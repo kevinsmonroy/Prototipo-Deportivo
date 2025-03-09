@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos de Baloncesto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product:hover{
+            transform:scale(1.05);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+            height: 200px;
+            color:#f9f9f9;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: #FF4500;
+        }
+        .button {
+            display: inline-block;
+            background-color: #FF4500;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #C0392B;
+        }
+        header {
+            background-color: #FF4500   ;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+        }
+        
+    </style>
+</head>
+<body>
+    <header>Productos de Baloncesto</header>
+    <p>Encuentra los mejores artículos para jugar al baloncesto.</p>
+
+    <div class="container">
+        <a href="detallesbalonbasket.html" class="product">
+            <img src="balonbasket.jpg" alt="Balón de Baloncesto">
+            <h2>Balón Oficial</h2>
+            <p>Balón profesional de alta calidad con agarre mejorado.</p>
+        </a>
+        <a href="zapatillasnbasket.html" class="product">
+            <img src="zapatillasbasket.jpg" alt="Zapatillas de Baloncesto">
+            <h2>Zapatillas Nike Air</h2>
+            <p>Zapatillas de alto rendimiento para máxima velocidad y control.</p>  
+        </a>
+        <a href="camisetasnbasket.html" class="product">
+            <img src="Camisetabasket.jpg" alt="Camiseta de Baloncesto">
+            <h2>Camiseta NBA</h2>
+            <p>Camiseta oficial de la NBA con tejido transpirable.</p>
+        </a>
+    </div>
+
+    <br>
+    <a href="inicio.html" class="button">Volver al inicio</a>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Deportiva</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>Tienda Deportiva</h1>
+        </div>
+        <div class="cart">
+            <button id="cart-button">Carrito (0)</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="products">
+            <h2>Productos</h2>
+            <div class="product" data-product="1">
+                <img src="https://via.placeholder.com/200x200?text=Producto+1" alt="Producto 1">
+                <p>Pelota de fútbol</p>
+                <p>$20</p>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+            <div class="product" data-product="2">
+                <img src="https://via.placeholder.com/200x200?text=Producto+2" alt="Producto 2">
+                <p>Bicicleta de montaña</p>
+                <p>$150</p>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+            <div class="product" data-product="3">
+                <img src="https://via.placeholder.com/200x200?text=Producto+3" alt="Producto 3">
+                <p>Zapatillas deportivas</p>
+                <p>$50</p>
+                <button class="add-to-cart">Añadir al carrito</button>
+            </div>
+        </section>
+
+        <section class="cart-modal" id="cart-modal">
+            <div class="cart-content">
+                <h3>Carrito de Compras</h3>
+                <ul id="cart-items">
+                    <!-- Productos añadidos se listarán aquí -->
+                </ul>
+                <button id="checkout-button">Pagar</button>
+                <button id="close-cart">Cerrar</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Tienda Deportiva. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

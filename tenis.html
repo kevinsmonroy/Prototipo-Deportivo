@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos de Tenis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            text-align: center;
+        }
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px;
+        }
+        .product {
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        .product img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        .product h2 {
+            font-size: 1.2em;
+            color: #28a745;
+        }
+        .button {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <header>Productos de Tenis</header>
+    <div class="container">
+        <a href="detallesRaquetatenis.html" class="product">
+            <img src="raqueta teniss.jpg" alt="Raqueta de tenis">
+            <h2>Raqueta Wilson</h2>
+            <p>Raqueta profesional de alta resistencia y precisión.</p>
+        </a>
+        </a>
+        <a href="detallePelotatenis.html" class="product">
+            <img src="pelotas tenis.png" alt="Pelotas de tenis">
+            <h2>Pelotas Penn</h2>
+            <p>Set de 3 pelotas de tenis de alta durabilidad y bote uniforme.</p>
+        </a>
+        <a href="detallesZapatillastenis.html" class="product">
+            <img src="tenis zapatillas.jpg" alt="Zapatillas de tenis">
+            <h2>Zapatillas Nike</h2>
+            <p>Zapatillas especializadas para una mayor agilidad en la cancha.</p>
+
+        </a>
+    </div>
+    <br>
+    <a href="inicio.html" class="button">Volver al inicio</a>
+</body>
+</html>

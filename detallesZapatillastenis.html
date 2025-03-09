@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapatillas de Tenis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background: #90EE90; /* Light green color */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        img {
+            height: 200px;
+            object-fit: cover;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        h1 {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: black;
+        }
+        p {
+            color: black;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Zapatillas de Tenis</h1>
+    <p>Encuentra las mejores zapatillas de tenis para tus partidos y entrenamientos.</p>
+
+    <div class="container">
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="courtjam.jpg" alt="Zapatillas Adidas">
+            <h2>Adidas CourtJam</h2>
+            <p>Zapatillas ligeras y cómodas para un rendimiento óptimo.</p>
+            <p><strong>Precio:</strong> $89.99</p>
+        </a>
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="nike air zoom.jpg" alt="Zapatillas Nike">
+            <h2>Nike Air Zoom</h2>
+            <p>Zapatillas con amortiguación superior y gran durabilidad.</p>
+            <p><strong>Precio:</strong> $99.99</p>
+        </a>
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="puma smash.jpg" alt="Zapatillas Puma">
+            <h2>Puma Smash</h2>
+            <p>Zapatillas con diseño clásico y gran comodidad.</p>
+            <p><strong>Precio:</strong> $79.99</p>
+        </a>
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="gel game.jpg" alt="Zapatillas Asics">
+            <h2>Asics Gel</h2>
+            <p>Zapatillas con tecnología de gel para una mejor amortiguación.</p>
+            <p><strong>Precio:</strong> $109.99</p>
+        </a>
+    </div>
+
+    <br>
+    <a href="tenis.html" class="button">Volver a productos</a>
+</body>
+</html>

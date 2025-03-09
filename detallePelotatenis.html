@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Pelotas de Tenis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background: #90EE90; /* Light green color */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product:hover {
+            transform: scale(1.05);
+        }
+        h1 {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: black;
+        }
+        p {
+            color: black;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pelotas de Tenis</h1>
+    <p>Encuentra las mejores pelotas de tenis para tus partidos y entrenamientos.</p>
+
+    <div class="container">
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="wilson pelotas.jpg" alt="Pelota de Tenis Wilson">
+            <h2>Wilson US Open</h2>
+            <p>Marca: Wilson</p>
+            <p>Modelo: US Open</p>
+            <p><strong>Precio:</strong> $10</p>
+        </a>
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="babolat team.jpg" alt="Pelota de Tenis Babolat">
+            <h2>Babolat Team</h2>
+            <p>Marca: Babolat</p>
+            <p>Modelo: Team</p>
+            <p><strong>Precio:</strong> $12</p>
+        </a>
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="dunlop.jpg" alt="Pelota de Tenis Dunlop">
+            <h2>Dunlop Fort All Court</h2>
+            <p>Marca: Dunlop</p>
+            <p>Modelo: Fort All Court</p>
+            <p><strong>Precio:</strong> $11</p>
+        </a>
+        <a href="confirmar_compratenis.html" class="product">
+            <img src="head championship.jpg" alt="Pelota de Tenis Head">
+            <h2>Head Championship</h2>
+            <p>Marca: Head</p>
+            <p>Modelo: Championship</p>
+            <p><strong>Precio:</strong> $9</p>
+        </a>
+    </div>
+
+    <br>
+    <a href="tenis.html" class="button">Volver a productos</a>
+</body>
+</html>

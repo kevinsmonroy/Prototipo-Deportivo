@@ -1,0 +1,148 @@
+css
+Copiar
+/* Reset de estilos */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* Cabecera */
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}
+
+/* Logo */
+.logo h1 {
+    font-size: 24px;
+}
+
+/* Carrito */
+.cart button {
+    background-color: #ff6347;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.cart button:hover {
+    background-color: #ff4500;
+}
+
+/* Productos */
+.products {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 250px;
+}
+
+.product img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.product p {
+    margin: 10px 0;
+}
+
+.add-to-cart {
+    background-color: #28a745;
+    border: none;
+    padding: 10px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.add-to-cart:hover {
+    background-color: #218838;
+}
+
+/* Modal del carrito */
+.cart-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    width: 300px;
+}
+
+#cart-items {
+    list-style-type: none;
+    margin: 20px 0;
+}
+
+#cart-items li {
+    padding: 5px 0;
+}
+
+button {
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+}
+
+#checkout-button {
+    background-color: #007bff;
+    color: white;
+    width: 100%;
+}
+
+#checkout-button:hover {
+    background-color: #0056b3;
+}
+
+#close-cart {
+    background-color: #dc3545;
+    color: white;
+    width: 100%;
+    margin-top: 10px;
+}
+
+#close-cart:hover {
+    background-color: #c82333;
+}
+
+/* Pie de página */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+}

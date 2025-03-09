@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deportes Populares</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        /* Estilos para el encabezado */
+        header {
+            background: url('https://via.placeholder.com/1920x300') no-repeat center center;
+            background-size: cover;
+            height: 200px;
+            color: white;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        header h1 {
+            font-size: 2.5em;
+            color:black;
+            padding: 20px;
+        }
+        /* Contenedor principal */
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+        /* Estilos de las tarjetas de deportes */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            margin: 20px;
+        }
+        .sport {
+            background-color: #fff;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        .sport a {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        .sport img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+        .sport:hover {
+            transform: scale(1.05);
+        }
+        /* Menú de navegación abajo */
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+        }
+        footer a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header>
+        <h1>Bienvenidos al Mundo de los Deportes</h1>
+    </header>
+    
+    <!-- Sección de Deportes -->
+    <main>
+       
+        <div class="container">
+            <a href="futbol.html" class="sport">
+                <img src="futbol.jpg" alt="Fútbol">
+                <h2>Fútbol</h2>
+                <p>El fútbol es un deporte de equipo jugado entre dos conjuntos de once jugadores...</p>
+            </a>
+            <a href="baloncesto.html" class="sport">
+                <img src="baloncesto.jpg" alt="Baloncesto">
+                <h2>Baloncesto</h2>
+                <p>El baloncesto es un deporte de equipo, jugado entre dos conjuntos de cinco jugadores...</p>
+            </a>
+            <a href="boxeo.html" class="sport">
+                <img src="boxeo.jpg" alt="Boxeo">
+                <h2>Boxeo</h2>
+                <p>El boxeo es un deporte de combate en el que dos personas luchan utilizando únicamente sus puños...</p>
+            </a>
+            <a href="voleibol.html" class="sport">
+                <img src="voleibol.jpg" alt="Voleibol">
+                <h2>Voleibol</h2>
+                <p>El voleibol es un deporte de equipo jugado entre dos conjuntos de seis jugadores...</p>
+            </a>
+            <a href="tenis.html" class="sport">
+                <img src="tenis.jpg" alt="Tenis">
+                <h2>Tenis</h2>
+                <p>El tenis es un deporte de raqueta en el que dos jugadores se enfrentan entre sí...</p>
+            </a>
+        </div>
+    </main>
+    
+    <!-- Pie de página con menú de navegación -->
+    <footer>
+   
+        <a href="#contacto">Contacto:+57 313 4928612</a>
+    </footer>
+</body>
+</html>

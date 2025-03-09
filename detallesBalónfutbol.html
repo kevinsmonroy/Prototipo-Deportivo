@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balones de Fútbol</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background: #007BFF;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            display:flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .product:hover{
+            transform: scale(1.05);
+        }
+        img {
+            height: 200px;
+            object-fit: cover;
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        h1{
+            background-color: #0056b3;
+            color: white;
+            padding: 20px;
+            font-size: 2em;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: black;
+        }
+        p{
+            color:black;
+        }
+        .button {
+            display: inline-block;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Balones de Fútbol <p>Encuentra los mejores balones de fútbol para entrenamientos y partidos oficiales.</p>
+    </h1>
+    
+
+    <div class="container">
+        <a href="confirmar_compra.html" class="product">
+            <img src="adidas al rihla.jpg" alt="Balón Adidas Al Rihla">
+            <h2>Adidas Al Rihla</h2>
+            <p>Balón oficial de la Copa del Mundo, con diseño aerodinámico.</p>
+            <p><strong>Precio:</strong> $79.99</p>
+           
+        </a>
+        <a href="confirmar_compra.html" class="product">
+            <img src="balon nike flight.png" alt="Balón Nike Flight">
+            <h2>Nike Flight</h2>
+            <p>Balón de alta precisión y tecnología anti-vibración.</p>
+            <p><strong>Precio:</strong> $69.99</p>
+            
+        </a>
+        <a href="confirmar_compra.html" class="product">
+            <img src="balon puma orbita.jpg" alt="Balón Puma Orbita">
+            <h2>Puma Orbita</h2>
+            <p>Balón con estructura multicapa para mayor durabilidad.</p>
+            <p><strong>Precio:</strong> $59.99</p>
+          
+        </a>
+        <a href="confirmar_compra.html" class="product">
+            <img src="jabuli.jpg"alt="Balon Jabulani">
+            <h2>Jabulani</h2>
+            <p>Balon oficial del mundial 2010</p>
+            <p><strong>Precio:</strong>$112.82</p>
+
+
+        </a>
+    </div>
+
+    <br>
+    <a href="futbol.html" class="button">Volver a productos</a>
+</body>
+</html>
+

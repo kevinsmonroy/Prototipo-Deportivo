@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zapatillas NBA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f9f9f9;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .product {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .product:hover{
+            transform: scale(1.05);
+        }
+        img {
+            max-width: 100%;
+            border-radius: 10px;
+        }
+        h2 {
+            font-size: 1.2em;
+            color: #FF4500;
+        }
+        .button {
+            display: inline-block;
+            background-color: #FF4500;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+        }
+        .button:hover {
+            background-color: #C0392B;
+        }
+        header {
+            background-color: #FF4500   ;
+            color: white;
+            padding: 20px;
+            font-size: 1em;
+        }
+    </style>
+</head>
+<body>
+    <header>Zapatillas de Baloncesto</header>
+    <p>Las mejores zapatillas para un mejor rendimiento en la cancha.</p>
+
+    <div class="container">
+        <a href="confirmar_comprabasket.html" class="product">
+            <img src="zapatillaslebron.jpg" alt="Zapatillas Nike LeBron">
+            <h2>Nike LeBron 20</h2>
+            <p>Zapatillas diseñadas para máxima comodidad y amortiguación.</p>
+            <p><strong>Precio:</strong> $179.99</p>
+        </a>
+        <a href="confirmar_comprabasket.html" class="product">
+            <img src="zapatillascurry.png" alt="Zapatillas Under Armour Curry">
+            <h2>Under Armour Curry 10</h2>
+            <p>Ligereza y soporte para cortes rápidos en la cancha.</p>
+            <p><strong>Precio:</strong> $159.99</p>
+        </a>
+        <a href="confirmar_comprabasket.html"class="product">
+            <img src="Air jordan retro.jpg" alt="Zapatillas Air Jordan">
+            <h2>Air Jordan Retro</h2>
+            <p>Estilo clásico con la tecnología moderna de alto rendimiento.</p>
+            <p><strong>Precio:</strong> $199.99</p>
+        </a>
+    </div>
+
+    <br>
+    <a href="baloncesto.html" class="button">Volver a productos</a>
+</body>
+</html>
