@@ -7,74 +7,72 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header {
+            background-color: #FF7F50; /* Color anaranjado */
+            color: white;
+            padding: 10px;
             text-align: center;
-            background-color: #f9f9f9;
-            padding: 20px;
+            font-size: 1.5em;
+        }
+        .breadcrumb {
+            background-color: #e9ecef;
+            padding: 10px;
+            font-size: 0.9em;
+            text-align: center; /* Centrar el breadcrumb */
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .breadcrumb span {
+            color: #6c757d;
         }
         .container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            justify-content: space-around;
+            margin: 20px;
         }
         .product {
-            background: white;
-            padding: 15px;
+            background-color: #fff;
+            border: 2px solid #ccc;
             border-radius: 10px;
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 250px;
             text-align: center;
             transition: transform 0.3s ease;
         }
         .product:hover {
             transform: scale(1.05);
         }
-        img {
+        .product img {
             max-width: 100%;
-            border-radius: 10px;
             height: 200px;
-        }
-        h2 {
-            font-size: 1.2em;
-            color: #FF4500;
+            object-fit: cover;
+            border-radius: 10px;
         }
         .button {
             display: inline-block;
-            background-color: #FF4500;
-            color: white;
             padding: 10px 15px;
-            border-radius: 5px;
+            background-color: #007BFF;
+            color: white;
             text-decoration: none;
-            font-size: 1em;
+            border-radius: 5px;
+            margin: 20px auto;
+            text-align: center;
         }
         .button:hover {
-            background-color: #C0392B;
-        }
-        header {
-            background-color: #FF4500;
-            color: white;
-            padding: 20px;
-            font-size: 2em;
-        }
-        .breadcrumb {
-            width: 100%;
-            background-color: #f1f1f1;
-            padding: 10px 20px;
-            font-size: 0.9em;
-            color: #555;
-            margin-bottom: 20px;
-        }
-        .breadcrumb a {
-            text-decoration: none;
-            color: #007BFF;
-            margin-right: 5px;
-        }
-        .breadcrumb a:hover {
-            text-decoration: underline;
-        }
-        .breadcrumb span {
-            margin-right: 5px;
-            color: #555;
+            background-color: #0056b3;
         }
 
         /* Estilos del carrito */
@@ -93,7 +91,6 @@
             font-size: 1em;
             z-index: 1000;
         }
-
         .cart-icon span {
             background-color: white;
             color: #007BFF;
@@ -102,7 +99,6 @@
             padding: 5px 10px;
             font-size: 0.9em;
         }
-
         .cart-container {
             position: fixed;
             top: 60px;
@@ -116,7 +112,6 @@
             display: none;
             z-index: 1000;
         }
-
         .cart-header {
             background-color: #007BFF;
             color: white;
@@ -126,7 +121,6 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -134,57 +128,42 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
-
         .cart-item:last-child {
             border-bottom: none;
         }
-
         .cart-item p {
             margin: 0;
             font-size: 0.9em;
         }
-
-        .cart-item .remove-btn {
-            background-color: #ff4d4d;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            cursor: pointer;
-            font-size: 0.8em;
-        }
-
-        .cart-item .remove-btn:hover {
-            background-color: #cc0000;
-        }
-
         .cart-footer {
             padding: 10px;
             text-align: center;
             font-size: 1em;
         }
-
-        .cart-footer .checkout-btn {
-            background-color: #28a745;
+        .cart-footer p {
+            margin: 10px 0;
+        }
+        .cart-footer button {
+            padding: 10px 15px;
+            background-color: #007BFF;
             color: white;
             border: none;
             border-radius: 5px;
-            padding: 10px 20px;
             cursor: pointer;
             font-size: 1em;
         }
-
-        .cart-footer .checkout-btn:hover {
-            background-color: #218838;
+        .cart-footer button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
+    <!-- Encabezado -->
     <header>Productos de Baloncesto</header>
 
     <!-- Breadcrumb -->
     <div class="breadcrumb">
-        <a href="inicio.html">Inicio</a> >
+        <a href="index.html">Inicio</a> >
         <span>Baloncesto</span>
     </div>
 
@@ -198,11 +177,10 @@
         <div class="cart-header">Tu Carrito</div>
         <div id="cartItems"></div>
         <div class="cart-footer">
-            <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
+            <p id="cartTotal">Total: $0.00</p>
+            <button id="checkoutBtn">Comprar todo</button>
         </div>
     </div>
-
-    <p>Encuentra los mejores artículos para jugar al baloncesto.</p>
 
     <!-- Contenedor para los productos -->
     <div class="container">
@@ -225,13 +203,15 @@
 
     <br>
 
-    <a href="inicio.html" class="button">Volver al inicio</a>
+    <!-- Botón único para volver al inicio -->
+    <a href="index.html" class="button">Volver al inicio</a>
 
     <script>
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
         const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
 
         // Mostrar/Ocultar el carrito
@@ -244,30 +224,34 @@
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             cartCount.textContent = carrito.length;
 
-            // Limpiar los elementos del carrito
             cartItems.innerHTML = '';
+            let total = 0;
 
             if (carrito.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                cartTotal.textContent = 'Total: $0.00';
                 return;
             }
 
-            // Mostrar los productos en el carrito
             carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
                 item.classList.add('cart-item');
                 item.innerHTML = `
                     <div>
                         <p><strong>${producto.nombre}</strong></p>
-                        <p>Talla: ${producto.talla}</p>
                         <p>Precio: ${producto.precio}</p>
                     </div>
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
+
+                // Sumar el precio al total
+                total += parseFloat(producto.precio.replace('$', ''));
             });
 
-            // Agregar eventos para eliminar productos
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+
+            // Agregar funcionalidad a los botones "Eliminar"
             const removeButtons = document.querySelectorAll('.remove-btn');
             removeButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
@@ -280,22 +264,20 @@
         // Eliminar un producto del carrito
         function removeFromCart(index) {
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.splice(index, 1); // Eliminar el producto del array
-            localStorage.setItem('carrito', JSON.stringify(carrito)); // Guardar el carrito actualizado
-            loadCart(); // Recargar el carrito
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            loadCart();
         }
 
-        // Finalizar compra
+        // Comprar todo
         checkoutBtn.addEventListener('click', () => {
             alert('Gracias por tu compra.');
-            localStorage.removeItem('carrito'); // Vaciar el carrito
-            loadCart(); // Recargar el carrito
+            localStorage.removeItem('carrito');
+            loadCart();
         });
 
         // Cargar el carrito al cargar la página
         loadCart();
     </script>
-
-    <a href="index.html" class="button">Volver al inicio</a>
 </body>
 </html>

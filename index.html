@@ -437,49 +437,17 @@
       surveyContainer.classList.add('hidden'); // Ocultar la encuesta permanentemente
     });
   </script>
-=======
-    <!-- Encabezado -->
-    <header>
-        <h1>Bienvenidos a Passion of Sport</h1>
-    </header>
-    
-    <!-- Sección de Deportes -->
-    <main>
-       
-        <div class="container">
-            <a href="futbol.html" class="sport">
-                <img src="futbol.jpg" alt="Fútbol">
-                <h2>Fútbol</h2>
-                <p>El fútbol es un deporte de equipo jugado entre dos conjuntos de once jugadores...</p>
-            </a>
-            <a href="baloncesto.html" class="sport">
-                <img src="baloncesto.jpg" alt="Baloncesto">
-                <h2>Baloncesto</h2>
-                <p>El baloncesto es un deporte de equipo, jugado entre dos conjuntos de cinco jugadores...</p>
-            </a>
-            <a href="boxeo.html" class="sport">
-                <img src="boxeo.jpg" alt="Boxeo">
-                <h2>Boxeo</h2>
-                <p>El boxeo es un deporte de combate en el que dos personas luchan utilizando únicamente sus puños...</p>
-            </a>
-            <a href="voleibol.html" class="sport">
-                <img src="voleibol.jpg" alt="Voleibol">
-                <h2>Voleibol</h2>
-                <p>El voleibol es un deporte de equipo jugado entre dos conjuntos de seis jugadores...</p>
-            </a>
-            <a href="tenis.html" class="sport">
-                <img src="tenis.jpg" alt="Tenis">
-                <h2>Tenis</h2>
-                <p>El tenis es un deporte de raqueta en el que dos jugadores se enfrentan entre sí...</p>
-            </a>
-        </div>
-    </main>
-    
-    <!-- Pie de página con menú de navegación -->
-    <footer>
-   
-        <a href="https://api.whatsapp.com/send?phone=573134928612&text=Hola quisiera tener mas conocimiento sobre los productos de la tienda deportiva">Contacto:+57 313 4928612</a>
-    </footer>
->>>>>>> 38c4689f751eba5e1369d9ae0b824f5b8a5c2886:index.html
+  <script>
+    function toggleDescription(button) {
+        const description = button.previousElementSibling;
+        if (description.style.display === "none") {
+            description.style.display = "block";
+            button.textContent = "Ver menos";
+        } else {
+            description.style.display = "none";
+            button.textContent = "Ver más";
+        }
+    }
+</script>
 </body>
 </html>
