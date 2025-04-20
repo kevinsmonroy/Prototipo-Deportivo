@@ -7,44 +7,180 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #e0f7fa;
+        }
+
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
             text-align: center;
-            background-color: #e0f7fa; /* Color de fondo de voleibol.html */
-            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
+
         .container {
-            background: white;
-            padding: 20px;
+            margin-top: 60px; /* Espacio para el breadcrumb fijo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 60px); /* Ajusta el espacio restante */
+        }
+
+        .card {
+            max-width: 600px;
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
         }
+
         h1 {
-            color: #00796b; /* Color de encabezado de voleibol.html */
+            font-size: 2em;
+            color: #00796b;
+            margin-bottom: 20px;
         }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 10px 0;
+        }
+
         .button {
             display: inline-block;
-            background-color: #00796b; /* Color de botón de voleibol.html */
-            color: white;
+            margin-top: 20px;
             padding: 10px 20px;
-            border-radius: 5px;
+            background-color: #00796b;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
             font-size: 1em;
-            margin: 10px;
+            transition: background-color 0.3s;
         }
-        .button.cancel {
-            background-color: #d32f2f;
-        }
+
         .button:hover {
-            opacity: 0.8;
+            background-color: #005b4f;
         }
     </style>
 </head>
 <body>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb" id="breadcrumb"></div>
+
     <div class="container">
-        <h1>¿Deseas confirmar tu compra?</h1>
-        <p>Estás a punto de comprar este producto. ¿Quieres continuar con el pago?</p>
-        <a href="pago.html" class="button">Proceder al Pago</a>
-        <a href="voleibol.html" class="button cancel">Cancelar Compra</a>
+        <div class="card">
+            <h1>¡Compra Confirmada! 🏐</h1>
+            <div id="detallesCompra"></div>
+            <a href="voleibol.html" class="button">Volver a productos</a>
+        </div>
     </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const modelo = params.get("modelo") || "Modelo desconocido";
+        const talla = params.get("talla") || "No aplica";
+
+        const nombresModelos = {
+            // Balones
+            "mikasa_v200w": "Balón Mikasa V200W",
+            "molten_v5m5000": "Balón Molten V5M5000",
+            "wilson_softplay": "Balón Wilson Soft Play",
+            "spalding": "Balón Spalding",
+
+            // Rodilleras
+            "rodilleras_mizuno": "Rodilleras Mizuno",
+            "rodilleras_asics": "Rodilleras Asics",
+            "rodilleras_Nike": "Rodilleras Nike",
+            "rodilleras_adidas": "Rodilleras Adidas",
+
+            // Coderas
+            "coderas_mizuno": "Coderas Mizuno",
+            "coderas_tachikara": "Coderas Tachikara",
+            "coderas_underArmour": "Coderas Under Armour",
+            "coderas_rdx": "Coderas RDX"
+        };
+
+        const categorias = {
+            // Balones
+            "mikasa_v200w": { nombre: "Balones de Voleibol", enlace: "detallesBalonboleibol.html" },
+            "molten_v5m5000": { nombre: "Balones de Voleibol", enlace: "detallesBalonboleibol.html" },
+            "wilson_softplay": { nombre: "Balones de Voleibol", enlace: "detallesBalonboleibol.html" },
+            "spalding": { nombre: "Balones de Voleibol", enlace: "detallesBalonboleibol.html" },
+
+            // Rodilleras
+            "rodilleras_mizuno": { nombre: "Rodilleras de Voleibol", enlace: "detallesRodillerasboleibol.html" },
+            "rodilleras_asics": { nombre: "Rodilleras de Voleibol", enlace: "detallesRodillerasboleibol.html" },
+            "rodilleras_Nike": { nombre: "Rodilleras de Voleibol", enlace: "detallesRodillerasboleibol.html" },
+            "rodilleras_adidas": { nombre: "Rodilleras de Voleibol", enlace: "detallesRodillerasboleibol.html" },
+
+            // Coderas
+            "coderas_mizuno": { nombre: "Coderas de Voleibol", enlace: "detallesRedboleibol.html" },
+            "coderas_tachikara": { nombre: "Coderas de Voleibol", enlace: "detallesRedboleibol.html" },
+            "coderas_underArmour": { nombre: "Coderas de Voleibol", enlace: "detallesRedboleibol.html" },
+            "coderas_rdx": { nombre: "Coderas de Voleibol", enlace: "detallesCoderasVoleibol.html" }
+        };
+
+        const precios = {
+            // Balones
+            "mikasa_v200w": "$71.12",
+            "molten_v5m5000": "$80.37",
+            "wilson_softplay": "$80.20",
+            "spalding": "$28.98",
+
+            // Rodilleras
+            "rodilleras_mizuno": "$30.93",
+            "rodilleras_asics": "$24.84",
+            "rodilleras_Nike": "$28.98",
+            "rodilleras_adidas": "$28.98",
+
+            // Coderas
+            "coderas_mizuno": "$29.96",
+            "coderas_underArmour": "$32.12",
+            "coderas_tachikara": "$30.50",
+            "coderas_rdx": "$24.00"
+        };
+
+        const nombre = nombresModelos[modelo] || "Modelo desconocido";
+        const precio = precios[modelo] || "$0.00";
+        const categoria = categorias[modelo] || { nombre: "Voleibol", enlace: "voleibol.html" };
+
+        // Construir el breadcrumb dinámico
+        document.getElementById("breadcrumb").innerHTML = `
+            <a href="inicio.html">Inicio</a> >
+            <a href="voleibol.html">Voleibol</a> >
+            <a href="${categoria.enlace}">${categoria.nombre}</a> >
+            <span>${nombre}</span>
+        `;
+
+        // Mostrar los detalles de la compra
+        document.getElementById("detallesCompra").innerHTML = `
+            <p><strong>Producto:</strong> ${nombre}</p>
+            <p><strong>Talla:</strong> ${talla}</p>
+            <p><strong>Precio:</strong> ${precio}</p>
+        `;
+    </script>
 </body>
 </html>

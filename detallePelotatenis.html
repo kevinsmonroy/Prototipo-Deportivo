@@ -11,6 +11,27 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -63,29 +84,36 @@
     <h1>Pelotas de Tenis</h1>
     <p>Encuentra las mejores pelotas de tenis para tus partidos y entrenamientos.</p>
 
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <a href="tenis.html">Tenis</a> >
+        <span>Pelotas de Tenis</span>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=wilson_us_open" class="product">
             <img src="wilson pelotas.jpg" alt="Pelota de Tenis Wilson">
             <h2>Wilson US Open</h2>
             <p>Marca: Wilson</p>
             <p>Modelo: US Open</p>
             <p><strong>Precio:</strong> $10</p>
         </a>
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=babolat_gold" class="product">
             <img src="babolat team.jpg" alt="Pelota de Tenis Babolat">
             <h2>Babolat Team</h2>
             <p>Marca: Babolat</p>
             <p>Modelo: Team</p>
             <p><strong>Precio:</strong> $12</p>
         </a>
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=dunlop_fort" class="product">
             <img src="dunlop.jpg" alt="Pelota de Tenis Dunlop">
             <h2>Dunlop Fort All Court</h2>
             <p>Marca: Dunlop</p>
             <p>Modelo: Fort All Court</p>
             <p><strong>Precio:</strong> $11</p>
         </a>
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=head_champions" class="product">
             <img src="head championship.jpg" alt="Pelota de Tenis Head">
             <h2>Head Championship</h2>
             <p>Marca: Head</p>

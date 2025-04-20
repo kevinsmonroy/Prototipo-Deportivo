@@ -11,6 +11,27 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -37,7 +58,7 @@
             width: 100%;
             height: 100%;
         }
-        .product:hover{
+        .product:hover {
             transform: scale(1.05);
         }
         img {
@@ -46,7 +67,7 @@
             object-fit: cover;
             border-radius: 10px;
         }
-        h1{
+        h1 {
             background-color: #d9534f;
             color: black;
             padding: 20px;
@@ -56,7 +77,7 @@
             font-size: 1.2em;
             color: black;
         }
-        p{
+        p {
             color: black;
         }
         .button {
@@ -69,34 +90,40 @@
             font-size: 1em;
         }
         .button:hover {
-            background-color: #d9534f;
+            background-color: #c9302c;
         }
     </style>
 </head>
 <body>
-    <h1>Protectores Bucales <p>Encuentra los mejores protectores para tu entrenamiento.</p>
-    </h1>
-    
+    <h1>Protectores Bucales</h1>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <a href="boxeo.html">Boxeo</a> >
+        <span>Protectores Bucales</span>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compraboxeo.html" class="product">
+        <a href="protector_venum.html" class="product">
             <img src="Protector venum.jpg" alt="Protector Bucal Venum">
             <h2>Protector Bucal Venum</h2>
             <p>Famoso por su durabilidad y resistencia, ideal para entrenamientos intensos.</p>
             <p><strong>Precio:</strong> $19.99</p>
         </a>
-        <a href="confirmar_compraboxeo.html" class="product">
+        <a href="protector_everlast.html" class="product">
             <img src="Protector everlast.jpg" alt="Protector Bucal Everlast">
             <h2>Protector Bucal Everlast</h2>
             <p>Diseñado para absorber impactos y proteger tus dientes durante el entrenamiento.</p>
             <p><strong>Precio:</strong> $24.99</p>
         </a>
-        <a href="confirmar_compraboxeo.html" class="product">
+        <a href="protector_RDX.html" class="product">
             <img src="protector rdx.jpg" alt="Protector Bucal RDX">
             <h2>Protector Bucal RDX</h2>
             <p>Alta durabilidad y resistencia, perfecto para sesiones prolongadas de entrenamiento.</p>
             <p><strong>Precio:</strong> $22.99</p>
         </a>
-        <a href="confirmar_compraboxeo.html" class="product">
+        <a href="protector_safejawz.html" class="product">
             <img src="safejawz.jpg" alt="Protector Bucal safejawz">
             <h2>Protector Bucal safejawz</h2>
             <p>Los protectores bucales safejawz han sido creados para entrenamientos intensos y de alto impacto.</p>
@@ -107,4 +134,4 @@
     <br>
     <a href="boxeo.html" class="button">Volver a productos</a>
 </body>
-</html> 
+</html>

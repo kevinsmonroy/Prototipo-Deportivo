@@ -11,6 +11,27 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -30,14 +51,7 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .product a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .product:hover{
+        .product:hover {
             transform: scale(1.05);
         }
         img {
@@ -46,18 +60,18 @@
             object-fit: cover;
             border-radius: 10px;
         }
-        h1{
+        h1 {
             background-color: #0056b3;
-            color: black;
+            color: white;
             padding: 20px;
             font-size: 2em;
         }
         h2 {
             font-size: 1.2em;
-            color: black;
+            color: white;
         }
-        p{
-            color: black;
+        p {
+            color: white;
         }
         .button {
             display: inline-block;
@@ -71,41 +85,202 @@
         .button:hover {
             background-color: #0056b3;
         }
+
+        /* Estilos del carrito */
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        .cart-icon span {
+            background-color: white;
+            color: #007BFF;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        .cart-container {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .cart-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .cart-item .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .cart-item .remove-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .cart-footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .cart-footer .checkout-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .cart-footer .checkout-btn:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
-    <h1>Guantes de Fútbol <p>Encuentra los mejores guantes para porteros .</p>
-    </h1>
-    
+    <h1>Guantes de Fútbol</h1>
+    <p>Encuentra los mejores guantes para porteros.</p>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <a href="futbol.html">Fútbol</a> >
+        <span>Guantes de Fútbol</span>
+    </div>
+
+    <!-- Icono del carrito -->
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span id="cartCount">0</span>
+    </div>
+
+    <!-- Contenedor del carrito -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">Tu Carrito</div>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
+        </div>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compra.html" class="product">
+        <a href="guantes_adidapredator.html" class="product">
             <img src="guantes portero.png" alt="Guantes Adidas Predator">
             <h2>Adidas Predator</h2>
             <p>Diseño profesional con tecnología de agarre mejorada.</p>
             <p><strong>Precio:</strong> $49.99</p>
         </a>
-        <a href="confirmar_compra.html" class="product">
+        <a href="guantes_nikevaporgip3.html" class="product">
             <img src="nike vapor.png" alt="Guantes Nike Vapor Grip">
             <h2>Nike Vapor Grip 3</h2>
             <p>Excelente ajuste y amortiguación para atajadas seguras.</p>
             <p><strong>Precio:</strong> $59.99</p>
         </a>
-        <a href="confirmar_compra.html" class="product">
+        <a href="guantes_pumafuturegrip.html" class="product">
             <img src="guantes puma.jpg" alt="Guantes Puma Future">
             <h2>Puma Future Grip</h2>
             <p>Guantes con látex de alto rendimiento y ajuste perfecto.</p>
             <p><strong>Precio:</strong> $54.99</p>
         </a>
-        <a href="confirmar_compra.html" class="product">
-            <img src="Reusch.jpg" alt="Guantes reusch">
-            <h2>Guantes reusch</h2>
-            <p>Guantes de alta calidad</p>
+        <a href="guantes_reusch.html" class="product">
+            <img src="Reusch.jpg" alt="Guantes Reusch">
+            <h2>Guantes Reusch</h2>
+            <p>Guantes de alta calidad.</p>
             <p><strong>Precio:</strong> $69.99</p>
         </a>
     </div>
 
     <br>
     <a href="futbol.html" class="button">Volver a productos</a>
+
+    <script>
+        const cartIcon = document.getElementById('cartIcon');
+        const cartContainer = document.getElementById('cartContainer');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+
+        // Mostrar/Ocultar el carrito
+        cartIcon.addEventListener('click', () => {
+            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Cargar el carrito desde localStorage
+        function loadCart() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            cartCount.textContent = carrito.length;
+
+            cartItems.innerHTML = '';
+
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                return;
+            }
+
+            carrito.forEach((producto, index) => {
+                const item = document.createElement('div');
+                item.classList.add('cart-item');
+                item.innerHTML = `
+                    <div>
+                        <p><strong>${producto.nombre}</strong></p>
+                        <p>Precio: ${producto.precio}</p>
+                    </div>
+                `;
+                cartItems.appendChild(item);
+            });
+        }
+
+        // Cargar el carrito al cargar la página
+        loadCart();
+    </script>
 </body>
 </html>
-

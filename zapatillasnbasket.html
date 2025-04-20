@@ -26,7 +26,7 @@
             text-align: center;
             transition: transform 0.3s ease;
         }
-        .product:hover{
+        .product:hover {
             transform: scale(1.05);
         }
         img {
@@ -45,44 +45,268 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 1em;
+            margin-top: 10px;
         }
         .button:hover {
             background-color: #C0392B;
         }
         header {
-            background-color: #FF4500   ;
+            background-color: #FF4500;
             color: white;
             padding: 20px;
             font-size: 1em;
+        }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
+
+        /* Estilos del carrito */
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        .cart-icon span {
+            background-color: white;
+            color: #007BFF;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        .cart-container {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .cart-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .cart-item .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+
+        .cart-item .remove-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .cart-footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .cart-footer .checkout-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .cart-footer .checkout-btn:hover {
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
     <header>Zapatillas de Baloncesto</header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <a href="baloncesto.html">Baloncesto</a> >
+        <span>Zapatillas de Baloncesto</span>
+    </div>
+
+    <!-- Icono del carrito -->
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span id="cartCount">0</span>
+    </div>
+
+    <!-- Contenedor del carrito -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">Tu Carrito</div>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
+        </div>
+    </div>
+
     <p>Las mejores zapatillas para un mejor rendimiento en la cancha.</p>
 
     <div class="container">
-        <a href="confirmar_comprabasket.html" class="product">
+        <!-- Producto 1: Nike LeBron 20 -->
+        <a href="nike_lebron_20.html" class="product-link">
+          <div class="product">
             <img src="zapatillaslebron.jpg" alt="Zapatillas Nike LeBron">
             <h2>Nike LeBron 20</h2>
             <p>Zapatillas diseñadas para máxima comodidad y amortiguación.</p>
             <p><strong>Precio:</strong> $179.99</p>
+          </div>
         </a>
-        <a href="confirmar_comprabasket.html" class="product">
-            <img src="zapatillascurry.png" alt="Zapatillas Under Armour Curry">
+      
+        <!-- Producto 2: Curry 10 -->
+        <a href="curry_10.html" class="product-link">
+          <div class="product">
+            <img src="zapatillascurry.png" alt="Zapatillas Curry 10">
             <h2>Under Armour Curry 10</h2>
             <p>Ligereza y soporte para cortes rápidos en la cancha.</p>
             <p><strong>Precio:</strong> $159.99</p>
+          </div>
         </a>
-        <a href="confirmar_comprabasket.html"class="product">
+      
+        <!-- Producto 3: Air Jordan Retro -->
+        <a href="jordan_Retro.html" class="product-link">
+          <div class="product">
             <img src="Air jordan retro.jpg" alt="Zapatillas Air Jordan">
             <h2>Air Jordan Retro</h2>
-            <p>Estilo clásico con la tecnología moderna de alto rendimiento.</p>
+            <p>Estilo clásico con tecnología moderna de alto rendimiento.</p>
             <p><strong>Precio:</strong> $199.99</p>
+          </div>
         </a>
     </div>
 
     <br>
     <a href="baloncesto.html" class="button">Volver a productos</a>
+
+    <script>
+        const cartIcon = document.getElementById('cartIcon');
+        const cartContainer = document.getElementById('cartContainer');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+
+        // Mostrar/Ocultar el carrito
+        cartIcon.addEventListener('click', () => {
+            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Cargar el carrito desde localStorage
+        function loadCart() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            cartCount.textContent = carrito.length;
+
+            // Limpiar los elementos del carrito
+            cartItems.innerHTML = '';
+
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                return;
+            }
+
+            // Mostrar los productos en el carrito
+            carrito.forEach((producto, index) => {
+                const item = document.createElement('div');
+                item.classList.add('cart-item');
+                item.innerHTML = `
+                    <div>
+                        <p><strong>${producto.nombre}</strong></p>
+                        <p>Talla: ${producto.talla}</p>
+                        <p>Precio: ${producto.precio}</p>
+                    </div>
+                    <button class="remove-btn" data-index="${index}">Eliminar</button>
+                `;
+                cartItems.appendChild(item);
+            });
+
+            // Agregar eventos para eliminar productos
+            const removeButtons = document.querySelectorAll('.remove-btn');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Eliminar un producto del carrito
+        function removeFromCart(index) {
+            let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.splice(index, 1); // Eliminar el producto del array
+            localStorage.setItem('carrito', JSON.stringify(carrito)); // Guardar el carrito actualizado
+            loadCart(); // Recargar el carrito
+        }
+
+        // Finalizar compra
+        checkoutBtn.addEventListener('click', () => {
+            alert('Gracias por tu compra.');
+            localStorage.removeItem('carrito'); // Vaciar el carrito
+            loadCart(); // Recargar el carrito
+        });
+
+        // Cargar el carrito al cargar la página
+        loadCart();
+    </script>
 </body>
 </html>

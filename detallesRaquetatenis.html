@@ -11,6 +11,27 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -37,7 +58,7 @@
             width: 100%;
             height: 100%;
         }
-        .product:hover{
+        .product:hover {
             transform: scale(1.05);
         }
         img {
@@ -46,7 +67,7 @@
             object-fit: cover;
             border-radius: 10px;
         }
-        h1{
+        h1 {
             background-color: #28a745;
             color: white;
             padding: 20px;
@@ -54,10 +75,10 @@
         }
         h2 {
             font-size: 1.2em;
-            color: white;
+            color: black;
         }
-        p{
-            color: white;
+        p {
+            color: black;
         }
         .button {
             display: inline-block;
@@ -69,34 +90,40 @@
             font-size: 1em;
         }
         .button:hover {
-            background-color: #d9534f;
+            background-color: #c9302c;
         }
     </style>
 </head>
 <body>
-    <h1>Raquetas de Tenis <p>Encuentra las mejores raquetas para tu juego.</p>
-    </h1>
-    
+    <h1>Raquetas de Tenis</h1>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <a href="tenis.html">Tenis</a> >
+        <span>Raquetas de Tenis</span>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=wilson_pro_staff" class="product">
             <img src="raqueta wilson.jpg" alt="Raqueta Wilson Pro Staff">
             <h2>Wilson Pro Staff</h2>
             <p>Conocida por su precisión y control, ideal para jugadores avanzados.</p>
             <p><strong>Precio:</strong> $249.99</p>
         </a>
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=babolat_pure_drive" class="product">
             <img src="raqueta pure drive.png" alt="Raqueta Babolat Pure Drive">
             <h2>Babolat Pure Drive</h2>
             <p>Ofrece una excelente combinación de potencia y control, perfecta para jugadores intermedios.</p>
             <p><strong>Precio:</strong> $199.99</p>
         </a>
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=head_graphene" class="product">
             <img src="graphene.jpg" alt="Raqueta Head Graphene">
             <h2>Head Graphene</h2>
             <p>Ligera y potente, ideal para jugadores que buscan mejorar su juego.</p>
             <p><strong>Precio:</strong> $179.99</p>
         </a>
-        <a href="confirmar_compratenis.html" class="product">
+        <a href="confirmar_compratenis.html?modelo=yonex_ezone" class="product">
             <img src="ezone.jpg" alt="Raqueta Yonex Ezone">
             <h2>Yonex Ezone</h2>
             <p>Con tecnología avanzada para mayor comodidad y precisión en cada golpe.</p>

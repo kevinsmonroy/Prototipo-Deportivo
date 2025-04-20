@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Confirmación de Compra</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .breadcrumb {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 10px 20px;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+      color: #007BFF;
+      margin-right: 5px;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      margin-right: 5px;
+      color: #555;
+    }
+
+    .card {
+      max-width: 600px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .card h1 {
+      font-size: 2em;
+      color: #27ae60;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      font-size: 1.2em;
+      margin: 10px 0;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #27ae60;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #1e8449;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" id="breadcrumb"></div>
+
+  <div class="card">
+    <h1>¡Compra Confirmada! ⚽</h1>
+    <div id="detallesCompra">
+      <!-- Aquí se insertarán los detalles de la compra -->
+    </div>
+    <a href="futbol.html" class="button">Volver a productos</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const modelo = params.get("modelo") || "Modelo desconocido";
+    const talla = params.get("talla") || "No aplica";
+
+    const nombresModelos = {
+      // Camisetas
+      "barcelona_jersey": "Camiseta FC Barcelona",
+      "real_madrid_jersey": "Camiseta Real Madrid",
+      "manchester_united_jersey": "Camiseta Manchester United",
+      "psg_jersey": "Camiseta PSG",
+      "colombia_jersey": "Camiseta Colombia",
+      "camiseta_argentina": "Camiseta Argentina",
+      "camiseta_bayern": "Camiseta Bayern Munich",
+
+      // Botines
+      "nike_botines": "Botines Nike Mercurial",
+      "adidas_botines": "Botines Adidas Predator",
+      "puma_botines": "Botines Puma Future",
+      "nike_tiempo": "Botines Nike Tiempo",
+
+      // Guantes
+      "adidas_guantes": "Guantes Adidas Predator",
+      "nike_guantes": "Guantes Nike Goalkeeper",
+      "puma_guantes": "Guantes Puma One Grip",
+      "guantes_reusch": "Guantes Reusch",
+
+      // Balones
+      "adidas_balon": "Balón Adidas Al Rihla",
+      "nike_balon": "Balón Nike Flight",
+      "puma_balon": "Balón Puma Orbita",
+      "jabulani_balon": "Balón Jabulani"
+    };
+
+    const categorias = {
+      // Camisetas
+      "barcelona_jersey": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+      "real_madrid_jersey": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+      "manchester_united_jersey": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+      "psg_jersey": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+      "colombia_jersey": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+      "camiseta_argentina": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+      "camiseta_bayern": { nombre: "Camisetas de Fútbol", enlace: "detallescamisetasfutbol.html" },
+
+      // Botines
+      "nike_botines": { nombre: "Botines de Fútbol", enlace: "detallesBotinesfutbol.html" },
+      "adidas_botines": { nombre: "Botines de Fútbol", enlace: "detallesBotinesfutbol.html" },
+      "puma_botines": { nombre: "Botines de Fútbol", enlace: "detallesBotinesfutbol.html" },
+      "nike_tiempo": { nombre: "Botines de Fútbol", enlace: "detallesBotinesfutbol.html" },
+
+      // Guantes
+      "adidas_guantes": { nombre: "Guantes de Portero", enlace: "detallesguantesfutboñ.html" },
+      "nike_guantes": { nombre: "Guantes de Portero", enlace: "detallesguantesfutbol.html" },
+      "puma_guantes": { nombre: "Guantes de Portero", enlace: "detallesguantesfutbol.html" },
+      "guantes_reusch": { nombre: "Guantes de Portero", enlace: "detallesguantesfutbol.html" },
+
+      // Balones
+      "adidas_balon": { nombre: "Productos futbol", enlace: "futbol.html" },
+      "nike_balon": { nombre: "Productos futbol", enlace: "futbol.html" },
+      "puma_balon": { nombre: "Productos futbol", enlace: "futbol.html" },
+      "jabulani_balon": { nombre: "Productos futbol", enlace: "futbol.html" }
+    };
+
+    const precios = {
+      // Camisetas
+      "barcelona_jersey": "$133.95",
+      "real_madrid_jersey": "$145.89",
+      "manchester_united_jersey": "$104.99",
+      "psg_jersey": "$125.00",
+      "colombia_jersey": "$121.53",
+      "camiseta_argentina": "$85.23",
+      "camiseta_bayern": "$109.58",
+
+      // Botines
+      "nike_botines": "$149.99",
+      "adidas_botines": "$129.99",
+      "puma_botines": "$119.99",
+      "nike_tiempo": "$89.38",
+
+      // Guantes
+      "adidas_guantes": "$49.99",
+      "nike_guantes": "$59.99",
+      "puma_guantes": "$54.99",
+      "guantes_reusch": "$69.99",
+
+      // Balones
+      "adidas_balon": "$79.99",
+      "nike_balon": "$69.99",
+      "puma_balon": "$59.99",
+      "jabulani_balon": "$112.82"
+    };
+
+    const nombre = nombresModelos[modelo] || "Modelo desconocido";
+    const precio = precios[modelo] || "$0.00";
+    const categoria = categorias[modelo] || { nombre: "Fútbol", enlace: "futbol.html" };
+
+    // Construir el breadcrumb dinámico
+    document.getElementById("breadcrumb").innerHTML = `
+      <a href="inicio.html">Inicio</a> >
+      <a href="futbol.html">Fútbol</a> >
+      <a href="${categoria.enlace}">${categoria.nombre}</a> >
+      <span>${nombre}</span>
+    `;
+
+    // Mostrar los detalles de la compra
+    document.getElementById("detallesCompra").innerHTML = `
+      <p><strong>Producto:</strong> ${nombre}</p>
+      <p><strong>Talla:</strong> ${talla}</p>
+      <p><strong>Precio:</strong> ${precio}</p>
+    `;
+  </script>
+</body>
+</html>

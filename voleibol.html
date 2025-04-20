@@ -19,6 +19,27 @@
             padding: 20px;
             font-size: 2em;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -34,10 +55,10 @@
             width: 250px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            transition:transform 0.3s ease;
+            transition: transform 0.3s ease;
         }
-        .product:hover{
-            transform:scale(1.05);
+        .product:hover {
+            transform: scale(1.05);
         }
         .product img {
             max-width: 100%;
@@ -63,12 +84,18 @@
 </head>
 <body>
     <header>Productos de Voleibol</header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <span>Voleibol</span>
+    </div>
+
     <div class="container">
         <a href="detallesbalonboleibol.html" class="product">
             <img src="balom-voleibol2.png" alt="Balón de voleibol">
             <h2>Balón Oficial</h2>
             <p>Balón de voleibol con materiales de alta calidad para competiciones profesionales.</p>
-        
         </a>
         <a href="detallesRodillerasboleibol.html" class="product">
             <img src="rodillerasvoleibol.jpg" alt="Rodilleras de voleibol">
@@ -78,7 +105,7 @@
         <a href="detallesRedboleibol.html" class="product">
             <img src="coderass.jpg" alt="Red de voleibol">
             <h2>Coderas</h2>
-            <p>Coderas acolchonadas para protegerte durante los saltos y caidas</p>
+            <p>Coderas acolchonadas para protegerte durante los saltos y caídas.</p>
         </a>
     </div>
     <br>

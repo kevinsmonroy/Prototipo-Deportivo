@@ -7,44 +7,180 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+        }
+
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
             text-align: center;
-            background-color: #f0f0f0; /* Color de fondo de tenis.html */
-            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
         }
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
+
         .container {
-            background: white;
-            padding: 20px;
+            margin-top: 60px; /* Espacio para el breadcrumb fijo */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 60px); /* Ajusta el espacio restante */
+        }
+
+        .card {
+            max-width: 600px;
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
         }
+
         h1 {
-            color: #28a745; /* Color de encabezado de tenis.html */
+            font-size: 2em;
+            color: #28a745;
+            margin-bottom: 20px;
         }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 10px 0;
+        }
+
         .button {
             display: inline-block;
-            background-color: #28a745; /* Color de botón de tenis.html */
-            color: white;
+            margin-top: 20px;
             padding: 10px 20px;
-            border-radius: 5px;
+            background-color: #28a745;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
             font-size: 1em;
-            margin: 10px;
+            transition: background-color 0.3s;
         }
-        .button.cancel {
-            background-color: #dc3545;
-        }
+
         .button:hover {
-            opacity: 0.8;
+            background-color: #218838;
         }
     </style>
 </head>
 <body>
+    <!-- Breadcrumb -->
+    <div class="breadcrumb" id="breadcrumb"></div>
+
     <div class="container">
-        <h1>¿Deseas confirmar tu compra?</h1>
-        <p>Estás a punto de comprar este producto. ¿Quieres continuar con el pago?</p>
-        <a href="pago.html" class="button">Proceder al Pago</a>
-        <a href="tenis.html" class="button cancel">Cancelar Compra</a>
+        <div class="card">
+            <h1>¡Compra Confirmada! 🎾</h1>
+            <div id="detallesCompra"></div>
+            <a href="tenis.html" class="button">Volver a productos</a>
+        </div>
     </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const modelo = params.get("modelo") || "Modelo desconocido";
+        const talla = params.get("talla") || "Sin talla";
+
+        const nombresModelos = {
+            // Raquetas
+            "wilson_pro_staff": "Raqueta Wilson Pro Staff",
+            "babolat_pure_drive": "Raqueta Babolat Pure Drive",
+            "head_graphene": "Raqueta Head Graphene",
+            "yonex_ezone": "Raqueta Yonex Ezone",
+
+            // Zapatillas
+            "nike_court_air_zoom": "Zapatillas Nike Court Air Zoom",
+            "adidas_CourtJam": "Zapatillas Adidas CourtJam",
+            "puma_Smash": "Zapatillas Puma Smash",
+            "asics_Gel": "Zapatillas Asics Gel",
+
+            // Pelotas
+            "wilson_us_open": "Pelotas Wilson US Open",
+            "babolat_gold": "Pelotas Babolat Gold",
+            "dunlop_fort": "Pelotas Dunlop Fort",
+            "head_champions": "Pelotas Head Champions"
+        };
+
+        const categorias = {
+            // Raquetas
+            "wilson_pro_staff": { nombre: "Raquetas de Tenis", enlace: "detallesRaquetatenis.html" },
+            "babolat_pure_drive": { nombre: "Raquetas de Tenis", enlace: "detallesRaquetatenis.html" },
+            "head_graphene": { nombre: "Raquetas de Tenis", enlace: "detallesRaquetatenis.html" },
+            "yonex_ezone": { nombre: "Raquetas de Tenis", enlace: "detallesRaquetatenis.html" },
+
+            // Zapatillas
+            "nike_court_air_zoom": { nombre: "Zapatillas de Tenis", enlace: "detallesZapatillastenis.html" },
+            "adidas_CourtJam": { nombre: "Zapatillas de Tenis", enlace: "detallesZapatillastenis.html" },
+            "puma_Smash": { nombre: "Zapatillas de Tenis", enlace: "detallesZapatillastenis.html" },
+            "asics_Gel": { nombre: "Zapatillas de Tenis", enlace: "detallesZapatillastenis.html" },
+
+            // Pelotas
+            "wilson_us_open": { nombre: "Pelotas de Tenis", enlace: "detallePelotatenis.html" },
+            "babolat_gold": { nombre: "Pelotas de Tenis", enlace: "detallePelotatenis.html" },
+            "dunlop_fort": { nombre: "Pelotas de Tenis", enlace: "detallePelotatenis.html" },
+            "head_champions": { nombre: "Pelotas de Tenis", enlace: "detallePelotatenis.html" }
+        };
+
+        const precios = {
+            // Raquetas
+            "wilson_pro_staff": "$249.99",
+            "babolat_pure_drive": "$199.99",
+            "head_graphene": "$179.99",
+            "yonex_ezone": "$229.99",
+
+            // Zapatillas
+            "nike_court_air_zoom": "$99.99",
+            "adidas_CourtJam": "$89.99",
+            "puma_Smash": "$79.99",
+            "asics_Gel": "$109.99",
+
+            // Pelotas
+            "wilson_us_open": "$10.00",
+            "babolat_gold": "$12.00",
+            "dunlop_fort": "$11.00",
+            "head_champions": "$9.00"
+        };
+
+        const nombre = nombresModelos[modelo] || "Modelo desconocido";
+        const precio = precios[modelo] || "$0.00";
+        const categoria = categorias[modelo] || { nombre: "Tenis", enlace: "tenis.html" };
+
+        // Construir el breadcrumb dinámico
+        document.getElementById("breadcrumb").innerHTML = `
+            <a href="inicio.html">Inicio</a> >
+            <a href="tenis.html">Tenis</a> >
+            <a href="${categoria.enlace}">${categoria.nombre}</a> >
+            <span>${nombre}</span>
+        `;
+
+        // Mostrar los detalles de la compra
+        document.getElementById("detallesCompra").innerHTML = `
+            <p><strong>Producto:</strong> ${nombre}</p>
+            <p><strong>Talla:</strong> ${talla}</p>
+            <p><strong>Precio:</strong> ${precio}</p>
+        `;
+    </script>
 </body>
 </html>

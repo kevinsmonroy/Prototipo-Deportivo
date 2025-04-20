@@ -1,50 +1,169 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmar Compra</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #e0e0e0; /* Color de fondo de baloncesto.html */
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
-        }
-        h1 {
-            color: #ff4500; /* Color de encabezado de baloncesto.html */
-        }
-        .button {
-            display: inline-block;
-            background-color: #ff4500; /* Color de botón de baloncesto.html */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-size: 1em;
-            margin: 10px;
-        }
-        .button.cancel {
-            background-color: #dc3545;
-        }
-        .button:hover {
-            opacity: 0.8;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Confirmar Compra</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .breadcrumb {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 10px 20px;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+      color: #007BFF;
+      margin-right: 5px;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      margin-right: 5px;
+      color: #555;
+    }
+
+    .card {
+      max-width: 600px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #555;
+      margin: 10px 0;
+    }
+
+    .button {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-size: 1em;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¿Deseas confirmar tu compra?</h1>
-        <p>Estás a punto de comprar este producto. ¿Quieres continuar con el pago?</p>
-        <a href="pago.html" class="button">Proceder al Pago</a>
-        <a href="baloncesto.html" class="button cancel">Cancelar Compra</a>
-    </div>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb" id="breadcrumb"></div>
+
+  <div class="card">
+    <h1>¡Compra Confirmada! 🏀</h1>
+    <div id="detallesCompra"></div>
+    <a href="baloncesto.html" class="button">Volver a productos</a>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const modelo = params.get("modelo") || "Modelo desconocido";
+    const talla = params.get("talla") || "No aplica";
+
+    const nombresModelos = {
+      // Zapatillas
+      "nike_lebron_20": "Nike LeBron 20",
+      "curry_10": "Under Armour Curry 10",
+      "air_jordan_retro": "Air Jordan Retro",
+
+      // Camisetas
+      "lebron_lakers_jersey": "Camiseta LeBron James Lakers",
+      "warriors_jersey": "Camiseta Golden State Warriors",
+      "michael_jordan_jersey": "Camiseta Michael Jordan",
+
+      // Balones
+      "spalding_official": "Balón Spalding Oficial NBA",
+      "wilson_evolution": "Balón Wilson Evolution",
+      "nike_elite": "Balón Nike Elite"
+    };
+
+    const categorias = {
+      // Zapatillas
+      "nike_lebron_20": { nombre: "Zapatillas de Baloncesto", enlace: "zapatillasnbasket.html" },
+      "curry_10": { nombre: "Zapatillas de Baloncesto", enlace: "zapatillasnbasket.html" },
+      "air_jordan_retro": { nombre: "Zapatillas de Baloncesto", enlace: "zapatillasnbasket.html" },
+
+      // Camisetas
+      "lebron_lakers_jersey": { nombre: "Camisetas de Baloncesto", enlace: "camisetasnbasket.html" },
+      "warriors_jersey": { nombre: "Camisetas de Baloncesto", enlace: "camisetasnbasket.html" },
+      "michael_jordan_jersey": { nombre: "Camisetas de Baloncesto", enlace: "camisetasnbasket.html" },
+
+      // Balones
+      "spalding_official": { nombre: "Balones de Baloncesto", enlace: "detallesBalonesBasket.html" },
+      "wilson_evolution": { nombre: "Balones de Baloncesto", enlace: "detallesBalonesBasket.html" },
+      "nike_elite": { nombre: "Balones de Baloncesto", enlace: "detallesBalonesBasket.html" }
+    };
+
+    const precios = {
+      // Zapatillas
+      "nike_lebron_20": "$179.99",
+      "curry_10": "$159.99",
+      "air_jordan_retro": "$199.99",
+
+      // Camisetas
+      "lebron_lakers_jersey": "$79.99",
+      "warriors_jersey": "$79.99",
+      "michael_jordan_jersey": "$89.99",
+
+      // Balones
+      "spalding_official": "$59.99",
+      "wilson_evolution": "$54.99",
+      "nike_elite": "$49.99"
+    };
+
+    const nombre = nombresModelos[modelo] || "Modelo desconocido";
+    const precio = precios[modelo] || "$0.00";
+    const categoria = categorias[modelo] || { nombre: "Baloncesto", enlace: "basket.html" };
+
+    // Construir el breadcrumb dinámico
+    document.getElementById("breadcrumb").innerHTML = `
+      <a href="inicio.html">Inicio</a> >
+      <a href="basket.html">Baloncesto</a> >
+      <a href="${categoria.enlace}">${categoria.nombre}</a> >
+      <span>${nombre}</span>
+    `;
+
+    // Mostrar los detalles de la compra
+    document.getElementById("detallesCompra").innerHTML = `
+      <p><strong>Producto:</strong> ${nombre}</p>
+      <p><strong>Talla:</strong> ${talla}</p>
+      <p><strong>Precio:</strong> ${precio}</p>
+    `;
+  </script>
 </body>
 </html>

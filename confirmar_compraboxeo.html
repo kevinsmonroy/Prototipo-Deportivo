@@ -7,44 +7,208 @@
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
             text-align: center;
-            background-color: #e0e0e0; /* Color de fondo de boxeo.html */
-            padding: 20px;
         }
-        .container {
-            background: white;
-            padding: 20px;
+
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
+
+        .card {
+            max-width: 600px;
+            background-color: white;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
         }
+
         h1 {
-            color: #ff4500; /* Color de encabezado de boxeo.html */
+            font-size: 2em;
+            color: #ff4500;
+            margin-bottom: 20px;
         }
+
+        p {
+            font-size: 1.2em;
+            color: #555;
+            margin: 10px 0;
+        }
+
         .button {
             display: inline-block;
-            background-color: #ff4500; /* Color de botón de boxeo.html */
-            color: white;
+            margin-top: 20px;
             padding: 10px 20px;
-            border-radius: 5px;
+            background-color: #ff4500;
+            color: white;
             text-decoration: none;
+            border-radius: 5px;
             font-size: 1em;
-            margin: 10px;
+            transition: background-color 0.3s;
         }
-        .button.cancel {
-            background-color: #dc3545;
-        }
+
         .button:hover {
-            opacity: 0.8;
+            background-color: #e03e00;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>¿Deseas confirmar tu compra?</h1>
-        <p>Estás a punto de comprar este producto. ¿Quieres continuar con el pago?</p>
-        <a href="pago.html" class="button">Proceder al Pago</a>
-        <a href="boxeo.html" class="button cancel">Cancelar Compra</a>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb" id="breadcrumb"></div>
+
+    <div class="card">
+        <h1>¡Compra Confirmada! 🥊</h1>
+        <div id="detallesCompra"></div>
+        <a href="boxeo.html" class="button">Volver a productos</a>
     </div>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const modelo = params.get("modelo") || "Modelo desconocido";
+        const talla = params.get("talla") || "No aplica";
+
+        const nombresModelos = {
+            // Guantes
+            "guantes_everlast": "Guantes Everlast",
+            "hayabusa_gloves_negro": "Guantes Hayabusa",
+            "guantes_fiving": "Guantes Fiving",
+            "guantes_RDX": "Guantes RDX",
+
+            // Protectores bucales
+            "protector_bucal_everlast": "Protector Bucal Everlast",
+            "protector_bucal_shockdoctor": "Protector Bucal Shock Doctor",
+            "protector_bucal_venum": "Protector Bucal Venum",
+            "protector_bucal_RDX": "Protector Bucal RDX",
+            "protector_bucal_safejawz": "Protector Bucal SafeJawz",
+
+            // Cascos
+            "casco_everlast": "Casco Everlast",
+            "casco_adidas": "Casco Adidas",
+            "casco_venum": "Casco Venum",
+            "casco_RDX": "Casco RDX",
+            "casco_Makoto": "Casco Makoto",
+
+            // Sacos de boxeo
+            "saco_everlast": "Saco de Boxeo Everlast",
+            "saco_Makoto": "Saco de Boxeo Makoto",
+            "Saco_venum": "Saco de Boxeo Venum",
+            "saco_RDX": "Saco de Boxeo RDX",
+
+            // Otros
+            "vendas_everlast": "Vendas Everlast",
+            "vendas_adidas": "Vendas Adidas"
+        };
+
+        const categorias = {
+            // Guantes
+            "guantes_everlast": { nombre: "Guantes de Boxeo", enlace: "detallesguantesboxeo.html" },
+            "hayabusa_gloves_negro": { nombre: "Guantes de Boxeo", enlace: "detallesguantesboxeo.html" },
+            "guantes_fiving": { nombre: "Guantes de Boxeo", enlace: "detallesguantesboxeo.html" },
+            "guantes_RDX": { nombre: "Guantes de Boxeo", enlace: "detallesguantesboxeo.html" },
+
+            // Protectores bucales
+            "protector_bucal_everlast": { nombre: "Protectores Bucales", enlace: "protector bucal.html" },
+            "protector_bucal_shockdoctor": { nombre: "Protectores Bucales", enlace: "protector bucal.html" },
+            "protector_bucal_venum": { nombre: "Protectores Bucales", enlace: "protector bucal.html" },
+            "protector_bucal_RDX": { nombre: "Protectores Bucales", enlace: "protector bucal.html" },
+            "protector_bucal_safejawz": { nombre: "Protectores Bucales", enlace: "protector bucal.html" },
+
+            // Cascos
+            "casco_everlast": { nombre: "Cascos de Boxeo", enlace: "casco boxeo.html" },
+            "casco_adidas": { nombre: "Cascos de Boxeo", enlace: "casco boxeo.html" },
+            "casco_venum": { nombre: "Cascos de Boxeo", enlace: "casco boxeo.html" },
+            "casco_RDX": { nombre: "Cascos de Boxeo", enlace: "casco boxeo.html" },
+            "casco_Makoto": { nombre: "Cascos de Boxeo", enlace: "casco boxeo.html" },
+
+            // Sacos de boxeo
+            "saco_everlast": { nombre: "Sacos de Boxeo", enlace: "sacodeboxeo.html" },
+            "saco_Makoto": { nombre: "Sacos de Boxeo", enlace: "sacodeboxeo.html" },
+            "Saco_venum": { nombre: "Sacos de Boxeo", enlace: "sacodeboxeo.html" },
+            "saco_RDX": { nombre: "Sacos de Boxeo", enlace: "sacodeboxeo.html" },
+
+            // Otros
+            "vendas_everlast": { nombre: "Vendas de Boxeo", enlace: "detallesVendas.html" },
+            "vendas_adidas": { nombre: "Vendas de Boxeo", enlace: "detallesVendas.html" }
+        };
+
+        const precios = {
+            // Guantes
+            "guantes_everlast": "$64.99",
+            "hayabusa_gloves_negro": "$159.77",
+            "guantes_fiving": "$32.99",
+            "guantes_RDX": "$54.99",
+
+            // Protectores bucales
+            "protector_bucal_everlast": "$24.99",
+            "protector_bucal_shockdoctor": "$19.99",
+            "protector_bucal_venum": "$19.99",
+            "protector_bucal_RDX": "$22.99",
+            "protector_bucal_safejawz": "$18.47",
+
+            // Cascos
+            "casco_everlast": "$98.64",
+            "casco_adidas": "$44.99",
+            "casco_venum": "$59.99",
+            "casco_RDX": "$54.99",
+            "casco_Makoto": "$76.47",
+
+            // Sacos de boxeo
+            "saco_everlast": "$98.64",
+            "saco_Makoto": "$76.47",
+            "Saco_venum": "$59.99",
+            "saco_RDX": "$54.99",
+
+            // Otros
+            "vendas_everlast": "$9.99",
+            "vendas_adidas": "$12.99"
+        };
+
+        const nombre = nombresModelos[modelo] || "Modelo desconocido";
+        const precio = precios[modelo] || "$0.00";
+        const categoria = categorias[modelo] || { nombre: "Boxeo", enlace: "boxeo.html" };
+
+        // Construir el breadcrumb dinámico
+        document.getElementById("breadcrumb").innerHTML = `
+            <a href="inicio.html">Inicio</a> >
+            <a href="boxeo.html">Boxeo</a> >
+            <a href="${categoria.enlace}">${categoria.nombre}</a> >
+            <span>${nombre}</span>
+        `;
+
+        // Mostrar los detalles de la compra
+        document.getElementById("detallesCompra").innerHTML = `
+            <p><strong>Producto:</strong> ${nombre}</p>
+            <p><strong>Talla:</strong> ${talla}</p>
+            <p><strong>Precio:</strong> ${precio}</p>
+        `;
+    </script>
 </body>
 </html>

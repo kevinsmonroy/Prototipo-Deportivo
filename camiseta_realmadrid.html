@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camiseta Real Madrid</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    .breadcrumb {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 10px 20px;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+      color: #007BFF;
+      margin-right: 5px;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      margin-right: 5px;
+      color: #555;
+    }
+
+    .main-container {
+      display: flex;
+      flex-wrap: wrap;
+      min-height: 100vh;
+    }
+
+    .image-container {
+      flex: 1;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      max-height: 500px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-container {
+      flex: 1;
+      background-color: #fff;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .details-container h1 {
+      font-size: 2em;
+      color: #FEBE10; /* Color amarillo del Real Madrid */
+      margin-bottom: 10px;
+    }
+
+    .details-container p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 1.5em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .size-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 30px;
+    }
+
+    .size-button {
+      padding: 15px 20px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      background-color: white;
+      transition: 0.2s;
+    }
+
+    .size-button:hover {
+      border-color: #FEBE10;
+    }
+
+    .size-button.selected {
+      border-color: #FEBE10;
+      background-color: #FEBE10;
+      color: white;
+    }
+
+    .button {
+      padding: 15px;
+      background-color: #FEBE10;
+      color: white;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #D4A00D;
+    }
+
+    /* Estilos del carrito */
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1em;
+      z-index: 1000;
+    }
+
+    .cart-icon span {
+      background-color: white;
+      color: #007BFF;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 0.9em;
+    }
+
+    .cart-container {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      width: 300px;
+      max-height: 400px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+    }
+
+    .cart-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .cart-footer {
+      padding: 10px;
+      text-align: center;
+      font-size: 1em;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="inicio.html">Inicio</a> >
+    <a href="futbol.html">Fútbol</a> >
+    <a href="detallescamisetasfutbol.html">Camisetas de Fútbol</a> >
+    <span>Camiseta Real Madrid</span>
+  </div>
+
+  <!-- Icono del carrito -->
+  <div class="cart-icon" id="cartIcon">
+    🛒 <span id="cartCount">0</span>
+  </div>
+
+  <!-- Contenedor del carrito -->
+  <div class="cart-container" id="cartContainer">
+    <div class="cart-header">Tu Carrito</div>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <p>Gestiona tus productos desde aquí.</p>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="image-container">
+      <img src="real madrid camisa.jpg" alt="Camiseta Real Madrid">
+    </div>
+    <div class="details-container">
+      <h1>Camiseta Real Madrid</h1>
+      <p>La camiseta oficial del Real Madrid.</p>
+      <p class="price">$145.89</p>
+      <div class="size-options">
+        <button class="size-button">S</button>
+        <button class="size-button">M</button>
+        <button class="size-button">L</button>
+        <button class="size-button">XL</button>
+      </div>
+      <button class="button">Añadir al carrito</button>
+    </div>
+  </div>
+
+  <script>
+    const sizeButtons = document.querySelectorAll('.size-button');
+    const addToCartButton = document.querySelector('.button');
+    const cartIcon = document.getElementById('cartIcon');
+    const cartContainer = document.getElementById('cartContainer');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    let selectedSize = null;
+
+    // Selección de talla
+    sizeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        sizeButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        selectedSize = button.textContent;
+      });
+    });
+
+    // Añadir al carrito
+    addToCartButton.addEventListener('click', () => {
+      if (selectedSize) {
+        const producto = {
+          nombre: "Camiseta Real Madrid",
+          talla: selectedSize,
+          precio: "$145.89"
+        };
+
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        alert('Producto añadido al carrito.');
+        loadCart();
+
+        // Redirigir a la página de confirmación
+        window.location.href = `confirmar_comprafutbol.html?modelo=real_madrid_jersey&talla=${selectedSize}`;
+      } else {
+        alert('Por favor, selecciona una talla antes de continuar.');
+      }
+    });
+
+    // Mostrar/Ocultar el carrito
+    cartIcon.addEventListener('click', () => {
+      cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Cargar el carrito desde localStorage
+    function loadCart() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      cartCount.textContent = carrito.length;
+
+      cartItems.innerHTML = '';
+
+      if (carrito.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+        return;
+      }
+
+      carrito.forEach((producto, index) => {
+        const item = document.createElement('div');
+        item.classList.add('cart-item');
+        item.innerHTML = `
+          <div>
+            <p><strong>${producto.nombre}</strong></p>
+            <p>Talla: ${producto.talla}</p>
+            <p>Precio: ${producto.precio}</p>
+          </div>
+          <button class="remove-btn" data-index="${index}">Eliminar</button>
+        `;
+        cartItems.appendChild(item);
+      });
+
+      const removeButtons = document.querySelectorAll('.remove-btn');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          removeFromCart(index);
+        });
+      });
+    }
+
+    // Eliminar un producto del carrito
+    function removeFromCart(index) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      loadCart();
+    }
+
+    // Cargar el carrito al cargar la página
+    loadCart();
+  </script>
+</body>
+</html>

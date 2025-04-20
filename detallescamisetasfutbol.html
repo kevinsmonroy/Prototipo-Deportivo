@@ -11,6 +11,27 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -24,8 +45,9 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             width: 250px;
             text-align: center;
+            transition: transform 0.3s ease;
         }
-        .product:hover{
+        .product:hover {
             transform: scale(1.05);
         }
         img {
@@ -33,7 +55,7 @@
             border-radius: 10px;
             height: 200px;
         }
-        h1{
+        h1 {
             background-color: #0056b3;
             color: white;
             padding: 20px;
@@ -43,8 +65,8 @@
             font-size: 1.2em;
             color: black;
         }
-        p{
-            color:black;
+        p {
+            color: black;
         }
         .button {
             display: inline-block;
@@ -58,60 +80,186 @@
         .button:hover {
             background-color: #0056b3;
         }
+
+        /* Estilos del carrito */
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        .cart-icon span {
+            background-color: white;
+            color: #007BFF;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        .cart-container {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .cart-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .cart-footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 1em;
+        }
     </style>
 </head>
 <body>
-    <h1>Camisetas de Fútbol 
-        <p>Descubre nuestra colección de camisetas de los equipos más importantes del mundo.</p>
+    <h1>Camisetas de Fútbol</h1>
+    <p>Descubre nuestra colección de camisetas de los equipos más importantes del mundo.</p>
 
-    </h1>
-    
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <a href="futbol.html">Fútbol</a> >
+        <span>Camisetas de Fútbol</span>
+    </div>
+
+    <!-- Icono del carrito -->
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span id="cartCount">0</span>
+    </div>
+
+    <!-- Contenedor del carrito -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">Tu Carrito</div>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <p>Gestiona tus productos desde aquí.</p>
+        </div>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compra.html" class="product">
+        <a href="camiseta_barcelona.html" class="product">
             <img src="Camisa barcelona.jpg" alt="Camiseta FC Barcelona">
             <h2>FC Barcelona</h2>
             <p>Edición 2024 - 2025</p>
             <p><strong>Precio:</strong> $133.95</p>
-            
         </a>
-        <a href="confirmar_compra.html" class="product">
+        <a href="camiseta_realmadrid.html" class="product">
             <img src="real madrid camisa.jpg" alt="Camiseta Real Madrid">
             <h2>Real Madrid</h2>
             <p>Edición 2024 - 2025</p>
             <p><strong>Precio:</strong> $145.89</p>
-        
         </a>
-        <a href="confirmar_compra.html" class="product">
+        <a href="camisetas_psg.html" class="product">
             <img src="camisetas-champions-league-2023-24-psg-5.jpg" alt="Camiseta PSG">
             <h2>Paris Saint-Germain</h2>
             <p>Edición 2024 - 2025</p>
             <p><strong>Precio:</strong> $125.00</p>
-            
         </a>
-        <a href="confirmar_compra.html" class="product">
-            <img src="colombia.jpg" alt="camiseta colombia">
-            <h2>Seleccion Colombia</h2>
+        <a href="camisa colombia.html" class="product">
+            <img src="colombia.jpg" alt="Camiseta Colombia">
+            <h2>Selección Colombia</h2>
             <p>Edición 2024 - 2025</p>
             <p><strong>Precio:</strong> $121.53</p>
-    
         </a>
-        <a href="confirmar_compra.html" class="product">
+        <a href="camisa_argentina.html" class="product">
             <img src="argentina camisa.jpg" alt="Camiseta Argentina">
             <h2>Selección Argentina</h2>
             <p>Edición Campeones del Mundo</p>
             <p><strong>Precio:</strong> $85.23</p>
-            
         </a>
-        <a href="confirmar_compra.html" class="product">
-            <img src="munich.jpg" alt="Camiseta Bayern munich">
-            <h2>Bayern de munich</h2>
+        <a href="camisa_bayernmunich.html" class="product">
+            <img src="munich.jpg" alt="Camiseta Bayern Munich">
+            <h2>Bayern de Munich</h2>
             <p>Edición 2023 - 2024</p>
             <p><strong>Precio:</strong> $109.58</p>
-            
         </a>
     </div>
 
     <br>
     <a href="futbol.html" class="button">Volver a productos</a>
+
+    <script>
+        const cartIcon = document.getElementById('cartIcon');
+        const cartContainer = document.getElementById('cartContainer');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+
+        // Mostrar/Ocultar el carrito
+        cartIcon.addEventListener('click', () => {
+            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Cargar el carrito desde localStorage
+        function loadCart() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            cartCount.textContent = carrito.length;
+
+            cartItems.innerHTML = '';
+
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                return;
+            }
+
+            carrito.forEach(producto => {
+                const item = document.createElement('div');
+                item.classList.add('cart-item');
+                item.innerHTML = `
+                    <div>
+                        <p><strong>${producto.nombre}</strong></p>
+                        <p>Precio: ${producto.precio}</p>
+                    </div>
+                `;
+                cartItems.appendChild(item);
+            });
+        }
+
+        // Cargar el carrito al cargar la página
+        loadCart();
+    </script>
 </body>
 </html>

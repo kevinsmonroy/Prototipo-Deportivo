@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Guantes Reusch</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f9f9f9;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .breadcrumb {
+      width: 100%;
+      background-color: #f1f1f1;
+      padding: 10px 20px;
+      font-size: 0.9em;
+      color: #555;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .breadcrumb a {
+      text-decoration: none;
+      color: #007BFF;
+      margin-right: 5px;
+    }
+
+    .breadcrumb a:hover {
+      text-decoration: underline;
+    }
+
+    .breadcrumb span {
+      margin-right: 5px;
+      color: #555;
+    }
+
+    .product-container {
+      max-width: 1000px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .product-container .image-container {
+      flex: 1;
+      background: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    .product-container img {
+      max-width: 90%;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .details {
+      flex: 1;
+      text-align: left;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1.2em;
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .price {
+      font-size: 1.5em;
+      color: #27ae60;
+      margin-bottom: 20px;
+    }
+
+    .size-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .size-button {
+      padding: 10px 20px;
+      border: 2px solid #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+      background-color: white;
+      transition: 0.3s;
+    }
+
+    .size-button:hover {
+      border-color: #007BFF;
+    }
+
+    .size-button.selected {
+      border-color: #007BFF;
+      background-color: #007BFF;
+      color: white;
+    }
+
+    .button {
+      padding: 15px 20px;
+      background-color: #007BFF;
+      color: white;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Estilos del carrito */
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1em;
+      z-index: 1000;
+    }
+
+    .cart-icon span {
+      background-color: white;
+      color: #007BFF;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 0.9em;
+    }
+
+    .cart-container {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      width: 300px;
+      max-height: 400px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+    }
+
+    .cart-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .cart-item .remove-btn {
+      background-color: #ff4d4d;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+      font-size: 0.8em;
+    }
+
+    .cart-item .remove-btn:hover {
+      background-color: #cc0000;
+    }
+
+    .cart-footer {
+      padding: 10px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    .cart-footer .checkout-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .cart-footer .checkout-btn:hover {
+      background-color: #218838;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Breadcrumb -->
+  <div class="breadcrumb">
+    <a href="inicio.html">Inicio</a> >
+    <a href="futbol.html">Fútbol</a> >
+    <a href="detallesguantesfutbol.html">Guantes de Fútbol</a> >
+    <span>Guantes Reusch</span>
+  </div>
+
+  <!-- Icono del carrito -->
+  <div class="cart-icon" id="cartIcon">
+    🛒 <span id="cartCount">0</span>
+  </div>
+
+  <!-- Contenedor del carrito -->
+  <div class="cart-container" id="cartContainer">
+    <div class="cart-header">Tu Carrito</div>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
+    </div>
+  </div>
+
+  <div class="product-container">
+    <div class="image-container">
+      <img src="Reusch.jpg" alt="Guantes Reusch">
+    </div>
+    <div class="details">
+      <h1>Guantes Reusch</h1>
+      <p>Protege tu portería con los guantes Reusch, diseñados para un rendimiento superior y máxima durabilidad.</p>
+      <p class="price">$69.99</p>
+      <p>Selecciona tu talla para continuar con la compra:</p>
+      <div class="size-options">
+        <button class="size-button">7</button>
+        <button class="size-button">8</button>
+        <button class="size-button">9</button>
+        <button class="size-button">10</button>
+        <button class="size-button">11</button>
+      </div>
+      <button class="button">Añadir al carrito</button>
+    </div>
+  </div>
+
+  <script>
+    const sizeButtons = document.querySelectorAll('.size-button');
+    const addToCartButton = document.querySelector('.button');
+    const cartIcon = document.getElementById('cartIcon');
+    const cartContainer = document.getElementById('cartContainer');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    let selectedSize = null;
+
+    // Selección de talla
+    sizeButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        sizeButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        selectedSize = button.textContent;
+      });
+    });
+
+    // Añadir al carrito
+    addToCartButton.addEventListener('click', () => {
+      if (selectedSize) {
+        const producto = {
+          nombre: "Guantes Reusch",
+          talla: selectedSize,
+          precio: "$69.99"
+        };
+
+        let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+
+        alert('Producto añadido al carrito.');
+        loadCart();
+
+        // Redirigir a la página de confirmación
+        window.location.href = `confirmar_comprafutbol.html?modelo=guantes_reusch&talla=${selectedSize}`;
+      } else {
+        alert('Por favor, selecciona una talla antes de continuar.');
+      }
+    });
+
+    // Mostrar/Ocultar el carrito
+    cartIcon.addEventListener('click', () => {
+      cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Cargar el carrito desde localStorage
+    function loadCart() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      cartCount.textContent = carrito.length;
+
+      cartItems.innerHTML = '';
+
+      if (carrito.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+        return;
+      }
+
+      carrito.forEach((producto, index) => {
+        const item = document.createElement('div');
+        item.classList.add('cart-item');
+        item.innerHTML = `
+          <div>
+            <p><strong>${producto.nombre}</strong></p>
+            <p>Talla: ${producto.talla}</p>
+            <p>Precio: ${producto.precio}</p>
+          </div>
+          <button class="remove-btn" data-index="${index}">Eliminar</button>
+        `;
+        cartItems.appendChild(item);
+      });
+
+      const removeButtons = document.querySelectorAll('.remove-btn');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          removeFromCart(index);
+        });
+      });
+    }
+
+    // Eliminar un producto del carrito
+    function removeFromCart(index) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      loadCart();
+    }
+
+    // Finalizar compra
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      alert('Gracias por tu compra.');
+      localStorage.removeItem('carrito');
+      loadCart();
+    });
+
+    // Cargar el carrito al cargar la página
+    loadCart();
+  </script>
+</body>
+</html>

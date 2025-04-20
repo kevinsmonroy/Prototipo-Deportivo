@@ -19,6 +19,27 @@
             padding: 20px;
             font-size: 2em;
         }
+        .breadcrumb {
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .breadcrumb a {
+            text-decoration: none;
+            color: #007BFF;
+            margin-right: 5px;
+        }
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        .breadcrumb span {
+            margin-right: 5px;
+            color: #555;
+        }
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -63,12 +84,18 @@
 </head>
 <body>
     <header>Productos de Tenis</header>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="inicio.html">Inicio</a> >
+        <span>Tenis</span>
+    </div>
+
     <div class="container">
         <a href="detallesRaquetatenis.html" class="product">
             <img src="raqueta teniss.jpg" alt="Raqueta de tenis">
             <h2>Raqueta Wilson</h2>
             <p>Raqueta profesional de alta resistencia y precisión.</p>
-        </a>
         </a>
         <a href="detallePelotatenis.html" class="product">
             <img src="pelotas tenis.png" alt="Pelotas de tenis">
@@ -79,7 +106,6 @@
             <img src="tenis zapatillas.jpg" alt="Zapatillas de tenis">
             <h2>Zapatillas Nike</h2>
             <p>Zapatillas especializadas para una mayor agilidad en la cancha.</p>
-
         </a>
     </div>
     <br>

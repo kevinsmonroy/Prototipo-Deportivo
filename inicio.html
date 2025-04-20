@@ -1,137 +1,440 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deportes Populares</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
-        /* Estilos para el encabezado */
-        header {
-            background: url('https://via.placeholder.com/1920x300') no-repeat center center;
-            background-size: cover;
-            height: 200px;
-            color: white;
-            text-align: center;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-        }
-        header h1 {
-            font-size: 2.5em;
-            color:black;
-            padding: 20px;
-        }
-        /* Contenedor principal */
-        main {
-            flex: 1;
-            padding: 20px;
-        }
-        /* Estilos de las tarjetas de deportes */
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 20px;
-        }
-        .sport {
-            background-color: #fff;
-            border: 2px solid #ccc;
-            border-radius: 10px;
-            margin: 10px;
-            padding: 20px;
-            width: 300px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease;
-            text-align: center;
-        }
-        .sport a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            width: 100%;
-            height: 100%;
-        }
-        .sport img {
-            max-width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
-        }
-        .sport:hover {
-            transform: scale(1.05);
-        }
-        /* Menú de navegación abajo */
-        footer {
-            background-color: #333;
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-            margin-top: auto;
-        }
-        footer a {
-            color: white;
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1em;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deportes Populares</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f0f0f0;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background: url('https://via.placeholder.com/1920x300') no-repeat center center;
+      background-size: cover;
+      height: 200px;
+      color: white;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    }
+    header h1 {
+      font-size: 2.5em;
+      color: black;
+      padding: 20px;
+    }
+    main {
+      flex: 1;
+      padding: 20px;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      margin: 20px;
+    }
+    .sport {
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      margin: 10px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+      text-align: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .sport:hover {
+      transform: scale(1.05);
+    }
+    .sport img {
+      max-width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+      margin-top: auto;
+    }
+    footer a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1.1em;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* Estilos del carrito */
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1em;
+      z-index: 1000;
+    }
+
+    .cart-icon span {
+      background-color: white;
+      color: #007BFF;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 0.9em;
+    }
+
+    .cart-container {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      width: 300px;
+      max-height: 400px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+    }
+
+    .cart-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+
+    .cart-item p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+
+    .cart-footer {
+      padding: 10px;
+      text-align: center;
+      font-size: 1em;
+    }
+
+    .cart-footer p {
+      margin: 10px 0;
+    }
+
+    .cart-footer button {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+
+    .cart-footer button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Estilos de la encuesta */
+    .survey-container {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background-color: #007BFF;
+      color: white;
+      width: 250px;
+      border-radius: 10px 0 0 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transition: width 0.3s ease, opacity 0.3s ease;
+      z-index: 2000; /* Asegura que esté encima del contenido */
+    }
+
+    .survey-container.minimized {
+      width: 50px;
+      cursor: pointer;
+    }
+
+    .survey-container.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .survey-header {
+      padding: 10px;
+      font-size: 1em;
+      text-align: center;
+      background-color: #0056b3;
+      cursor: pointer;
+    }
+
+    .survey-content {
+      padding: 10px;
+      display: none;
+    }
+
+    .survey-content h3 {
+      margin-top: 0;
+    }
+
+    .survey-content form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .survey-content form label {
+      font-size: 0.9em;
+    }
+
+    .survey-content form select,
+    .survey-content form textarea,
+    .survey-content form button {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      font-size: 0.9em;
+    }
+
+    .survey-content form button {
+      background-color: #0056b3;
+      color: white;
+      cursor: pointer;
+    }
+
+    .survey-content form button:hover {
+      background-color: #003f7f;
+    }
+  </style>
 </head>
 <body>
-    <!-- Encabezado -->
-    <header>
-        <h1>Bienvenidos al Mundo de los Deportes</h1>
-    </header>
-    
-    <!-- Sección de Deportes -->
-    <main>
-       
-        <div class="container">
-            <a href="futbol.html" class="sport">
-                <img src="futbol.jpg" alt="Fútbol">
-                <h2>Fútbol</h2>
-                <p>El fútbol es un deporte de equipo jugado entre dos conjuntos de once jugadores...</p>
-            </a>
-            <a href="baloncesto.html" class="sport">
-                <img src="baloncesto.jpg" alt="Baloncesto">
-                <h2>Baloncesto</h2>
-                <p>El baloncesto es un deporte de equipo, jugado entre dos conjuntos de cinco jugadores...</p>
-            </a>
-            <a href="boxeo.html" class="sport">
-                <img src="boxeo.jpg" alt="Boxeo">
-                <h2>Boxeo</h2>
-                <p>El boxeo es un deporte de combate en el que dos personas luchan utilizando únicamente sus puños...</p>
-            </a>
-            <a href="voleibol.html" class="sport">
-                <img src="voleibol.jpg" alt="Voleibol">
-                <h2>Voleibol</h2>
-                <p>El voleibol es un deporte de equipo jugado entre dos conjuntos de seis jugadores...</p>
-            </a>
-            <a href="tenis.html" class="sport">
-                <img src="tenis.jpg" alt="Tenis">
-                <h2>Tenis</h2>
-                <p>El tenis es un deporte de raqueta en el que dos jugadores se enfrentan entre sí...</p>
-            </a>
-        </div>
-    </main>
-    
-    <!-- Pie de página con menú de navegación -->
-    <footer>
-   
-        <a href="#contacto">Contacto:+57 313 4928612</a>
-    </footer>
+  <!-- Encabezado -->
+  <header>
+    <h1>Bienvenidos al Mundo de los Deportes</h1>
+  </header>
+
+  <!-- Icono del carrito -->
+  <div class="cart-icon" id="cartIcon">
+    🛒 <span id="cartCount">0</span>
+  </div>
+
+  <!-- Contenedor del carrito -->
+  <div class="cart-container" id="cartContainer">
+    <div class="cart-header">Tu Carrito</div>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <p id="cartTotal">Total: $0.00</p>
+      <button id="checkoutBtn">Comprar todo</button>
+    </div>
+  </div>
+
+  <!-- Encuesta de satisfacción -->
+  <div class="survey-container minimized" id="surveyContainer">
+    <div class="survey-header" id="surveyHeader">
+      📝 Encuesta
+    </div>
+    <div class="survey-content" id="surveyContent">
+      <h3>¡Tu opinión es importante!</h3>
+      <p>Por favor, responde las siguientes preguntas:</p>
+      <form id="surveyForm">
+        <label for="satisfaction">¿Qué tan satisfecho estás con nuestra página?</label>
+        <select id="satisfaction" name="satisfaction" required>
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="muy_satisfecho">Muy satisfecho</option>
+          <option value="satisfecho">Satisfecho</option>
+          <option value="neutral">Neutral</option>
+          <option value="insatisfecho">Insatisfecho</option>
+          <option value="muy_insatisfecho">Muy insatisfecho</option>
+        </select>
+
+        <label for="comments">¿Tienes algún comentario o sugerencia?</label>
+        <textarea id="comments" name="comments" rows="4" placeholder="Escribe aquí tus comentarios..."></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Sección de Deportes -->
+  <main>
+    <div class="container">
+      <!-- Fútbol -->
+      <div class="sport" onclick="window.location.href='futbol.html'">
+        <img src="futbol.jpg" alt="Fútbol" />
+        <h2>Fútbol</h2>
+        <p>El deporte más popular del mundo.</p>
+      </div>
+
+      <!-- Baloncesto -->
+      <div class="sport" onclick="window.location.href='baloncesto.html'">
+        <img src="baloncesto.jpg" alt="Baloncesto" />
+        <h2>Baloncesto</h2>
+        <p>Un deporte de precisión y trabajo en equipo.</p>
+      </div>
+
+      <!-- Boxeo -->
+      <div class="sport" onclick="window.location.href='boxeo.html'">
+        <img src="boxeo.jpg" alt="Boxeo" />
+        <h2>Boxeo</h2>
+        <p>Una disciplina de fuerza y estrategia.</p>
+      </div>
+
+      <!-- Voleibol -->
+      <div class="sport" onclick="window.location.href='voleibol.html'">
+        <img src="voleibol.jpg" alt="Voleibol" />
+        <h2>Voleibol</h2>
+        <p>Trabajo en equipo y agilidad en la cancha.</p>
+      </div>
+
+      <!-- Tenis -->
+      <div class="sport" onclick="window.location.href='tenis.html'">
+        <img src="tenis.jpg" alt="Tenis" />
+        <h2>Tenis</h2>
+        <p>Un deporte de precisión y resistencia.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <a href="#contacto">Contacto: +57 313 4928612</a>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    const cartIcon = document.getElementById('cartIcon');
+    const cartContainer = document.getElementById('cartContainer');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+
+    // Mostrar/Ocultar el carrito
+    cartIcon.addEventListener('click', () => {
+      cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // Cargar el carrito desde localStorage
+    function loadCart() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      cartCount.textContent = carrito.length;
+
+      cartItems.innerHTML = '';
+      let total = 0;
+
+      if (carrito.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+        cartTotal.textContent = 'Total: $0.00';
+        return;
+      }
+
+      carrito.forEach((producto, index) => {
+        const item = document.createElement('div');
+        item.classList.add('cart-item');
+        item.innerHTML = `
+          <div>
+            <p><strong>${producto.nombre}</strong></p>
+            <p>Precio: ${producto.precio}</p>
+          </div>
+          <button class="remove-btn" data-index="${index}">Eliminar</button>
+        `;
+        cartItems.appendChild(item);
+
+        // Sumar el precio al total
+        total += parseFloat(producto.precio.replace('$', ''));
+      });
+
+      cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+
+      // Agregar funcionalidad a los botones "Eliminar"
+      const removeButtons = document.querySelectorAll('.remove-btn');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          removeFromCart(index);
+        });
+      });
+    }
+
+    // Eliminar un producto del carrito
+    function removeFromCart(index) {
+      let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      loadCart();
+    }
+
+    // Comprar todo
+    checkoutBtn.addEventListener('click', () => {
+      alert('Compra realizada con éxito.');
+      localStorage.removeItem('carrito');
+      loadCart();
+    });
+
+    // Cargar el carrito al cargar la página
+    loadCart();
+
+    // Encuesta de satisfacción
+    const surveyContainer = document.getElementById('surveyContainer');
+    const surveyHeader = document.getElementById('surveyHeader');
+    const surveyContent = document.getElementById('surveyContent');
+    const surveyForm = document.getElementById('surveyForm');
+
+    // Alternar la visibilidad de la encuesta
+    surveyHeader.addEventListener('click', () => {
+      if (surveyContainer.classList.contains('minimized')) {
+        surveyContainer.classList.remove('minimized');
+        surveyContent.style.display = 'block';
+      } else {
+        surveyContainer.classList.add('minimized');
+        surveyContent.style.display = 'none';
+      }
+    });
+
+    // Manejar el envío de la encuesta
+    surveyForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('¡Gracias por tu opinión!');
+      surveyContainer.classList.add('hidden'); // Ocultar la encuesta permanentemente
+    });
+  </script>
 </body>
 </html>
