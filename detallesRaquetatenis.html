@@ -11,6 +11,7 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+
         .breadcrumb {
             width: 100%;
             background-color: #f1f1f1;
@@ -20,18 +21,22 @@
             margin-bottom: 20px;
             text-align: center;
         }
+
         .breadcrumb a {
             text-decoration: none;
             color: #007BFF;
             margin-right: 5px;
         }
+
         .breadcrumb a:hover {
             text-decoration: underline;
         }
+
         .breadcrumb span {
             margin-right: 5px;
             color: #555;
         }
+
         .container {
             display: flex;
             flex-wrap: wrap;
@@ -39,8 +44,9 @@
             gap: 20px;
             align-items: stretch;
         }
+
         .product {
-            background: #90EE90;
+            background: #E8F5E9; /* Verde claro */
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -51,53 +57,143 @@
             flex-direction: column;
             justify-content: space-between;
         }
-        .product a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            width: 100%;
-            height: 100%;
+
+        .product:hover {
+            transform: scale(1.05);
         }
-    .product:hover {
-        transform: scale(1.05);
-    }
 
-    a:visited {
-        text-decoration: none;
-        color: inherit;
-    }
-
-    img {
+        .product img {
             max-width: 100%;
             height: 200px;
             object-fit: cover;
             border-radius: 10px;
         }
+
+        .product h2 {
+            font-size: 1.2em;
+            color: #2E7D32; /* Verde oscuro */
+            margin: 10px 0;
+        }
+
+        .product p {
+            color: #333; /* Negro */
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
         h1 {
             background-color: #28a745;
             color: white;
             padding: 20px;
             font-size: 2em;
-        }
-        h2 {
-            font-size: 1.2em;
-            color: black;
+            border-radius: 5px;
         }
 
-        p {
-
-        p {
-            color: black;
-        }
-            background-color: #d9534f;
+        .button {
+            display: inline-block;
+            background-color: #28a745; /* Verde */
             color: white;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
+
         .button:hover {
-            background-color: #c9302c;
+            background-color: #218838; /* Verde más oscuro */
+        }
+
+        /* Estilos del carrito */
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        .cart-icon span {
+            background-color: white;
+            color: #007BFF;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        .cart-container {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            display: none; /* Oculto por defecto */
+            z-index: 1000;
+        }
+
+        .cart-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .cart-footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .cart-footer p {
+            margin: 10px 0;
+        }
+
+        .cart-footer button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .cart-footer button:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
@@ -111,34 +207,142 @@
         <span>Raquetas de Tenis</span>
     </div>
 
+    <!-- Icono del carrito -->
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span id="cartCount">0</span>
+    </div>
+
+    <!-- Contenedor del carrito -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">Tu Carrito</div>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <p id="cartTotal">Total: $0.00</p>
+            <button id="checkoutBtn">Comprar todo</button>
+        </div>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compratenis.html?modelo=wilson_pro_staff" class="product">
+        <div class="product" data-modelo="wilson_pro_staff" data-precio="249.99">
             <img src="raqueta wilson.jpg" alt="Raqueta Wilson Pro Staff">
             <h2>Wilson Pro Staff</h2>
             <p>Conocida por su precisión y control, ideal para jugadores avanzados.</p>
             <p><strong>Precio:</strong> $249.99</p>
-        </a>
-        <a href="confirmar_compratenis.html?modelo=babolat_pure_drive" class="product">
+        </div>
+        <div class="product" data-modelo="babolat_pure_drive" data-precio="199.99">
             <img src="raqueta pure drive.png" alt="Raqueta Babolat Pure Drive">
             <h2>Babolat Pure Drive</h2>
             <p>Ofrece una excelente combinación de potencia y control, perfecta para jugadores intermedios.</p>
             <p><strong>Precio:</strong> $199.99</p>
-        </a>
-        <a href="confirmar_compratenis.html?modelo=head_graphene" class="product">
+        </div>
+        <div class="product" data-modelo="head_graphene" data-precio="179.99">
             <img src="graphene.jpg" alt="Raqueta Head Graphene">
             <h2>Head Graphene</h2>
             <p>Ligera y potente, ideal para jugadores que buscan mejorar su juego.</p>
             <p><strong>Precio:</strong> $179.99</p>
-        </a>
-        <a href="confirmar_compratenis.html?modelo=yonex_ezone" class="product">
+        </div>
+        <div class="product" data-modelo="yonex_ezone" data-precio="229.99">
             <img src="ezone.jpg" alt="Raqueta Yonex Ezone">
             <h2>Yonex Ezone</h2>
             <p>Con tecnología avanzada para mayor comodidad y precisión en cada golpe.</p>
             <p><strong>Precio:</strong> $229.99</p>
-        </a>
+        </div>
     </div>
 
     <br> 
     <a href="tenis.html" class="button">Volver a productos</a>
+
+    <script>
+        const cartIcon = document.getElementById('cartIcon');
+        const cartContainer = document.getElementById('cartContainer');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const products = document.querySelectorAll('.product');
+
+        // Mostrar/Ocultar el carrito
+        cartIcon.addEventListener('click', () => {
+            cartContainer.style.display = cartContainer.style.display === 'none' || cartContainer.style.display === '' ? 'block' : 'none';
+        });
+
+        // Cargar el carrito
+        function loadCart() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            cartCount.textContent = carrito.length;
+
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                cartTotal.textContent = 'Total: $0.00';
+                return;
+            }
+
+            carrito.forEach((producto, index) => {
+                const item = document.createElement('div');
+                item.classList.add('cart-item');
+                item.innerHTML = `
+                    <div>
+                        <p><strong>${producto.nombre}</strong></p>
+                        <p>Precio: $${producto.precio}</p>
+                    </div>
+                    <button class="remove-btn" data-index="${index}">Eliminar</button>
+                `;
+                cartItems.appendChild(item);
+                total += parseFloat(producto.precio);
+            });
+
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+
+            const removeButtons = document.querySelectorAll('.remove-btn');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Eliminar producto del carrito
+        function removeFromCart(index) {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            loadCart();
+        }
+
+        // Comprar todo
+        checkoutBtn.addEventListener('click', () => {
+            alert('Gracias por tu compra.');
+            localStorage.removeItem('carrito');
+            loadCart();
+        });
+
+        // Añadir producto al carrito y redirigir
+        products.forEach(product => {
+            product.addEventListener('click', () => {
+                const modelo = product.getAttribute('data-modelo');
+                const precio = product.getAttribute('data-precio');
+
+                const producto = {
+                    nombre: modelo,
+                    precio: precio
+                };
+
+                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                carrito.push(producto);
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                loadCart();
+
+                // Redirigir a confirmar_compratenis.html con los valores correctos
+                window.location.href = `confirmar_compratenis.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}`;
+            });
+        });
+
+        // Cargar el carrito al cargar la página
+        loadCart();
+    </script>
 </body>
 </html>

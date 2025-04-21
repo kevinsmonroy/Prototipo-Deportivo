@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sacos de Boxeo</title>
     <style>
+        /* Estilos generales y del carrito */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -50,13 +51,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-        .product a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            width: 100%;
-            height: 100%;
+            cursor: pointer;
         }
         .product:hover {
             transform: scale(1.05);
@@ -201,30 +196,30 @@
     </div>
 
     <div class="container">
-        <a href="confirmar_compraboxeo.html?modelo=Saco_venum" class="product">
-            <img src="sacovenum.jpg" alt="Saco de Boxeo venum">
-            <h2>Saco de Boxeo venum</h2>
+        <div class="product" data-nombre="Saco de Boxeo Venum" data-precio="$59.99">
+            <img src="sacovenum.jpg" alt="Saco de Boxeo Venum">
+            <h2>Saco de Boxeo Venum</h2>
             <p>Famoso por su durabilidad y resistencia, ideal para entrenamientos intensos.</p>
             <p><strong>Precio:</strong> $59.99</p>
-        </a>
-        <a href="confirmar_compraboxeo.html?modelo=saco_everlast" class="product">
+        </div>
+        <div class="product" data-nombre="Saco de Boxeo Everlast" data-precio="$98.64">
             <img src="sacoeverlast.jpg" alt="Saco de Boxeo Everlast">
             <h2>Saco de Boxeo Everlast</h2>
             <p>Diseñado para absorber impactos y proteger tus manos durante el entrenamiento.</p>
             <p><strong>Precio:</strong> $98.64</p>
-        </a>
-        <a href="confirmar_compraboxeo.html?modelo=saco_RDX" class="product">
+        </div>
+        <div class="product" data-nombre="Saco de Boxeo RDX" data-precio="$54.99">
             <img src="sacoRDX.jpg" alt="Saco de Boxeo RDX">
             <h2>Saco de Boxeo RDX</h2>
             <p>Alta durabilidad y resistencia, perfecto para sesiones prolongadas de entrenamiento.</p>
             <p><strong>Precio:</strong> $54.99</p>
-        </a>
-        <a href="confirmar_compraboxeo.html?modelo=saco_Makoto" class="product">
+        </div>
+        <div class="product" data-nombre="Saco de Boxeo Makoto" data-precio="$76.47">
             <img src="sacomakoto.jpg" alt="Saco de Boxeo Makoto">
             <h2>Saco de Boxeo Makoto</h2>
             <p>Los Sacos de boxeo Makoto han sido creados para entrenamientos intensos y de alto impacto.</p>
             <p><strong>Precio:</strong> $76.47</p>
-        </a>
+        </div>
     </div>
 
     <br>
@@ -237,30 +232,27 @@
         const cartCount = document.getElementById('cartCount');
         const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
-
+        const products = document.querySelectorAll('.product');
+    
         // Mostrar/Ocultar el carrito al hacer clic en el ícono
         cartIcon.addEventListener('click', () => {
-            if (cartContainer.style.display === 'none' || cartContainer.style.display === '') {
-                cartContainer.style.display = 'block'; // Mostrar el carrito
-            } else {
-                cartContainer.style.display = 'none'; // Ocultar el carrito
-            }
+            cartContainer.style.display = cartContainer.style.display === 'none' || cartContainer.style.display === '' ? 'block' : 'none';
         });
-
+    
         // Cargar el carrito desde localStorage
         function loadCart() {
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             cartCount.textContent = carrito.length;
-
+    
             cartItems.innerHTML = '';
             let total = 0;
-
+    
             if (carrito.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
                 cartTotal.textContent = 'Total: $0.00';
                 return;
             }
-
+    
             carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
                 item.classList.add('cart-item');
@@ -272,13 +264,13 @@
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
-
+    
                 // Sumar el precio al total
                 total += parseFloat(producto.precio.replace('$', ''));
             });
-
+    
             cartTotal.textContent = `Total: $${total.toFixed(2)}`;
-
+    
             // Agregar funcionalidad a los botones "Eliminar"
             const removeButtons = document.querySelectorAll('.remove-btn');
             removeButtons.forEach(button => {
@@ -288,7 +280,7 @@
                 });
             });
         }
-
+    
         // Eliminar un producto del carrito
         function removeFromCart(index) {
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -296,14 +288,33 @@
             localStorage.setItem('carrito', JSON.stringify(carrito));
             loadCart();
         }
-
+    
         // Comprar todo
         checkoutBtn.addEventListener('click', () => {
             alert('Gracias por tu compra.');
             localStorage.removeItem('carrito');
             loadCart();
         });
+    
+        // Añadir producto al carrito y redirigir a confirmar_compraboxeo.html
+        products.forEach(product => {
+    product.addEventListener('click', () => {
+        const nombre = product.getAttribute('data-nombre'); // Nombre del producto
+        const precio = product.getAttribute('data-precio'); // Precio del producto
 
+        const producto = { nombre, precio };
+
+        // Guardar el producto en el carrito
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        loadCart();
+        alert(`Producto "${nombre}" añadido al carrito.`);
+
+        // Redirigir a confirmar_compraboxeo.html con los parámetros correctos
+        window.location.href = `confirmar_compraboxeo.html?modelo=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
+    });
+});
         // Cargar el carrito al cargar la página
         loadCart();
     </script>

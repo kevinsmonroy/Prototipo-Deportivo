@@ -354,25 +354,25 @@
 
     // Añadir producto al carrito y redirigir
     comprarBtn.addEventListener('click', () => {
-      if (selectedSize) {
-        const producto = {
-          nombre: 'Guantes Hayabusa Gloves Negro',
-          talla: selectedSize,
-          precio: '$159.77'
-        };
+  if (selectedSize) {
+    const producto = {
+      nombre: 'hayabusa_gloves_negro', // Nombre del modelo
+      talla: selectedSize, // Talla seleccionada
+      precio: '$159.77' // Precio del producto
+    };
 
-        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-        carrito.push(producto);
-        localStorage.setItem('carrito', JSON.stringify(carrito));
-        loadCart();
-        alert('Producto añadido al carrito.');
+    const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+    carrito.push(producto);
+    localStorage.setItem('carrito', JSON.stringify(carrito));
+    loadCart();
+    alert('Producto añadido al carrito.');
 
         // Redirigir a confirmar_compraboxeo.html
-        window.location.href = `confirmar_compraboxeo.html?producto=${encodeURIComponent(producto.nombre)}&talla=${encodeURIComponent(producto.talla)}&precio=${encodeURIComponent(producto.precio)}`;
-      } else {
-        alert('Por favor, selecciona una talla antes de continuar.');
-      }
-    });
+        window.location.href = `confirmar_compraboxeo.html?modelo=${encodeURIComponent(producto.nombre)}&talla=${encodeURIComponent(producto.talla)}&precio=${encodeURIComponent(producto.precio)}`;
+  } else {
+    alert('Por favor, selecciona una talla antes de continuar.');
+  }
+});
 
     // Cargar el carrito al cargar la página
     loadCart();

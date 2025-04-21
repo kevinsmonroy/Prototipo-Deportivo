@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detalle Pelotas de Tenis</title>
+    <title>Pelotas de Tenis</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,6 +11,7 @@
             background-color: #f9f9f9;
             padding: 20px;
         }
+
         .breadcrumb {
             width: 100%;
             background-color: #f1f1f1;
@@ -20,26 +21,31 @@
             margin-bottom: 20px;
             text-align: center;
         }
+
         .breadcrumb a {
             text-decoration: none;
             color: #007BFF;
             margin-right: 5px;
         }
+
         .breadcrumb a:hover {
             text-decoration: underline;
         }
+
         .breadcrumb span {
             margin-right: 5px;
             color: #555;
         }
+
         .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
         }
+
         .product {
-            background: #90EE90; /* Light green color */
+            background: #E8F5E9; /* Verde claro */
             padding: 15px;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -50,32 +56,142 @@
             flex-direction: column;
             justify-content: space-between;
         }
+
         .product:hover {
             transform: scale(1.05);
         }
+
+        .product img {
+            max-width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product h2 {
+            font-size: 1.2em;
+            color: #2E7D32; /* Verde oscuro */
+            margin: 10px 0;
+        }
+
+        .product p {
+            color: #333; /* Negro */
+            font-size: 1em;
+            margin: 5px 0;
+        }
+
         h1 {
             background-color: #28a745;
             color: white;
             padding: 20px;
             font-size: 2em;
+            border-radius: 5px;
         }
-        h2 {
-            font-size: 1.2em;
-            color: black;
-        }
-        p {
-            color: black;
-        }
+
         .button {
             display: inline-block;
-            background-color: #007BFF;
+            background-color: #28a745; /* Verde */
             color: white;
-            padding: 10px 15px;
+            padding: 10px 20px;
             border-radius: 5px;
             text-decoration: none;
             font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
         }
+
         .button:hover {
+            background-color: #218838; /* Verde más oscuro */
+        }
+
+        /* Estilos del carrito */
+        .cart-icon {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1em;
+            z-index: 1000;
+        }
+
+        .cart-icon span {
+            background-color: white;
+            color: #007BFF;
+            font-weight: bold;
+            border-radius: 50%;
+            padding: 5px 10px;
+            font-size: 0.9em;
+        }
+
+        .cart-container {
+            position: fixed;
+            top: 60px;
+            right: 10px;
+            width: 300px;
+            max-height: 400px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+            display: none; /* Oculto por defecto */
+            z-index: 1000;
+        }
+
+        .cart-header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            font-size: 1.2em;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item p {
+            margin: 0;
+            font-size: 0.9em;
+        }
+
+        .cart-footer {
+            padding: 10px;
+            text-align: center;
+            font-size: 1em;
+        }
+
+        .cart-footer p {
+            margin: 10px 0;
+        }
+
+        .cart-footer button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .cart-footer button:hover {
             background-color: #0056b3;
         }
     </style>
@@ -91,38 +207,146 @@
         <span>Pelotas de Tenis</span>
     </div>
 
+    <!-- Icono del carrito -->
+    <div class="cart-icon" id="cartIcon">
+        🛒 <span id="cartCount">0</span>
+    </div>
+
+    <!-- Contenedor del carrito -->
+    <div class="cart-container" id="cartContainer">
+        <div class="cart-header">Tu Carrito</div>
+        <div id="cartItems"></div>
+        <div class="cart-footer">
+            <p id="cartTotal">Total: $0.00</p>
+            <button id="checkoutBtn">Comprar todo</button>
+        </div>
+    </div>
+
     <div class="container">
-        <a href="confirmar_compratenis.html?modelo=wilson_us_open" class="product">
+        <div class="product" data-modelo="wilson_us_open" data-precio="10">
             <img src="wilson pelotas.jpg" alt="Pelota de Tenis Wilson">
             <h2>Wilson US Open</h2>
             <p>Marca: Wilson</p>
             <p>Modelo: US Open</p>
             <p><strong>Precio:</strong> $10</p>
-        </a>
-        <a href="confirmar_compratenis.html?modelo=babolat_gold" class="product">
+        </div>
+        <div class="product" data-modelo="babolat_gold" data-precio="12">
             <img src="babolat team.jpg" alt="Pelota de Tenis Babolat">
             <h2>Babolat Team</h2>
             <p>Marca: Babolat</p>
             <p>Modelo: Team</p>
             <p><strong>Precio:</strong> $12</p>
-        </a>
-        <a href="confirmar_compratenis.html?modelo=dunlop_fort" class="product">
+        </div>
+        <div class="product" data-modelo="dunlop_fort" data-precio="11">
             <img src="dunlop.jpg" alt="Pelota de Tenis Dunlop">
             <h2>Dunlop Fort All Court</h2>
             <p>Marca: Dunlop</p>
             <p>Modelo: Fort All Court</p>
             <p><strong>Precio:</strong> $11</p>
-        </a>
-        <a href="confirmar_compratenis.html?modelo=head_champions" class="product">
+        </div>
+        <div class="product" data-modelo="head_champions" data-precio="9">
             <img src="head championship.jpg" alt="Pelota de Tenis Head">
             <h2>Head Championship</h2>
             <p>Marca: Head</p>
             <p>Modelo: Championship</p>
             <p><strong>Precio:</strong> $9</p>
-        </a>
+        </div>
     </div>
 
     <br>
     <a href="tenis.html" class="button">Volver a productos</a>
+
+    <script>
+        const cartIcon = document.getElementById('cartIcon');
+        const cartContainer = document.getElementById('cartContainer');
+        const cartItems = document.getElementById('cartItems');
+        const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
+        const checkoutBtn = document.getElementById('checkoutBtn');
+        const products = document.querySelectorAll('.product');
+
+        // Mostrar/Ocultar el carrito
+        cartIcon.addEventListener('click', () => {
+            cartContainer.style.display = cartContainer.style.display === 'none' || cartContainer.style.display === '' ? 'block' : 'none';
+        });
+
+        // Cargar el carrito
+        function loadCart() {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            cartCount.textContent = carrito.length;
+
+            cartItems.innerHTML = '';
+            let total = 0;
+
+            if (carrito.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                cartTotal.textContent = 'Total: $0.00';
+                return;
+            }
+
+            carrito.forEach((producto, index) => {
+                const item = document.createElement('div');
+                item.classList.add('cart-item');
+                item.innerHTML = `
+                    <div>
+                        <p><strong>${producto.nombre}</strong></p>
+                        <p>Precio: $${producto.precio}</p>
+                    </div>
+                    <button class="remove-btn" data-index="${index}">Eliminar</button>
+                `;
+                cartItems.appendChild(item);
+                total += parseFloat(producto.precio);
+            });
+
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+
+            const removeButtons = document.querySelectorAll('.remove-btn');
+            removeButtons.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const index = e.target.getAttribute('data-index');
+                    removeFromCart(index);
+                });
+            });
+        }
+
+        // Eliminar producto del carrito
+        function removeFromCart(index) {
+            const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            loadCart();
+        }
+
+        // Comprar todo
+        checkoutBtn.addEventListener('click', () => {
+            alert('Gracias por tu compra.');
+            localStorage.removeItem('carrito');
+            loadCart();
+        });
+
+        // Añadir producto al carrito y redirigir
+        products.forEach(product => {
+            product.addEventListener('click', () => {
+                const modelo = product.getAttribute('data-modelo');
+                const precio = product.getAttribute('data-precio');
+
+                const producto = {
+                    nombre: modelo,
+                    precio: precio
+                };
+
+                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+                carrito.push(producto);
+                localStorage.setItem('carrito', JSON.stringify(carrito));
+                loadCart();
+
+                // Redirigir a confirmar_compratenis.html con los valores correctos
+                window.location.href = `confirmar_compratenis.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}`;
+            });
+        });
+
+        // Cargar el carrito al cargar la página
+        loadCart();
+    </script>
 </body>
 </html>
