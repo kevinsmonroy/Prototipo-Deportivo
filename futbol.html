@@ -82,12 +82,12 @@
             background-color: #0056b3;
         }
 
-        /* Estilos del carrito */
+        /* Estilos del carrito (color verde) */
         .cart-icon {
             position: fixed;
             top: 10px;
             right: 10px;
-            background-color: #007BFF;
+            background-color: #28a745;
             color: white;
             padding: 10px 15px;
             border-radius: 50px;
@@ -97,15 +97,21 @@
             gap: 10px;
             font-size: 1em;
             z-index: 1000;
+            transition: background-color 0.3s, transform 0.3s;
         }
 
         .cart-icon span {
             background-color: white;
-            color: #007BFF;
+            color: #28a745;
             font-weight: bold;
             border-radius: 50%;
             padding: 5px 10px;
             font-size: 0.9em;
+        }
+
+        .cart-icon:hover {
+            background-color: #218838;
+            transform: scale(1.1);
         }
 
         .cart-container {
@@ -114,16 +120,25 @@
             right: 10px;
             width: 300px;
             max-height: 400px;
-            background-color: white;
+            background-color: #eafbe7;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
-            display: none;
+            visibility: hidden;
+            opacity: 0;
+            transform: translateY(-20px);
             z-index: 1000;
+            transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .cart-container.show {
+            visibility: visible;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .cart-header {
-            background-color: #007BFF;
+            background-color: #28a745;
             color: white;
             padding: 10px;
             text-align: center;
@@ -167,9 +182,15 @@
             padding: 10px;
             text-align: center;
             font-size: 1em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
-
-        .cart-footer .checkout-btn {
+        .cart-footer #cartTotal {
+            margin-bottom: 10px;
+        }
+        .cart-footer #checkoutBtn {
             background-color: #28a745;
             color: white;
             border: none;
@@ -177,10 +198,108 @@
             padding: 10px 20px;
             cursor: pointer;
             font-size: 1em;
+            margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cart-footer #checkoutBtn:hover {
+            background-color: #218838;
         }
 
-        .cart-footer .checkout-btn:hover {
-            background-color: #218838;
+        /* Modal de compra exitosa */
+        #modalCompra {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+        #modalCompra .modal-content {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        #modalCompra h2 {
+            color: #28a745;
+            margin-bottom: 10px;
+        }
+        #modalCompra p {
+            color: #333;
+            font-size: 1.1em;
+        }
+        #cerrarModal {
+            margin-top: 20px;
+            padding: 10px 25px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        #cerrarModal:hover {
+            background: #218838;
+        }
+
+        /* Modal formulario de compra */
+        #modalFormulario {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.4);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+        #modalFormulario .modal-content {
+            background: white;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            min-width: 300px;
+        }
+        #modalFormulario input, #modalFormulario select {
+            width: 90%;
+            margin: 7px 0;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1em;
+        }
+        #modalFormulario button[type="submit"] {
+            margin-top: 15px;
+            padding: 10px 25px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        #modalFormulario button[type="submit"]:hover {
+            background: #218838;
+        }
+        #cerrarFormulario {
+            margin-top: 15px;
+            margin-left: 10px;
+            padding: 10px 25px;
+            background: #ccc;
+            color: #333;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            cursor: pointer;
+        }
+        #cerrarFormulario:hover {
+            background: #bbb;
         }
     </style>
 </head>
@@ -203,7 +322,74 @@
         <div class="cart-header">Tu Carrito</div>
         <div id="cartItems"></div>
         <div class="cart-footer">
-            <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
+            <p id="cartTotal">Total: $0.00</p>
+            <button id="checkoutBtn">Finalizar Compra</button>
+        </div>
+    </div>
+
+    <!-- Modal de compra exitosa -->
+    <div id="modalCompra">
+      <div class="modal-content">
+        <h2>¡Gracias por tu compra!</h2>
+        <p>Tu pedido ha sido realizado con éxito.<br>Pronto recibirás la confirmación en tu correo.</p>
+        <button id="cerrarModal">Cerrar</button>
+      </div>
+    </div>
+
+    <!-- Modal formulario de compra -->
+    <div id="modalFormulario">
+        <div class="modal-content">
+          <h2 style="color:#28a745; margin-bottom:10px;">Datos para tu compra</h2>
+          <form id="formCompra">
+            <input type="text" name="nombre" placeholder="Nombre" required><br>
+            <input type="text" name="apellido" placeholder="Apellido" required><br>
+            <input type="email" name="correo" placeholder="Correo electrónico" required><br>
+            <select name="ciudad" id="ciudad" required>
+              <option value="">Selecciona tu ciudad</option>
+              <option value="Bogotá">Bogotá</option>
+              <option value="Medellín">Medellín</option>
+              <option value="Cali">Cali</option>
+              <option value="Barranquilla">Barranquilla</option>
+              <option value="Cartagena">Cartagena</option>
+              <option value="Cúcuta">Cúcuta</option>
+              <option value="Bucaramanga">Bucaramanga</option>
+              <option value="Pereira">Pereira</option>
+              <option value="Santa Marta">Santa Marta</option>
+              <option value="Ibagué">Ibagué</option>
+              <option value="Villavicencio">Villavicencio</option>
+              <option value="Manizales">Manizales</option>
+              <option value="Neiva">Neiva</option>
+              <option value="Pasto">Pasto</option>
+              <option value="Montería">Montería</option>
+              <option value="Armenia">Armenia</option>
+              <option value="Popayán">Popayán</option>
+              <option value="Sincelejo">Sincelejo</option>
+              <option value="Valledupar">Valledupar</option>
+              <option value="Tunja">Tunja</option>
+              <option value="Riohacha">Riohacha</option>
+              <option value="Quibdó">Quibdó</option>
+              <option value="Florencia">Florencia</option>
+              <option value="Yopal">Yopal</option>
+              <option value="Mocoa">Mocoa</option>
+              <option value="San Andrés">San Andrés</option>
+              <option value="Leticia">Leticia</option>
+              <option value="Mitú">Mitú</option>
+              <option value="Puerto Carreño">Puerto Carreño</option>
+              <!-- Puedes agregar más ciudades si lo deseas -->
+            </select><br>
+            <input type="text" name="direccion" placeholder="Dirección" required><br>
+            <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{7,15}" title="Solo números, mínimo 7 dígitos"><br>
+            <select name="tipoDocumento" required>
+              <option value="">Tipo de documento</option>
+              <option value="CC">Cédula de ciudadanía</option>
+              <option value="CE">Cédula de extranjería</option>
+              <option value="TI">Tarjeta de identidad</option>
+              <option value="Pasaporte">Pasaporte</option>
+            </select><br>
+            <input type="text" name="documento" placeholder="Número de documento" required pattern="[0-9]{5,20}" title="Solo números, mínimo 5 dígitos"><br>
+            <button type="submit">Enviar</button>
+            <button type="button" id="cerrarFormulario">Cancelar</button>
+          </form>
         </div>
     </div>
 
@@ -231,44 +417,68 @@
     </div>
     <br>
     <a href="index.html" class="button">Volver al inicio</a>
-
     <script>
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
         const cartCount = document.getElementById('cartCount');
+        const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
-
-        // Mostrar/Ocultar el carrito
-        cartIcon.addEventListener('click', () => {
-            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+        const modalCompra = document.getElementById('modalCompra');
+        const cerrarModal = document.getElementById('cerrarModal');
+        const modalFormulario = document.getElementById('modalFormulario');
+        const cerrarFormulario = document.getElementById('cerrarFormulario');
+        const formCompra = document.getElementById('formCompra');
+    
+        // Evita que los clics dentro de los modales cierren el modal
+        document.querySelector('#modalCompra .modal-content').addEventListener('mousedown', function(e) {
+            e.stopPropagation();
         });
-
+        document.querySelector('#modalFormulario .modal-content').addEventListener('mousedown', function(e) {
+            e.stopPropagation();
+        });
+    
+        // Mostrar/Ocultar el carrito con animación
+        cartIcon.addEventListener('click', () => {
+            cartContainer.classList.toggle('show');
+        });
+    
         // Cargar el carrito desde localStorage
         function loadCart() {
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             cartCount.textContent = carrito.length;
-
+    
             cartItems.innerHTML = '';
-
+            let total = 0;
+    
             if (carrito.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                cartTotal.textContent = 'Total: $0.00';
+                checkoutBtn.style.display = 'none';
                 return;
             }
-
+            checkoutBtn.style.display = 'block';
+    
             carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
                 item.classList.add('cart-item');
                 item.innerHTML = `
                     <div>
-                        <p><strong>${producto.nombre}</strong></p>
-                        <p>Precio: ${producto.precio}</p>
+                        <p><strong>${producto.nombre ? producto.nombre : '-'}</strong></p>
+                        <p>Talla: ${producto.talla ? producto.talla : '-'}</p>
+                        <p>Precio: ${producto.precio ? producto.precio : '-'}</p>
                     </div>
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
+    
+                if (producto.precio) {
+                    total += parseFloat(producto.precio.replace('$', ''));
+                }
             });
-
+    
+            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+    
             const removeButtons = document.querySelectorAll('.remove-btn');
             removeButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
@@ -277,7 +487,7 @@
                 });
             });
         }
-
+    
         // Eliminar un producto del carrito
         function removeFromCart(index) {
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
@@ -285,20 +495,51 @@
             localStorage.setItem("carrito", JSON.stringify(carrito));
             loadCart();
         }
-
-        // Finalizar compra
+    
+        // Finalizar compra: mostrar formulario
         checkoutBtn.addEventListener('click', () => {
-            alert('Gracias por tu compra.');
-            localStorage.removeItem('carrito');
-            loadCart();
+            modalFormulario.style.display = 'flex';
         });
-
+    
+        // Cerrar formulario
+        cerrarFormulario.onclick = function() {
+            modalFormulario.style.display = 'none';
+        };
+    
+        // Validación extra para solo números en teléfono y documento (refuerza el pattern)
+        // ...código anterior...
+formCompra.addEventListener('submit', function(e) {
+    const telefono = this.telefono.value;
+    const documento = this.documento.value;
+    if (!/^\d{7,15}$/.test(telefono)) {
+        alert('El teléfono debe contener solo números (mínimo 7 dígitos).');
+        this.telefono.focus();
+        e.preventDefault();
+        return false;
+    }
+    if (!/^\d{5,20}$/.test(documento)) {
+        alert('El número de documento debe contener solo números (mínimo 5 dígitos).');
+        this.documento.focus();
+        e.preventDefault();
+        return false;
+    }
+    e.preventDefault(); // <-- ¡Esto es lo importante!
+    localStorage.removeItem('carrito');
+    loadCart();
+    modalFormulario.style.display = 'none';
+    modalCompra.style.display = 'flex';
+});
+// ...código posterior...
+    
+        // Cerrar modal de compra exitosa
+        cerrarModal.onclick = function() {
+            modalCompra.style.display = 'none';
+        };
+    
+   
+    
         // Cargar el carrito al cargar la página
         loadCart();
     </script>
-    
-    </div>
-    <br>
-    
 </body>
 </html>

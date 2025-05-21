@@ -48,9 +48,16 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
             display: none;
+            transform: translateY(-20px);
+            transition: transform 0.3s ease, opacity 0.3s ease;
             z-index: 1000;
-        }
 
+        }
+        .cart-container.show {
+            display: block;
+            transform: translateY(0);
+            opacity: 1;
+        }
         .cart-header {
             background-color: #007BFF;
             color: white;
@@ -137,7 +144,7 @@
 
         // Mostrar/Ocultar el carrito
         cartIcon.addEventListener('click', () => {
-            cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
+    cartContainer.classList.toggle('show');
         });
 
         // Cargar el carrito desde localStorage
@@ -196,6 +203,6 @@
         // Cargar el carrito al cargar la página
         loadCart();
     </script>
-    <sccript src="carrito.js"></script>
+    <script src="carrito.js"></script>
 </body>
 </html>

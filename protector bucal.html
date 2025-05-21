@@ -50,13 +50,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-        .product a {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-            width: 100%;
-            height: 100%;
+            cursor: pointer;
         }
         .product:hover {
             transform: scale(1.05);
@@ -92,7 +86,6 @@
         .button:hover {
             background-color: #c9302c;
         }
-
         /* Estilos del carrito */
         .cart-icon {
             position: fixed;
@@ -127,7 +120,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             overflow-y: auto;
-            display: none; /* Oculto por defecto */
+            display: none;
             z-index: 1000;
         }
         .cart-header {
@@ -163,7 +156,7 @@
         }
         .cart-footer button {
             padding: 10px 15px;
-            background-color: #007BFF;
+            background-color: #28a745;
             color: white;
             border: none;
             border-radius: 5px;
@@ -171,7 +164,58 @@
             font-size: 1em;
         }
         .cart-footer button:hover {
-            background-color: #0056b3;
+            background-color: #218838;
+        }
+        /* Estilos para el formulario */
+        #modalFormulario input,
+        #modalFormulario select {
+            width: 90%;
+            padding: 8px 10px;
+            margin: 7px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #modalFormulario input:focus,
+        #modalFormulario select:focus {
+            border-color: #28a745;
+        }
+        #modalFormulario button[type="submit"] {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 25px;
+            margin-top: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #modalFormulario button[type="submit"]:hover {
+            background: #218838;
+        }
+        #modalFormulario button[type="button"] {
+            background: #ccc;
+            color: #333;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 25px;
+            margin-top: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+        #modalFormulario button[type="button"]:hover {
+            background: #999;
+        }
+        #modalFormulario form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
@@ -201,36 +245,104 @@
     </div>
 
     <div class="container">
-        <a href="protector_venum.html" class="product">
+        <div class="product" data-modelo="venum" data-nombre="Protector Bucal Venum" data-precio="$19.99">
             <img src="Protector venum.jpg" alt="Protector Bucal Venum">
             <h2>Protector Bucal Venum</h2>
             <p>Famoso por su durabilidad y resistencia, ideal para entrenamientos intensos.</p>
             <p><strong>Precio:</strong> $19.99</p>
-        </a>
-        <a href="protector_everlast.html" class="product">
+        </div>
+        <div class="product" data-modelo="everlast" data-nombre="Protector Bucal Everlast" data-precio="$24.99">
             <img src="Protector everlast.jpg" alt="Protector Bucal Everlast">
             <h2>Protector Bucal Everlast</h2>
             <p>Diseñado para absorber impactos y proteger tus dientes durante el entrenamiento.</p>
             <p><strong>Precio:</strong> $24.99</p>
-        </a>
-        <a href="protector_RDX.html" class="product">
+        </div>
+        <div class="product" data-modelo="rdx" data-nombre="Protector Bucal RDX" data-precio="$22.99">
             <img src="protector rdx.jpg" alt="Protector Bucal RDX">
             <h2>Protector Bucal RDX</h2>
             <p>Alta durabilidad y resistencia, perfecto para sesiones prolongadas de entrenamiento.</p>
             <p><strong>Precio:</strong> $22.99</p>
-        </a>
-        <a href="protector_safejawz.html" class="product">
+        </div>
+        <div class="product" data-modelo="safejawz" data-nombre="Protector Bucal safejawz" data-precio="$18.47">
             <img src="safejawz.jpg" alt="Protector Bucal safejawz">
             <h2>Protector Bucal safejawz</h2>
             <p>Los protectores bucales safejawz han sido creados para entrenamientos intensos y de alto impacto.</p>
             <p><strong>Precio:</strong> $18.47</p>
-        </a>
+        </div>
     </div>
 
     <br>
     <a href="boxeo.html" class="button">Volver a productos</a>
 
+    <!-- Modal formulario de compra -->
+    <div id="modalFormulario" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:3000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; min-width:320px; max-width:95vw;">
+            <h2 style="color:#28a745; margin-bottom:10px;">Datos para tu compra</h2>
+            <form id="formCompra">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellido" placeholder="Apellido" required>
+                <input type="email" name="correo" placeholder="Correo electrónico" required>
+                <select name="ciudad" required>
+                    <option value="">Selecciona tu ciudad</option>
+                    <option value="Bogotá">Bogotá</option>
+                    <option value="Medellín">Medellín</option>
+                    <option value="Cali">Cali</option>
+                    <option value="Barranquilla">Barranquilla</option>
+                    <option value="Cartagena">Cartagena</option>
+                    <option value="Cúcuta">Cúcuta</option>
+                    <option value="Bucaramanga">Bucaramanga</option>
+                    <option value="Pereira">Pereira</option>
+                    <option value="Santa Marta">Santa Marta</option>
+                    <option value="Ibagué">Ibagué</option>
+                    <option value="Villavicencio">Villavicencio</option>
+                    <option value="Manizales">Manizales</option>
+                    <option value="Neiva">Neiva</option>
+                    <option value="Pasto">Pasto</option>
+                    <option value="Montería">Montería</option>
+                    <option value="Armenia">Armenia</option>
+                    <option value="Popayán">Popayán</option>
+                    <option value="Sincelejo">Sincelejo</option>
+                    <option value="Valledupar">Valledupar</option>
+                    <option value="Tunja">Tunja</option>
+                    <option value="Riohacha">Riohacha</option>
+                    <option value="Quibdó">Quibdó</option>
+                    <option value="Florencia">Florencia</option>
+                    <option value="Yopal">Yopal</option>
+                    <option value="Mocoa">Mocoa</option>
+                    <option value="San Andrés">San Andrés</option>
+                    <option value="Leticia">Leticia</option>
+                    <option value="Mitú">Mitú</option>
+                    <option value="Puerto Carreño">Puerto Carreño</option>
+                </select>
+                <input type="text" name="direccion" placeholder="Dirección" required>
+                <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{7,15}" title="Solo números, mínimo 7 dígitos">
+                <select name="tipoDocumento" required>
+                    <option value="">Tipo de documento</option>
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select>
+                <input type="text" name="documento" placeholder="Número de documento" required pattern="[0-9]{5,20}" title="Solo números, mínimo 5 dígitos">
+                <div>
+                    <button type="submit">Enviar</button>
+                    <button type="button" id="cerrarFormulario">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de compra exitosa -->
+    <div id="modalCompra" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:4000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center;">
+            <h2 style="color:#28a745;">¡Gracias por tu compra!</h2>
+            <p>Tu pedido ha sido realizado con éxito.<br>Pronto recibirás la confirmación en tu correo.</p>
+            <button id="cerrarModal">Cerrar</button>
+        </div>
+    </div>
+
     <script>
+        const products = document.querySelectorAll(".product");
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
@@ -238,12 +350,30 @@
         const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
 
+        // Añadir producto al carrito y redirigir a confirmación
+        products.forEach(product => {
+            product.addEventListener("click", () => {
+                const modelo = product.dataset.modelo;
+                const nombre = product.dataset.nombre;
+                const precio = product.dataset.precio;
+
+                const producto = { nombre, precio, modelo };
+
+                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+                carrito.push(producto);
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+
+                // Redirigir a la página de confirmación con los datos correctos
+                window.location.href = `confirmar_compraboxeo.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+            });
+        });
+
         // Mostrar/Ocultar el carrito al hacer clic en el ícono
         cartIcon.addEventListener('click', () => {
             if (cartContainer.style.display === 'none' || cartContainer.style.display === '') {
-                cartContainer.style.display = 'block'; // Mostrar el carrito
+                cartContainer.style.display = 'block';
             } else {
-                cartContainer.style.display = 'none'; // Ocultar el carrito
+                cartContainer.style.display = 'none';
             }
         });
 
@@ -258,8 +388,10 @@
             if (carrito.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
                 cartTotal.textContent = 'Total: $0.00';
+                checkoutBtn.style.display = 'none';
                 return;
             }
+            checkoutBtn.style.display = 'inline-block';
 
             carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
@@ -273,11 +405,11 @@
                 `;
                 cartItems.appendChild(item);
 
-                // Sumar el precio al total
-                total += parseFloat(producto.precio.replace('$', ''));
+                let precioNum = parseFloat(producto.precio.replace('$', '').replace(',', '.'));
+                if (!isNaN(precioNum)) total += precioNum;
             });
 
-            cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+            cartTotal.textContent = 'Total: $' + total.toLocaleString('es-CO', {minimumFractionDigits:2, maximumFractionDigits:2});
 
             // Agregar funcionalidad a los botones "Eliminar"
             const removeButtons = document.querySelectorAll('.remove-btn');
@@ -297,12 +429,51 @@
             loadCart();
         }
 
-        // Comprar todo
-        checkoutBtn.addEventListener('click', () => {
-            alert('Gracias por tu compra.');
+        // Modal formulario de compra
+        const modalFormulario = document.getElementById('modalFormulario');
+        const cerrarFormulario = document.getElementById('cerrarFormulario');
+        const formCompra = document.getElementById('formCompra');
+        const modalCompra = document.getElementById('modalCompra');
+        const cerrarModal = document.getElementById('cerrarModal');
+
+        // Finalizar compra: mostrar formulario de datos
+        checkoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalFormulario.style.display = 'flex';
+        });
+
+        // Cerrar formulario solo con el botón cancelar
+        cerrarFormulario.onclick = function() {
+            modalFormulario.style.display = 'none';
+        };
+
+        // Validación y mostrar mensaje de éxito
+        formCompra.addEventListener('submit', function(e) {
+            const telefono = this.telefono.value;
+            const documento = this.documento.value;
+            if (!/^\d{7,15}$/.test(telefono)) {
+                alert('El teléfono debe contener solo números (mínimo 7 dígitos).');
+                this.telefono.focus();
+                e.preventDefault();
+                return false;
+            }
+            if (!/^\d{5,20}$/.test(documento)) {
+                alert('El número de documento debe contener solo números (mínimo 5 dígitos).');
+                this.documento.focus();
+                e.preventDefault();
+                return false;
+            }
+            e.preventDefault();
             localStorage.removeItem('carrito');
             loadCart();
+            modalFormulario.style.display = 'none';
+            modalCompra.style.display = 'flex';
         });
+
+        // Cerrar modal de compra exitosa solo con el botón cerrar
+        cerrarModal.onclick = function() {
+            modalCompra.style.display = 'none';
+        };
 
         // Cargar el carrito al cargar la página
         loadCart();

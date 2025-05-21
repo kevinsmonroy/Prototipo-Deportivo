@@ -25,6 +25,7 @@
             width: 250px;
             text-align: center;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
         .product:hover {
             transform: scale(1.05);
@@ -76,8 +77,6 @@
             margin-right: 5px;
             color: #555;
         }
-
-        /* Estilos del carrito */
         .cart-icon {
             position: fixed;
             top: 10px;
@@ -93,7 +92,6 @@
             font-size: 1em;
             z-index: 1000;
         }
-
         .cart-icon span {
             background-color: white;
             color: #007BFF;
@@ -102,7 +100,6 @@
             padding: 5px 10px;
             font-size: 0.9em;
         }
-
         .cart-container {
             position: fixed;
             top: 60px;
@@ -116,7 +113,6 @@
             display: none;
             z-index: 1000;
         }
-
         .cart-header {
             background-color: #007BFF;
             color: white;
@@ -126,7 +122,6 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -134,16 +129,13 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
-
         .cart-item:last-child {
             border-bottom: none;
         }
-
         .cart-item p {
             margin: 0;
             font-size: 0.9em;
         }
-
         .cart-item .remove-btn {
             background-color: #ff4d4d;
             color: white;
@@ -153,17 +145,14 @@
             cursor: pointer;
             font-size: 0.8em;
         }
-
         .cart-item .remove-btn:hover {
             background-color: #cc0000;
         }
-
         .cart-footer {
             padding: 10px;
             text-align: center;
             font-size: 1em;
         }
-
         .cart-footer .checkout-btn {
             background-color: #28a745;
             color: white;
@@ -173,9 +162,59 @@
             cursor: pointer;
             font-size: 1em;
         }
-
         .cart-footer .checkout-btn:hover {
             background-color: #218838;
+        }
+        /* Estilos para el formulario igual que baloncesto.html */
+        #modalFormulario input,
+        #modalFormulario select {
+            width: 90%;
+            padding: 8px 10px;
+            margin: 7px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1em;
+            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        #modalFormulario input:focus,
+        #modalFormulario select:focus {
+            border-color: #28a745;
+        }
+        #modalFormulario button[type="submit"] {
+            background: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 25px;
+            margin-top: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        #modalFormulario button[type="submit"]:hover {
+            background: #218838;
+        }
+        #modalFormulario button[type="button"] {
+            background: #ccc;
+            color: #333;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 25px;
+            margin-top: 10px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+        #modalFormulario button[type="button"]:hover {
+            background: #999;
+        }
+        #modalFormulario form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
     </style>
 </head>
@@ -199,6 +238,7 @@
         <div class="cart-header">Tu Carrito</div>
         <div id="cartItems"></div>
         <div class="cart-footer">
+            <div id="cartTotal" style="font-weight:bold; margin-top:10px;">Total: $0.00</div>
             <button class="checkout-btn" id="checkoutBtn">Finalizar Compra</button>
         </div>
     </div>
@@ -207,80 +247,171 @@
 
     <div class="container">
         <!-- Producto 1: Nike LeBron 20 -->
-        <a href="nike_lebron_20.html" class="product-link">
-          <div class="product">
+        <div class="product" data-modelo="lebron_20" data-nombre="Nike LeBron 20" data-precio="$179.99">
             <img src="zapatillaslebron.jpg" alt="Zapatillas Nike LeBron">
             <h2>Nike LeBron 20</h2>
             <p>Zapatillas diseñadas para máxima comodidad y amortiguación.</p>
             <p><strong>Precio:</strong> $179.99</p>
-          </div>
-        </a>
-      
+        </div>
         <!-- Producto 2: Curry 10 -->
-        <a href="curry_10.html" class="product-link">
-          <div class="product">
+        <div class="product" data-modelo="curry_10" data-nombre="Under Armour Curry 10" data-precio="$159.99">
             <img src="zapatillascurry.png" alt="Zapatillas Curry 10">
             <h2>Under Armour Curry 10</h2>
             <p>Ligereza y soporte para cortes rápidos en la cancha.</p>
             <p><strong>Precio:</strong> $159.99</p>
-          </div>
-        </a>
-      
+        </div>
         <!-- Producto 3: Air Jordan Retro -->
-        <a href="jordan_Retro.html" class="product-link">
-          <div class="product">
+        <div class="product" data-modelo="jordan_retro" data-nombre="Air Jordan Retro" data-precio="$199.99">
             <img src="Air jordan retro.jpg" alt="Zapatillas Air Jordan">
             <h2>Air Jordan Retro</h2>
             <p>Estilo clásico con tecnología moderna de alto rendimiento.</p>
             <p><strong>Precio:</strong> $199.99</p>
-          </div>
-        </a>
+        </div>
     </div>
 
     <br>
     <a href="baloncesto.html" class="button">Volver a productos</a>
 
+    <!-- Modal formulario de compra -->
+    <div id="modalFormulario" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:3000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; min-width:320px; max-width:95vw;">
+            <h2 style="color:#28a745; margin-bottom:10px;">Datos para tu compra</h2>
+            <form id="formCompra">
+                <input type="text" name="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellido" placeholder="Apellido" required>
+                <input type="email" name="correo" placeholder="Correo electrónico" required>
+                <select name="ciudad" required>
+                    <option value="">Selecciona tu ciudad</option>
+                    <option value="Bogotá">Bogotá</option>
+                    <option value="Medellín">Medellín</option>
+                    <option value="Cali">Cali</option>
+                    <option value="Barranquilla">Barranquilla</option>
+                    <option value="Cartagena">Cartagena</option>
+                    <option value="Cúcuta">Cúcuta</option>
+                    <option value="Bucaramanga">Bucaramanga</option>
+                    <option value="Pereira">Pereira</option>
+                    <option value="Santa Marta">Santa Marta</option>
+                    <option value="Ibagué">Ibagué</option>
+                    <option value="Villavicencio">Villavicencio</option>
+                    <option value="Manizales">Manizales</option>
+                    <option value="Neiva">Neiva</option>
+                    <option value="Pasto">Pasto</option>
+                    <option value="Montería">Montería</option>
+                    <option value="Armenia">Armenia</option>
+                    <option value="Popayán">Popayán</option>
+                    <option value="Sincelejo">Sincelejo</option>
+                    <option value="Valledupar">Valledupar</option>
+                    <option value="Tunja">Tunja</option>
+                    <option value="Riohacha">Riohacha</option>
+                    <option value="Quibdó">Quibdó</option>
+                    <option value="Florencia">Florencia</option>
+                    <option value="Yopal">Yopal</option>
+                    <option value="Mocoa">Mocoa</option>
+                    <option value="San Andrés">San Andrés</option>
+                    <option value="Leticia">Leticia</option>
+                    <option value="Mitú">Mitú</option>
+                    <option value="Puerto Carreño">Puerto Carreño</option>
+                </select>
+                <input type="text" name="direccion" placeholder="Dirección" required>
+                <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{7,15}" title="Solo números, mínimo 7 dígitos">
+                <select name="tipoDocumento" required>
+                    <option value="">Tipo de documento</option>
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select>
+                <input type="text" name="documento" placeholder="Número de documento" required pattern="[0-9]{5,20}" title="Solo números, mínimo 5 dígitos">
+                <div>
+                    <button type="submit">Enviar</button>
+                    <button type="button" id="cerrarFormulario">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de compra exitosa -->
+    <div id="modalCompra" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:4000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center;">
+            <h2 style="color:#28a745;">¡Gracias por tu compra!</h2>
+            <p>Tu pedido ha sido realizado con éxito.<br>Pronto recibirás la confirmación en tu correo.</p>
+            <button id="cerrarModal">Cerrar</button>
+        </div>
+    </div>
+
     <script>
+        const products = document.querySelectorAll(".product");
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
         const cartCount = document.getElementById('cartCount');
         const checkoutBtn = document.getElementById('checkoutBtn');
+        const cartTotal = document.getElementById('cartTotal');
+        const modalFormulario = document.getElementById('modalFormulario');
+        const cerrarFormulario = document.getElementById('cerrarFormulario');
+        const formCompra = document.getElementById('formCompra');
+        const modalCompra = document.getElementById('modalCompra');
+        const cerrarModal = document.getElementById('cerrarModal');
+
+        // Añadir producto al carrito y redirigir a confirmación
+        products.forEach(product => {
+            product.addEventListener("click", () => {
+                const modelo = product.dataset.modelo;
+                const nombre = product.dataset.nombre;
+                const precio = product.dataset.precio;
+
+                const producto = { nombre, precio };
+
+                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+                carrito.push(producto);
+                localStorage.setItem("carrito", JSON.stringify(carrito));
+
+                // Redirigir a la página de confirmación con todos los datos
+                window.location.href = `confirmar_comprabasket.html?modelo=${encodeURIComponent(modelo)}&nombre=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
+            });
+        });
 
         // Mostrar/Ocultar el carrito
         cartIcon.addEventListener('click', () => {
             cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Cargar el carrito desde localStorage
+        // Mostrar total y ocultar botón si el carrito está vacío
         function loadCart() {
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             cartCount.textContent = carrito.length;
 
-            // Limpiar los elementos del carrito
             cartItems.innerHTML = '';
+            let total = 0;
 
             if (carrito.length === 0) {
-                cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                cartItems.innerHTML = '<p style="text-align: center; padding: 10px; color:#333;">El carrito está vacío.</p>';
+                cartTotal.textContent = 'Total: $0.00';
+                checkoutBtn.style.display = 'none';
                 return;
             }
+            checkoutBtn.style.display = 'inline-block';
 
-            // Mostrar los productos en el carrito
             carrito.forEach((producto, index) => {
                 const item = document.createElement('div');
                 item.classList.add('cart-item');
                 item.innerHTML = `
                     <div>
-                        <p><strong>${producto.nombre}</strong></p>
-                        <p>Talla: ${producto.talla}</p>
-                        <p>Precio: ${producto.precio}</p>
+                        <p><strong>${producto.nombre ? producto.nombre : '-'}</strong></p>
+                        <p>Precio: ${producto.precio ? producto.precio : '-'}</p>
                     </div>
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
+
+                if (producto.precio) {
+                    let precioNum = parseFloat(producto.precio.replace('$', '').replace(',', '.'));
+                    if (!isNaN(precioNum)) total += precioNum;
+                }
             });
 
-            // Agregar eventos para eliminar productos
+            cartTotal.textContent = 'Total: $' + total.toLocaleString('es-CO', {minimumFractionDigits:2, maximumFractionDigits:2});
+
             const removeButtons = document.querySelectorAll('.remove-btn');
             removeButtons.forEach(button => {
                 button.addEventListener('click', (e) => {
@@ -293,17 +424,49 @@
         // Eliminar un producto del carrito
         function removeFromCart(index) {
             let carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-            carrito.splice(index, 1); // Eliminar el producto del array
-            localStorage.setItem('carrito', JSON.stringify(carrito)); // Guardar el carrito actualizado
-            loadCart(); // Recargar el carrito
+            carrito.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(carrito));
+            loadCart();
         }
 
-        // Finalizar compra
-        checkoutBtn.addEventListener('click', () => {
-            alert('Gracias por tu compra.');
-            localStorage.removeItem('carrito'); // Vaciar el carrito
-            loadCart(); // Recargar el carrito
+        // Finalizar compra: mostrar formulario de datos
+        checkoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalFormulario.style.display = 'flex';
         });
+
+        // Cerrar formulario solo con el botón cancelar
+        cerrarFormulario.onclick = function() {
+            modalFormulario.style.display = 'none';
+        };
+
+        // Validación y mostrar mensaje de éxito
+        formCompra.addEventListener('submit', function(e) {
+            const telefono = this.telefono.value;
+            const documento = this.documento.value;
+            if (!/^\d{7,15}$/.test(telefono)) {
+                alert('El teléfono debe contener solo números (mínimo 7 dígitos).');
+                this.telefono.focus();
+                e.preventDefault();
+                return false;
+            }
+            if (!/^\d{5,20}$/.test(documento)) {
+                alert('El número de documento debe contener solo números (mínimo 5 dígitos).');
+                this.documento.focus();
+                e.preventDefault();
+                return false;
+            }
+            e.preventDefault();
+            localStorage.removeItem('carrito');
+            loadCart();
+            modalFormulario.style.display = 'none';
+            modalCompra.style.display = 'flex';
+        });
+
+        // Cerrar modal de compra exitosa solo con el botón cerrar
+        cerrarModal.onclick = function() {
+            modalCompra.style.display = 'none';
+        };
 
         // Cargar el carrito al cargar la página
         loadCart();

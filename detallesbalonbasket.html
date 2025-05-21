@@ -70,8 +70,6 @@
             margin-right: 5px;
             color: #555;
         }
-
-        /* Estilos del carrito */
         .cart-icon {
             position: fixed;
             top: 10px;
@@ -87,7 +85,6 @@
             font-size: 1em;
             z-index: 1000;
         }
-
         .cart-icon span {
             background-color: white;
             color: #007BFF;
@@ -96,7 +93,6 @@
             padding: 5px 10px;
             font-size: 0.9em;
         }
-
         .cart-container {
             position: fixed;
             top: 60px;
@@ -110,7 +106,6 @@
             display: none;
             z-index: 1000;
         }
-
         .cart-header {
             background-color: #007BFF;
             color: white;
@@ -120,7 +115,6 @@
             border-top-left-radius: 10px;
             border-top-right-radius: 10px;
         }
-
         .cart-item {
             display: flex;
             justify-content: space-between;
@@ -128,16 +122,13 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
-
         .cart-item:last-child {
             border-bottom: none;
         }
-
         .cart-item p {
             margin: 0;
             font-size: 0.9em;
         }
-
         .cart-item .remove-btn {
             background-color: #ff4d4d;
             color: white;
@@ -147,17 +138,14 @@
             cursor: pointer;
             font-size: 0.8em;
         }
-
         .cart-item .remove-btn:hover {
             background-color: #cc0000;
         }
-
         .cart-footer {
             padding: 10px;
             text-align: center;
             font-size: 1em;
         }
-
         .cart-footer .checkout-btn {
             background-color: #28a745;
             color: white;
@@ -167,7 +155,6 @@
             cursor: pointer;
             font-size: 1em;
         }
-
         .cart-footer .checkout-btn:hover {
             background-color: #218838;
         }
@@ -223,6 +210,71 @@
     <br>
     <a href="baloncesto.html" class="button">Volver a productos</a>
 
+    <!-- Modal formulario de compra -->
+    <div id="modalFormulario" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:3000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; min-width:300px;">
+            <h2 style="color:#28a745; margin-bottom:10px;">Datos para tu compra</h2>
+            <form id="formCompra">
+                <input type="text" name="nombre" placeholder="Nombre" required><br>
+                <input type="text" name="apellido" placeholder="Apellido" required><br>
+                <input type="email" name="correo" placeholder="Correo electrónico" required><br>
+                <select name="ciudad" required>
+                    <option value="">Selecciona tu ciudad</option>
+                    <option value="Bogotá">Bogotá</option>
+                    <option value="Medellín">Medellín</option>
+                    <option value="Cali">Cali</option>
+                    <option value="Barranquilla">Barranquilla</option>
+                    <option value="Cartagena">Cartagena</option>
+                    <option value="Cúcuta">Cúcuta</option>
+                    <option value="Bucaramanga">Bucaramanga</option>
+                    <option value="Pereira">Pereira</option>
+                    <option value="Santa Marta">Santa Marta</option>
+                    <option value="Ibagué">Ibagué</option>
+                    <option value="Villavicencio">Villavicencio</option>
+                    <option value="Manizales">Manizales</option>
+                    <option value="Neiva">Neiva</option>
+                    <option value="Pasto">Pasto</option>
+                    <option value="Montería">Montería</option>
+                    <option value="Armenia">Armenia</option>
+                    <option value="Popayán">Popayán</option>
+                    <option value="Sincelejo">Sincelejo</option>
+                    <option value="Valledupar">Valledupar</option>
+                    <option value="Tunja">Tunja</option>
+                    <option value="Riohacha">Riohacha</option>
+                    <option value="Quibdó">Quibdó</option>
+                    <option value="Florencia">Florencia</option>
+                    <option value="Yopal">Yopal</option>
+                    <option value="Mocoa">Mocoa</option>
+                    <option value="San Andrés">San Andrés</option>
+                    <option value="Leticia">Leticia</option>
+                    <option value="Mitú">Mitú</option>
+                    <option value="Puerto Carreño">Puerto Carreño</option>
+                </select><br>
+                <input type="text" name="direccion" placeholder="Dirección" required><br>
+                <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{7,15}" title="Solo números, mínimo 7 dígitos"><br>
+                <select name="tipoDocumento" required>
+                    <option value="">Tipo de documento</option>
+                    <option value="CC">Cédula de ciudadanía</option>
+                    <option value="CE">Cédula de extranjería</option>
+                    <option value="TI">Tarjeta de identidad</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select><br>
+                <input type="text" name="documento" placeholder="Número de documento" required pattern="[0-9]{5,20}" title="Solo números, mínimo 5 dígitos"><br>
+                <button type="submit">Enviar</button>
+                <button type="button" id="cerrarFormulario">Cancelar</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal de compra exitosa -->
+    <div id="modalCompra" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:4000; align-items:center; justify-content:center;">
+        <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center;">
+            <h2 style="color:#28a745;">¡Gracias por tu compra!</h2>
+            <p>Tu pedido ha sido realizado con éxito.<br>Pronto recibirás la confirmación en tu correo.</p>
+            <button id="cerrarModal">Cerrar</button>
+        </div>
+    </div>
+
     <script>
         const products = document.querySelectorAll(".product");
         const cartIcon = document.getElementById('cartIcon');
@@ -231,7 +283,7 @@
         const cartCount = document.getElementById('cartCount');
         const checkoutBtn = document.getElementById('checkoutBtn');
 
-        // Añadir producto al carrito y redirigir
+        // Añadir producto al carrito y redirigir a confirmación
         products.forEach(product => {
             product.addEventListener("click", () => {
                 const modelo = product.dataset.modelo;
@@ -245,7 +297,7 @@
                 carrito.push(producto);
                 localStorage.setItem("carrito", JSON.stringify(carrito));
 
-                // Redirigir a la página de confirmación
+                // Redirigir a la página de confirmación de ese producto
                 window.location.href = `confirmar_comprabasket.html?modelo=${modelo}`;
             });
         });
@@ -255,16 +307,31 @@
             cartContainer.style.display = cartContainer.style.display === 'block' ? 'none' : 'block';
         });
 
-        // Cargar el carrito desde localStorage
+        // --------- MOSTRAR TOTAL EN EL CARRITO Y OCULTAR BOTÓN SI ESTÁ VACÍO ---------
         function loadCart() {
             const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
             cartCount.textContent = carrito.length;
 
             cartItems.innerHTML = '';
+            let total = 0;
 
             if (carrito.length === 0) {
                 cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+                // Ocultar botón si el carrito está vacío
+                checkoutBtn.style.display = 'none';
+                // Mostrar total en 0
+                let totalDiv = document.getElementById('cartTotal');
+                if (!totalDiv) {
+                    totalDiv = document.createElement('div');
+                    totalDiv.id = 'cartTotal';
+                    totalDiv.style.fontWeight = 'bold';
+                    totalDiv.style.marginTop = '10px';
+                    cartContainer.querySelector('.cart-footer').insertBefore(totalDiv, checkoutBtn);
+                }
+                totalDiv.textContent = 'Total: $0.00';
                 return;
+            } else {
+                checkoutBtn.style.display = 'inline-block';
             }
 
             carrito.forEach((producto, index) => {
@@ -278,7 +345,22 @@
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
+
+                // Sumar el precio (elimina el símbolo $ y convierte a número)
+                let precioNum = parseFloat(producto.precio.replace('$','').replace(',','.'));
+                if (!isNaN(precioNum)) total += precioNum;
             });
+
+            // Mostrar el total
+            let totalDiv = document.getElementById('cartTotal');
+            if (!totalDiv) {
+                totalDiv = document.createElement('div');
+                totalDiv.id = 'cartTotal';
+                totalDiv.style.fontWeight = 'bold';
+                totalDiv.style.marginTop = '10px';
+                cartContainer.querySelector('.cart-footer').insertBefore(totalDiv, checkoutBtn);
+            }
+            totalDiv.textContent = 'Total: $' + total.toLocaleString('es-CO', {minimumFractionDigits:2, maximumFractionDigits:2});
 
             const removeButtons = document.querySelectorAll('.remove-btn');
             removeButtons.forEach(button => {
@@ -297,15 +379,55 @@
             loadCart();
         }
 
-        // Finalizar compra
-        checkoutBtn.addEventListener('click', () => {
-            alert('Gracias por tu compra.');
-            localStorage.removeItem('carrito');
-            loadCart();
-        });
-
         // Cargar el carrito al cargar la página
         loadCart();
+
+        // --- FUNCIONALIDAD FORMULARIO Y MODAL DE COMPRA ---
+        const modalFormulario = document.getElementById('modalFormulario');
+        const cerrarFormulario = document.getElementById('cerrarFormulario');
+        const formCompra = document.getElementById('formCompra');
+        const modalCompra = document.getElementById('modalCompra');
+        const cerrarModal = document.getElementById('cerrarModal');
+        const checkoutBtn2 = document.getElementById('checkoutBtn');
+
+        // Mostrar formulario al finalizar compra
+        checkoutBtn2.addEventListener('click', (e) => {
+            e.preventDefault();
+            modalFormulario.style.display = 'flex';
+        });
+
+        // Cerrar formulario
+        cerrarFormulario.onclick = function() {
+            modalFormulario.style.display = 'none';
+        };
+
+        // Validación y mostrar mensaje de éxito
+        formCompra.addEventListener('submit', function(e) {
+            const telefono = this.telefono.value;
+            const documento = this.documento.value;
+            if (!/^\d{7,15}$/.test(telefono)) {
+                alert('El teléfono debe contener solo números (mínimo 7 dígitos).');
+                this.telefono.focus();
+                e.preventDefault();
+                return false;
+            }
+            if (!/^\d{5,20}$/.test(documento)) {
+                alert('El número de documento debe contener solo números (mínimo 5 dígitos).');
+                this.documento.focus();
+                e.preventDefault();
+                return false;
+            }
+            e.preventDefault();
+            localStorage.removeItem('carrito');
+            if (typeof loadCart === "function") loadCart();
+            modalFormulario.style.display = 'none';
+            modalCompra.style.display = 'flex';
+        });
+
+        // Cerrar modal de compra exitosa
+        cerrarModal.onclick = function() {
+            modalCompra.style.display = 'none';
+        };
     </script>
 </body>
 </html>
