@@ -14,7 +14,6 @@
       flex-direction: column;
       align-items: center;
     }
-
     .breadcrumb {
       width: 100%;
       background-color: #f1f1f1;
@@ -24,22 +23,18 @@
       margin-bottom: 20px;
       text-align: center;
     }
-
     .breadcrumb a {
       text-decoration: none;
       color: #007BFF;
       margin-right: 5px;
     }
-
     .breadcrumb a:hover {
       text-decoration: underline;
     }
-
     .breadcrumb span {
       margin-right: 5px;
       color: #555;
     }
-
     .product-container {
       max-width: 1000px;
       background-color: white;
@@ -51,7 +46,6 @@
       padding: 20px;
       gap: 20px;
     }
-
     .product-container .image-container {
       flex: 1;
       background: white;
@@ -61,43 +55,36 @@
       padding: 20px;
       border-radius: 10px;
     }
-
     .product-container img {
       max-width: 90%;
       height: auto;
       border-radius: 10px;
     }
-
     .details {
       flex: 1;
       text-align: left;
     }
-
     h1 {
       font-size: 2.5em;
       color: #333;
       margin-bottom: 10px;
     }
-
     p {
       font-size: 1.2em;
       color: #555;
       margin-bottom: 20px;
     }
-
     .price {
       font-size: 1.5em;
       color: #27ae60;
       margin-bottom: 20px;
     }
-
     .size-options {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 20px;
     }
-
     .size-button {
       padding: 10px 20px;
       border: 2px solid #ccc;
@@ -107,17 +94,14 @@
       background-color: white;
       transition: 0.3s;
     }
-
     .size-button:hover {
       border-color: #007BFF;
     }
-
     .size-button.selected {
       border-color: #007BFF;
       background-color: #007BFF;
       color: white;
     }
-
     .button {
       padding: 15px 20px;
       background-color: #007BFF;
@@ -128,9 +112,156 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-
     .button:hover {
       background-color: #0056b3;
+    }
+    /* Estilos del carrito */
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1em;
+      z-index: 1000;
+    }
+    .cart-icon span {
+      background-color: white;
+      color: #007BFF;
+      font-weight: bold;
+      border-radius: 50%;
+      padding: 5px 10px;
+      font-size: 0.9em;
+    }
+    .cart-container {
+      position: fixed;
+      top: 60px;
+      right: 10px;
+      width: 300px;
+      max-height: 400px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      display: none;
+      z-index: 1000;
+    }
+    .cart-header {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 1.2em;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+    .cart-footer {
+      padding: 10px;
+      text-align: center;
+      font-size: 1em;
+    }
+    .cart-footer p {
+      margin: 10px 0;
+    }
+    .cart-footer button {
+      padding: 10px 15px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    .cart-footer button:hover {
+      background-color: #0056b3;
+    }
+    /* Modal formulario */
+    #modalFormulario input,
+    #modalFormulario select {
+      width: 90%;
+      padding: 8px 10px;
+      margin: 7px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #modalFormulario input:focus,
+    #modalFormulario select:focus {
+      border-color: #28a745;
+    }
+    #modalFormulario button[type="submit"] {
+      background: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 25px;
+      margin-top: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    #modalFormulario button[type="submit"]:hover {
+      background: #218838;
+    }
+    #modalFormulario button[type="button"] {
+      background: #ccc;
+      color: #333;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 25px;
+      margin-top: 10px;
+      font-size: 1em;
+      cursor: pointer;
+      margin-left: 10px;
+      transition: background 0.2s;
+    }
+    #modalFormulario button[type="button"]:hover {
+      background: #999;
+    }
+    #modalFormulario form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Modal de compra exitosa */
+    #modalCompra {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.4);
+      z-index: 4000;
+      align-items: center;
+      justify-content: center;
+    }
+    #modalCompra .modal-content {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+      text-align: center;
     }
   </style>
 </head>
@@ -142,6 +273,21 @@
     <a href="voleibol.html">Voleibol</a> >
     <a href="detallesRedboleibol.html">Coderas para Volleyball</a> >
     <span>Coderas Under Armour</span>
+  </div>
+
+  <!-- Icono del carrito -->
+  <div class="cart-icon" id="cartIcon">
+    🛒 <span id="cartCount">0</span>
+  </div>
+
+  <!-- Contenedor del carrito -->
+  <div class="cart-container" id="cartContainer">
+    <div class="cart-header">Tu Carrito</div>
+    <div id="cartItems"></div>
+    <div class="cart-footer">
+      <p id="cartTotal">Total: $0.00</p>
+      <button id="checkoutBtn">Comprar todo</button>
+    </div>
   </div>
 
   <div class="product-container">
@@ -163,33 +309,217 @@
     </div>
   </div>
 
+  <!-- Modal formulario de compra -->
+  <div id="modalFormulario" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:3000; align-items:center; justify-content:center;">
+    <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; min-width:320px; max-width:95vw;">
+      <h2 style="color:#28a745; margin-bottom:10px;">Datos para tu compra</h2>
+      <form id="formCompra">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellido" placeholder="Apellido" required>
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+        <select name="ciudad" required>
+          <option value="">Selecciona tu ciudad</option>
+          <option value="Bogotá">Bogotá</option>
+          <option value="Medellín">Medellín</option>
+          <option value="Cali">Cali</option>
+          <option value="Barranquilla">Barranquilla</option>
+          <option value="Cartagena">Cartagena</option>
+          <option value="Cúcuta">Cúcuta</option>
+          <option value="Bucaramanga">Bucaramanga</option>
+          <option value="Pereira">Pereira</option>
+          <option value="Santa Marta">Santa Marta</option>
+          <option value="Ibagué">Ibagué</option>
+          <option value="Villavicencio">Villavicencio</option>
+          <option value="Manizales">Manizales</option>
+          <option value="Neiva">Neiva</option>
+          <option value="Pasto">Pasto</option>
+          <option value="Montería">Montería</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Popayán">Popayán</option>
+          <option value="Sincelejo">Sincelejo</option>
+          <option value="Valledupar">Valledupar</option>
+          <option value="Tunja">Tunja</option>
+          <option value="Riohacha">Riohacha</option>
+          <option value="Quibdó">Quibdó</option>
+          <option value="Florencia">Florencia</option>
+          <option value="Yopal">Yopal</option>
+          <option value="Mocoa">Mocoa</option>
+          <option value="San Andrés">San Andrés</option>
+          <option value="Leticia">Leticia</option>
+          <option value="Mitú">Mitú</option>
+          <option value="Puerto Carreño">Puerto Carreño</option>
+        </select>
+        <input type="text" name="direccion" placeholder="Dirección" required>
+        <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{7,15}" title="Solo números, mínimo 7 dígitos">
+        <select name="tipoDocumento" required>
+          <option value="">Tipo de documento</option>
+          <option value="CC">Cédula de ciudadanía</option>
+          <option value="CE">Cédula de extranjería</option>
+          <option value="TI">Tarjeta de identidad</option>
+          <option value="Pasaporte">Pasaporte</option>
+        </select>
+        <input type="text" name="documento" placeholder="Número de documento" required pattern="[0-9]{5,20}" title="Solo números, mínimo 5 dígitos">
+        <div>
+          <button type="submit">Enviar</button>
+          <button type="button" id="cerrarFormulario">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de compra exitosa -->
+  <div id="modalCompra" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:4000; align-items:center; justify-content:center;">
+    <div class="modal-content">
+      <h2 style="color:#28a745;">¡Gracias por tu compra!</h2>
+      <p>Tu pedido ha sido realizado con éxito.<br>Pronto recibirás la confirmación en tu correo.</p>
+      <button id="cerrarModal">Cerrar</button>
+    </div>
+  </div>
+
   <script>
     const sizeButtons = document.querySelectorAll('.size-button');
     const comprarBtn = document.getElementById('comprarBtn');
+    const cartIcon = document.getElementById('cartIcon');
+    const cartContainer = document.getElementById('cartContainer');
+    const cartItems = document.getElementById('cartItems');
+    const cartCount = document.getElementById('cartCount');
+    const cartTotal = document.getElementById('cartTotal');
+    const checkoutBtn = document.getElementById('checkoutBtn');
+    const modalFormulario = document.getElementById('modalFormulario');
+    const cerrarFormulario = document.getElementById('cerrarFormulario');
+    const formCompra = document.getElementById('formCompra');
+    const modalCompra = document.getElementById('modalCompra');
+    const cerrarModal = document.getElementById('cerrarModal');
     let selectedSize = null;
 
-    // Agrega un evento de clic a cada botón de talla
+    // Selección de talla
     sizeButtons.forEach(button => {
       button.addEventListener('click', () => {
-        // Elimina la clase 'selected' de todos los botones
         sizeButtons.forEach(btn => btn.classList.remove('selected'));
-        // Agrega la clase 'selected' al botón que se hizo clic
         button.classList.add('selected');
-        // Guarda la talla seleccionada
         selectedSize = button.textContent;
       });
     });
 
-    // Agrega un evento de clic al botón de compra
+    // Mostrar/Ocultar el carrito
+    cartIcon.addEventListener('click', () => {
+      cartContainer.style.display = cartContainer.style.display === 'none' || cartContainer.style.display === '' ? 'block' : 'none';
+    });
+
+    // Cargar el carrito
+    function loadCart() {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      cartCount.textContent = carrito.length;
+
+      cartItems.innerHTML = '';
+      let total = 0;
+
+      if (carrito.length === 0) {
+        cartItems.innerHTML = '<p style="text-align: center; padding: 10px;">El carrito está vacío.</p>';
+        cartTotal.textContent = 'Total: $0.00';
+        checkoutBtn.style.display = 'none';
+        return;
+      }
+      checkoutBtn.style.display = 'inline-block';
+
+      carrito.forEach((producto, index) => {
+        const tallaHtml = producto.talla ? `<p>Talla: ${producto.talla}</p>` : '';
+        const item = document.createElement('div');
+        item.classList.add('cart-item');
+        item.innerHTML = `
+          <div>
+            <p><strong>${producto.nombre}</strong></p>
+            ${tallaHtml}
+            <p>Precio: ${producto.precio}</p>
+          </div>
+          <button class="remove-btn" data-index="${index}">Eliminar</button>
+        `;
+        cartItems.appendChild(item);
+        let precioNum = parseFloat(producto.precio.replace('$', '').replace(',', '.'));
+        if (!isNaN(precioNum)) total += precioNum;
+      });
+
+      cartTotal.textContent = `Total: $${total.toLocaleString('es-CO', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
+
+      const removeButtons = document.querySelectorAll('.remove-btn');
+      removeButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+          const index = e.target.getAttribute('data-index');
+          removeFromCart(index);
+        });
+      });
+    }
+
+    // Eliminar producto del carrito
+    function removeFromCart(index) {
+      const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+      carrito.splice(index, 1);
+      localStorage.setItem('carrito', JSON.stringify(carrito));
+      loadCart();
+    }
+
+    // Comprar todo: mostrar formulario
+    checkoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modalFormulario.style.display = 'flex';
+    });
+
+    // Cerrar formulario solo con el botón cancelar
+    cerrarFormulario.onclick = function() {
+      modalFormulario.style.display = 'none';
+    };
+
+    // Validación y mostrar mensaje de éxito
+    formCompra.addEventListener('submit', function(e) {
+      const telefono = this.telefono.value;
+      const documento = this.documento.value;
+      if (!/^\d{7,15}$/.test(telefono)) {
+        alert('El teléfono debe contener solo números (mínimo 7 dígitos).');
+        this.telefono.focus();
+        e.preventDefault();
+        return false;
+      }
+      if (!/^\d{5,20}$/.test(documento)) {
+        alert('El número de documento debe contener solo números (mínimo 5 dígitos).');
+        this.documento.focus();
+        e.preventDefault();
+        return false;
+      }
+      e.preventDefault();
+      localStorage.removeItem('carrito');
+      loadCart();
+      modalFormulario.style.display = 'none';
+      modalCompra.style.display = 'flex';
+    });
+
+    // Cerrar modal de compra exitosa solo con el botón cerrar
+    cerrarModal.onclick = function() {
+      modalCompra.style.display = 'none';
+    };
+
+    // Añadir producto al carrito y redirigir
     comprarBtn.addEventListener('click', () => {
       if (selectedSize) {
-        // Redirige a confirmar_compravoleibol.html con la talla seleccionada
-        window.location.href = `confirmar_compravoleibol.html?modelo=coderas_underArmour&talla=${selectedSize}`;
+        const producto = {
+          nombre: "Coderas Under Armour",
+          talla: selectedSize,
+          precio: "$32.12"
+        };
+
+        const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carrito.push(producto);
+        localStorage.setItem('carrito', JSON.stringify(carrito));
+        loadCart();
+
+        // Redirigir a confirmar_compravoleibol.html
+        window.location.href = `confirmar_compravoleibol.html?modelo=coderas_underArmour&talla=${encodeURIComponent(producto.talla)}&precio=${encodeURIComponent(producto.precio)}`;
       } else {
-        // Muestra un aviso si no se seleccionó una talla
         alert('Por favor, selecciona una talla antes de continuar.');
       }
     });
+
+    // Cargar el carrito al cargar la página
+    loadCart();
   </script>
 </body>
 </html>

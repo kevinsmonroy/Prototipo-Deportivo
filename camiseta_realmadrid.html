@@ -252,6 +252,60 @@
     .cart-footer #checkoutBtn:hover {
       background-color: #218838;
     }
+
+    /* Modal formulario */
+    #modalFormulario form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    #modalFormulario input,
+    #modalFormulario select {
+      width: 90%;
+      padding: 8px 10px;
+      margin: 7px 0;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1em;
+      box-sizing: border-box;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #modalFormulario button[type="submit"] {
+      background: linear-gradient(90deg, #28a745 60%, #34ce57 100%);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 30px;
+      margin-top: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(40,167,69,0.10);
+      transition: background 0.2s, transform 0.2s;
+    }
+    #modalFormulario button[type="submit"]:hover {
+      background: linear-gradient(90deg, #218838 60%, #28a745 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
+    #modalFormulario button[type="button"] {
+      background: linear-gradient(90deg, #bbb 60%, #eee 100%);
+      color: #333;
+      border: none;
+      border-radius: 6px;
+      padding: 10px 30px;
+      margin-top: 10px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      margin-left: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+      transition: background 0.2s, transform 0.2s;
+    }
+    #modalFormulario button[type="button"]:hover {
+      background: linear-gradient(90deg, #999 60%, #bbb 100%);
+      transform: translateY(-2px) scale(1.04);
+    }
   </style>
 </head>
 <body>
@@ -275,7 +329,7 @@
     <div id="cartItems"></div>
     <div class="cart-footer">
       <p id="cartTotal">Total: $0.00</p>
-      <button id="checkoutBtn">Comprar todo</button>
+      <button id="checkoutBtn">Finalizar Compra</button>
     </div>
   </div>
 
@@ -297,6 +351,73 @@
     </div>
   </div>
 
+  <!-- Modal formulario de compra -->
+  <div id="modalFormulario" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:3000; align-items:center; justify-content:center;">
+    <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center; min-width:320px; max-width:95vw;">
+      <h2 style="color:#28a745; margin-bottom:10px;">Datos para tu compra</h2>
+      <form id="formCompra">
+        <input type="text" name="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellido" placeholder="Apellido" required>
+        <input type="email" name="correo" placeholder="Correo electrónico" required>
+        <select name="ciudad" required>
+          <option value="">Selecciona tu ciudad</option>
+          <option value="Bogotá">Bogotá</option>
+          <option value="Medellín">Medellín</option>
+          <option value="Cali">Cali</option>
+          <option value="Barranquilla">Barranquilla</option>
+          <option value="Cartagena">Cartagena</option>
+          <option value="Cúcuta">Cúcuta</option>
+          <option value="Bucaramanga">Bucaramanga</option>
+          <option value="Pereira">Pereira</option>
+          <option value="Santa Marta">Santa Marta</option>
+          <option value="Ibagué">Ibagué</option>
+          <option value="Villavicencio">Villavicencio</option>
+          <option value="Manizales">Manizales</option>
+          <option value="Neiva">Neiva</option>
+          <option value="Pasto">Pasto</option>
+          <option value="Montería">Montería</option>
+          <option value="Armenia">Armenia</option>
+          <option value="Popayán">Popayán</option>
+          <option value="Sincelejo">Sincelejo</option>
+          <option value="Valledupar">Valledupar</option>
+          <option value="Tunja">Tunja</option>
+          <option value="Riohacha">Riohacha</option>
+          <option value="Quibdó">Quibdó</option>
+          <option value="Florencia">Florencia</option>
+          <option value="Yopal">Yopal</option>
+          <option value="Mocoa">Mocoa</option>
+          <option value="San Andrés">San Andrés</option>
+          <option value="Leticia">Leticia</option>
+          <option value="Mitú">Mitú</option>
+          <option value="Puerto Carreño">Puerto Carreño</option>
+        </select>
+        <input type="text" name="direccion" placeholder="Dirección" required>
+        <input type="tel" name="telefono" placeholder="Teléfono" required pattern="[0-9]{7,15}" title="Solo números, mínimo 7 dígitos">
+        <select name="tipoDocumento" required>
+          <option value="">Tipo de documento</option>
+          <option value="CC">Cédula de ciudadanía</option>
+          <option value="CE">Cédula de extranjería</option>
+          <option value="TI">Tarjeta de identidad</option>
+          <option value="Pasaporte">Pasaporte</option>
+        </select>
+        <input type="text" name="documento" placeholder="Número de documento" required pattern="[0-9]{5,20}" title="Solo números, mínimo 5 dígitos">
+        <div>
+          <button type="submit">Enviar</button>
+          <button type="button" id="cerrarFormulario">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal de compra exitosa -->
+  <div id="modalCompra" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.4); z-index:4000; align-items:center; justify-content:center;">
+    <div class="modal-content" style="background:white; padding:30px 40px; border-radius:12px; box-shadow:0 4px 16px rgba(0,0,0,0.2); text-align:center;">
+      <h2 style="color:#28a745;">¡Gracias por tu compra!</h2>
+      <p>Tu pedido ha sido realizado con éxito.<br>Pronto recibirás la confirmación en tu correo.</p>
+      <button id="cerrarModal">Cerrar</button>
+    </div>
+  </div>
+
   <script>
     const sizeButtons = document.querySelectorAll('.size-button');
     const addToCartButton = document.querySelector('.button');
@@ -306,6 +427,11 @@
     const cartCount = document.getElementById('cartCount');
     const cartTotal = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
+    const modalFormulario = document.getElementById('modalFormulario');
+    const cerrarFormulario = document.getElementById('cerrarFormulario');
+    const formCompra = document.getElementById('formCompra');
+    const modalCompra = document.getElementById('modalCompra');
+    const cerrarModal = document.getElementById('cerrarModal');
     let selectedSize = null;
 
     // Selección de talla
@@ -330,7 +456,9 @@
         carrito.push(producto);
         localStorage.setItem('carrito', JSON.stringify(carrito));
 
-        alert('Producto añadido al carrito.');
+        loadCart();
+
+        // Redirigir a la página de confirmación
         window.location.href = `confirmar_comprafutbol.html?modelo=real_madrid_jersey&talla=${selectedSize}`;
       } else {
         alert('Por favor, selecciona una talla antes de continuar.');
@@ -371,10 +499,13 @@
         `;
         cartItems.appendChild(item);
 
-        total += parseFloat(producto.precio.replace('$', ''));
+        if (producto.precio) {
+          let precioNum = parseFloat(producto.precio.replace('$', '').replace(',', '.'));
+          if (!isNaN(precioNum)) total += precioNum;
+        }
       });
 
-      cartTotal.textContent = `Total: $${total.toFixed(2)}`;
+      cartTotal.textContent = `Total: $${total.toLocaleString('es-CO', {minimumFractionDigits:2, maximumFractionDigits:2})}`;
 
       const removeButtons = document.querySelectorAll('.remove-btn');
       removeButtons.forEach(button => {
@@ -393,12 +524,44 @@
       loadCart();
     }
 
-    // Comprar todo
-    checkoutBtn.addEventListener('click', () => {
-      alert('Gracias por tu compra.');
+    // Finalizar compra: mostrar formulario de datos
+    checkoutBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      modalFormulario.style.display = 'flex';
+    });
+
+    // Cerrar formulario solo con el botón cancelar
+    cerrarFormulario.onclick = function() {
+      modalFormulario.style.display = 'none';
+    };
+
+    // Validación y mostrar mensaje de éxito
+    formCompra.addEventListener('submit', function(e) {
+      const telefono = this.telefono.value;
+      const documento = this.documento.value;
+      if (!/^\d{7,15}$/.test(telefono)) {
+        alert('El teléfono debe contener solo números (mínimo 7 dígitos).');
+        this.telefono.focus();
+        e.preventDefault();
+        return false;
+      }
+      if (!/^\d{5,20}$/.test(documento)) {
+        alert('El número de documento debe contener solo números (mínimo 5 dígitos).');
+        this.documento.focus();
+        e.preventDefault();
+        return false;
+      }
+      e.preventDefault();
       localStorage.removeItem('carrito');
       loadCart();
+      modalFormulario.style.display = 'none';
+      modalCompra.style.display = 'flex';
     });
+
+    // Cerrar modal de compra exitosa solo con el botón cerrar
+    cerrarModal.onclick = function() {
+      modalCompra.style.display = 'none';
+    };
 
     // Cargar el carrito al cargar la página
     loadCart();

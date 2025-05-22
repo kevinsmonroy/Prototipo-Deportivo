@@ -246,29 +246,33 @@
     </div>
 
     <div class="container">
-        <div class="product" data-modelo="venum" data-nombre="Saco de Boxeo Venum" data-precio="$59.99">
+        <div class="product" data-categoria="boxeo" data-modelo="Saco de Boxeo Venum" data-nombre="Saco de Boxeo Venum" data-precio="59.99">
             <img src="sacovenum.jpg" alt="Saco de Boxeo Venum">
             <h2>Saco de Boxeo Venum</h2>
             <p>Famoso por su durabilidad y resistencia, ideal para entrenamientos intensos.</p>
             <p><strong>Precio:</strong> $59.99</p>
+            <button class="button agregar-carrito">Agregar al carrito</button>
         </div>
-        <div class="product" data-modelo="everlast" data-nombre="Saco de Boxeo Everlast" data-precio="$98.64">
+        <div class="product" data-categoria="boxeo" data-modelo="Saco de Boxeo Everlast" data-nombre="Saco de Boxeo Everlast" data-precio="98.64">
             <img src="sacoeverlast.jpg" alt="Saco de Boxeo Everlast">
             <h2>Saco de Boxeo Everlast</h2>
             <p>Diseñado para absorber impactos y proteger tus manos durante el entrenamiento.</p>
             <p><strong>Precio:</strong> $98.64</p>
+            <button class="button agregar-carrito">Agregar al carrito</button>
         </div>
-        <div class="product" data-modelo="rdx" data-nombre="Saco de Boxeo RDX" data-precio="$54.99">
+        <div class="product" data-categoria="boxeo" data-modelo="Saco de Boxeo RDX" data-nombre="Saco de Boxeo RDX" data-precio="54.99">
             <img src="sacoRDX.jpg" alt="Saco de Boxeo RDX">
             <h2>Saco de Boxeo RDX</h2>
             <p>Alta durabilidad y resistencia, perfecto para sesiones prolongadas de entrenamiento.</p>
             <p><strong>Precio:</strong> $54.99</p>
+            <button class="button agregar-carrito">Agregar al carrito</button>
         </div>
-        <div class="product" data-modelo="makoto" data-nombre="Saco de Boxeo Makoto" data-precio="$76.47">
+        <div class="product" data-categoria="boxeo" data-modelo="Saco de Boxeo Makoto" data-nombre="Saco de Boxeo Makoto" data-precio="76.47">
             <img src="sacomakoto.jpg" alt="Saco de Boxeo Makoto">
             <h2>Saco de Boxeo Makoto</h2>
             <p>Los Sacos de boxeo Makoto han sido creados para entrenamientos intensos y de alto impacto.</p>
             <p><strong>Precio:</strong> $76.47</p>
+            <button class="button agregar-carrito">Agregar al carrito</button>
         </div>
     </div>
 
@@ -343,7 +347,6 @@
     </div>
 
     <script>
-        const products = document.querySelectorAll(".product");
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
@@ -351,21 +354,34 @@
         const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
 
-        // Añadir producto al carrito y redirigir a confirmación
-        products.forEach(product => {
-            product.addEventListener("click", () => {
-                const modelo = product.dataset.modelo;
-                const nombre = product.dataset.nombre;
-                const precio = product.dataset.precio;
+        // Botón agregar al carrito
+        document.querySelectorAll('.agregar-carrito').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const productDiv = this.closest('.product');
+                const categoria = productDiv.dataset.categoria;
+                const modelo = productDiv.dataset.modelo;
+                const nombre = productDiv.dataset.nombre;
+                const precio = productDiv.dataset.precio;
 
-                const producto = { nombre, precio, modelo };
+                const producto = { nombre, precio, modelo, categoria };
 
                 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
                 carrito.push(producto);
                 localStorage.setItem("carrito", JSON.stringify(carrito));
+                loadCart();
+            });
+        });
 
-                // Redirigir a la página de confirmación con los datos correctos
-                window.location.href = `confirmar_compraboxeo.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+        // Click en el producto para ir a la confirmación
+        document.querySelectorAll('.product').forEach(product => {
+            product.addEventListener("click", function(e) {
+                if (e.target.classList.contains('agregar-carrito')) return;
+                const categoria = this.dataset.categoria;
+                const modelo = this.dataset.modelo;
+                const nombre = this.dataset.nombre;
+                const precio = this.dataset.precio;
+                window.location.href = `confirmar_compraboxeo.html?categoria=${encodeURIComponent(categoria)}&modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent('$'+precio)}&nombre=${encodeURIComponent(nombre)}`;
             });
         });
 
@@ -395,19 +411,23 @@
             checkoutBtn.style.display = 'inline-block';
 
             carrito.forEach((producto, index) => {
+                let precioNum = Number(producto.precio);
+                if (isNaN(precioNum)) {
+                    // Si el precio viene con $, lo convertimos
+                    precioNum = Number((producto.precio + '').replace('$',''));
+                }
+                if (!isNaN(precioNum)) total += precioNum;
+
                 const item = document.createElement('div');
                 item.classList.add('cart-item');
                 item.innerHTML = `
                     <div>
                         <p><strong>${producto.nombre}</strong></p>
-                        <p>Precio: ${producto.precio}</p>
+                        <p>Precio: $${precioNum.toFixed(2)}</p>
                     </div>
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
-
-                let precioNum = parseFloat(producto.precio.replace('$', '').replace(',', '.'));
-                if (!isNaN(precioNum)) total += precioNum;
             });
 
             cartTotal.textContent = 'Total: $' + total.toLocaleString('es-CO', {minimumFractionDigits:2, maximumFractionDigits:2});

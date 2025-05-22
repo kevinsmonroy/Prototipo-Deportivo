@@ -243,19 +243,19 @@
 
     <!-- Contenedor para los productos -->
     <div class="container">
-        <div class="product" data-modelo="lebron_lakers" data-nombre="Lakers - LeBron James" data-precio="$79.99">
+        <div class="product" data-modelo="lebron_lakers_jersey" data-nombre="Camiseta Lebron James Lakers" data-precio="$79.99">
             <img src="lebron lakers.jpg" alt="Camiseta Lakers LeBron James">
             <h2>Lakers - LeBron James</h2>
             <p>Camiseta oficial de Los Angeles Lakers con el número 23 de LeBron.</p>
             <p><strong>Precio:</strong> $79.99</p>
         </div>
-        <div class="product" data-modelo="warriors_curry" data-nombre="Warriors - Stephen Curry" data-precio="$79.99">
+        <div class="product" data-modelo="warriors_jersey" data-nombre="Camiseta Golden State Warriors" data-precio="$79.99">
             <img src="golden state.jpg" alt="Camiseta Warriors Stephen Curry">
             <h2>Warriors - Stephen Curry</h2>
             <p>Camiseta Golden State Warriors con el icónico número 30 de Curry.</p>
             <p><strong>Precio:</strong> $79.99</p>
         </div>
-        <div class="product" data-modelo="bulls_jordan" data-nombre="Bulls - Michael Jordan" data-precio="$89.99">
+        <div class="product" data-modelo="michael_jordan_jersey" data-nombre="Camiseta Michael Jordan" data-precio="$89.99">
             <img src="camiseta-michael-jordan-23-chicago-bullss-negro-002-1000x1000.png" alt="Camiseta Bulls Michael Jordan">
             <h2>Bulls - Michael Jordan</h2>
             <p>Edición retro de los Chicago Bulls con el número 23 de Jordan.</p>
@@ -348,23 +348,28 @@
         const cerrarModal = document.getElementById('cerrarModal');
 
         // Añadir producto al carrito y redirigir a confirmación
-        products.forEach(product => {
-            product.addEventListener("click", (e) => {
-                e.preventDefault();
-                const modelo = product.dataset.modelo;
-                const nombre = product.dataset.nombre;
-                const precio = product.dataset.precio;
+   products.forEach(product => {
+    product.addEventListener("click", (e) => {
+        e.preventDefault();
+        const modelo = product.dataset.modelo;
+        const nombre = product.dataset.nombre;
+        const precio = product.dataset.precio;
 
-                const producto = { nombre, precio };
+        // Solo redirigir a la página de tallas, NO agregar al carrito aquí
+        let paginaTalla = "";
+        if (modelo === "lebron_lakers_jersey") {
+            paginaTalla = "lebron_lakers_jersey.html";
+        } else if (modelo === "warriors_jersey") {
+            paginaTalla = "camiseta_warriors.html";
+        } else if (modelo === "michael_jordan_jersey") {
+            paginaTalla = "camiseta_michael_jordan.html";
+        } else {
+            paginaTalla = "confirmar_comprabasket.html";
+        }
 
-                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-                carrito.push(producto);
-                localStorage.setItem("carrito", JSON.stringify(carrito));
-
-                // Redirigir a la página de confirmación con todos los datos
-                window.location.href = `confirmar_comprabasket.html?modelo=${encodeURIComponent(modelo)}&nombre=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
-            });
-        });
+        window.location.href = `${paginaTalla}?modelo=${encodeURIComponent(modelo)}&nombre=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
+    });
+});
 
         // Mostrar/Ocultar el carrito
         cartIcon.addEventListener('click', () => {

@@ -354,22 +354,27 @@
         const cerrarModal = document.getElementById('cerrarModal');
 
         // Añadir producto al carrito y redirigir a confirmación
-        products.forEach(product => {
-            product.addEventListener("click", () => {
-                const modelo = product.dataset.modelo;
-                const nombre = product.dataset.nombre;
-                const precio = product.dataset.precio;
+      products.forEach(product => {
+    product.addEventListener("click", () => {
+        const modelo = product.dataset.modelo;
+        const nombre = product.dataset.nombre;
+        const precio = product.dataset.precio;
 
-                const producto = { nombre, precio };
+        // Solo redirigir a la página de tallas, NO agregar al carrito aquí
+        let paginaTalla = "";
+        if (modelo === "lebron_20") {
+            paginaTalla = "nike_lebron_20.html";
+        } else if (modelo === "curry_10") {
+            paginaTalla = "curry_10.html";
+        } else if (modelo === "jordan_retro") {
+            paginaTalla = "jordan_retro.html";
+        }
 
-                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-                carrito.push(producto);
-                localStorage.setItem("carrito", JSON.stringify(carrito));
-
-                // Redirigir a la página de confirmación con todos los datos
-                window.location.href = `confirmar_comprabasket.html?modelo=${encodeURIComponent(modelo)}&nombre=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
-            });
-        });
+        if (paginaTalla) {
+            window.location.href = `${paginaTalla}?modelo=${encodeURIComponent(modelo)}&nombre=${encodeURIComponent(nombre)}&precio=${encodeURIComponent(precio)}`;
+        }
+    });
+});
 
         // Mostrar/Ocultar el carrito
         cartIcon.addEventListener('click', () => {

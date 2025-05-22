@@ -349,22 +349,29 @@
         const cartCount = document.getElementById('cartCount');
         const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
+        const modalFormulario = document.getElementById('modalFormulario');
+        const cerrarFormulario = document.getElementById('cerrarFormulario');
+        const formCompra = document.getElementById('formCompra');
+        const modalCompra = document.getElementById('modalCompra');
+        const cerrarModal = document.getElementById('cerrarModal');
 
-        // Añadir producto al carrito y redirigir a confirmación
+        // Redirección a la página de tallas específica según el producto
         products.forEach(product => {
             product.addEventListener("click", () => {
                 const modelo = product.dataset.modelo;
-                const nombre = product.dataset.nombre;
-                const precio = product.dataset.precio;
-
-                const producto = { nombre, precio, modelo };
-
-                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-                carrito.push(producto);
-                localStorage.setItem("carrito", JSON.stringify(carrito));
-
-                // Redirigir a la página de confirmación con los datos correctos
-                window.location.href = `confirmar_compravoleibol.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                let destino = "";
+                if (modelo === "mizuno") {
+                    destino = "coderas_mizuno.html";
+                } else if (modelo === "under_armour") {
+                    destino = "coderas_under_armour.html";
+                } else if (modelo === "tachikara") {
+                    destino = "coderas_Tachikara.html";
+                } else if (modelo === "rdx") {
+                    destino = "coderas_rdx.html";
+                } else {
+                    destino = "confirmar_compravoleibol.html";
+                }
+                window.location.href = `${destino}?modelo=${encodeURIComponent(modelo)}`;
             });
         });
 
@@ -424,13 +431,6 @@
             localStorage.setItem('carrito', JSON.stringify(carrito));
             loadCart();
         }
-
-        // Modal formulario de compra
-        const modalFormulario = document.getElementById('modalFormulario');
-        const cerrarFormulario = document.getElementById('cerrarFormulario');
-        const formCompra = document.getElementById('formCompra');
-        const modalCompra = document.getElementById('modalCompra');
-        const cerrarModal = document.getElementById('cerrarModal');
 
         // Finalizar compra: mostrar formulario de datos
         checkoutBtn.addEventListener('click', (e) => {

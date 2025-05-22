@@ -363,21 +363,23 @@
     const cartTotal = document.getElementById('cartTotal');
     const checkoutBtn = document.getElementById('checkoutBtn');
 
-    // Añadir producto al carrito y redirigir a confirmación
+    // Redireccionar a la página de tallas específica según el modelo de guante
     products.forEach(product => {
         product.addEventListener("click", () => {
             const modelo = product.dataset.modelo;
             const nombre = product.dataset.nombre;
             const precio = product.dataset.precio;
 
-            const producto = { nombre, precio, modelo };
-
-            let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-            carrito.push(producto);
-            localStorage.setItem("carrito", JSON.stringify(carrito));
-
-            // Redirigir a la página de confirmación con los datos correctos
-            window.location.href = `confirmar_compraboxeo.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+            // Redirige a la sección de tallas correspondiente según el modelo
+            if (modelo === "hayabusa") {
+                window.location.href = `guantes_hayabusa.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+            } else if (modelo === "everlast_powerlock") {
+                window.location.href = `guantes_everlast.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+            } else if (modelo === "rdx") {
+                window.location.href = `guantes_rdx.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+            } else if (modelo === "fiving") {
+                window.location.href = `guantes_fiving.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+            }
         });
     });
 
@@ -490,6 +492,6 @@
 
     // Cargar el carrito al cargar la página
     loadCart();
-</script>
+    </script>
 </body>
 </html>

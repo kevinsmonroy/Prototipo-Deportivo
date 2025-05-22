@@ -250,24 +250,28 @@
             <h2>Protector Bucal Venum</h2>
             <p>Famoso por su durabilidad y resistencia, ideal para entrenamientos intensos.</p>
             <p><strong>Precio:</strong> $19.99</p>
+            <button class="button elegir-talla">Elegir talla</button>
         </div>
         <div class="product" data-modelo="everlast" data-nombre="Protector Bucal Everlast" data-precio="$24.99">
             <img src="Protector everlast.jpg" alt="Protector Bucal Everlast">
             <h2>Protector Bucal Everlast</h2>
             <p>Diseñado para absorber impactos y proteger tus dientes durante el entrenamiento.</p>
             <p><strong>Precio:</strong> $24.99</p>
+            <button class="button elegir-talla">Elegir talla</button>
         </div>
         <div class="product" data-modelo="rdx" data-nombre="Protector Bucal RDX" data-precio="$22.99">
             <img src="protector rdx.jpg" alt="Protector Bucal RDX">
             <h2>Protector Bucal RDX</h2>
             <p>Alta durabilidad y resistencia, perfecto para sesiones prolongadas de entrenamiento.</p>
             <p><strong>Precio:</strong> $22.99</p>
+            <button class="button elegir-talla">Elegir talla</button>
         </div>
         <div class="product" data-modelo="safejawz" data-nombre="Protector Bucal safejawz" data-precio="$18.47">
             <img src="safejawz.jpg" alt="Protector Bucal safejawz">
             <h2>Protector Bucal safejawz</h2>
             <p>Los protectores bucales safejawz han sido creados para entrenamientos intensos y de alto impacto.</p>
             <p><strong>Precio:</strong> $18.47</p>
+            <button class="button elegir-talla">Elegir talla</button>
         </div>
     </div>
 
@@ -342,7 +346,6 @@
     </div>
 
     <script>
-        const products = document.querySelectorAll(".product");
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
@@ -350,21 +353,25 @@
         const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
 
-        // Añadir producto al carrito y redirigir a confirmación
-        products.forEach(product => {
-            product.addEventListener("click", () => {
-                const modelo = product.dataset.modelo;
-                const nombre = product.dataset.nombre;
-                const precio = product.dataset.precio;
+        // Al hacer click en el botón "Elegir talla" o en el producto, redirige a la sección de tallas específica de cada modelo
+        document.querySelectorAll('.elegir-talla, .product').forEach(element => {
+            element.addEventListener("click", function(e) {
+                // Si el click viene del botón o del div, redirige
+                const productDiv = this.classList.contains('product') ? this : this.closest('.product');
+                const modelo = productDiv.dataset.modelo;
+                const nombre = productDiv.dataset.nombre;
+                const precio = productDiv.dataset.precio;
 
-                const producto = { nombre, precio, modelo };
-
-                let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-                carrito.push(producto);
-                localStorage.setItem("carrito", JSON.stringify(carrito));
-
-                // Redirigir a la página de confirmación con los datos correctos
-                window.location.href = `confirmar_compraboxeo.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                // Redirige a la sección de tallas correspondiente según el modelo
+                if (modelo === "venum") {
+                    window.location.href = `protector_venum.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                } else if (modelo === "everlast") {
+                    window.location.href = `protector_everlast.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                } else if (modelo === "rdx") {
+                    window.location.href = `protector_RDX.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                } else if (modelo === "safejawz") {
+                    window.location.href = `protector_safejawz.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                }
             });
         });
 

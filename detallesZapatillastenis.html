@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zapatillas de Tenis</title>
     <style>
+        /* ...todos tus estilos previos aquí... */
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -382,7 +383,6 @@
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
                 `;
                 cartItems.appendChild(item);
-                // Limpia el precio antes de sumarlo
                 let precioNum = parseFloat((producto.precio + '').replace('$', '').replace(',', '.').trim());
                 if (!isNaN(precioNum)) total += precioNum;
             });
@@ -452,25 +452,23 @@
             modalCompra.style.display = 'none';
         };
 
-        // Añadir producto al carrito y redirigir
+        // Redirección a la página de tallas específica según el producto
         products.forEach(product => {
             product.addEventListener('click', () => {
                 const modelo = product.getAttribute('data-modelo');
-                const nombre = product.getAttribute('data-nombre');
-                const precio = product.getAttribute('data-precio');
-
-                const producto = {
-                    nombre: nombre,
-                    precio: precio
-                };
-
-                const carrito = JSON.parse(localStorage.getItem('carrito')) || [];
-                carrito.push(producto);
-                localStorage.setItem('carrito', JSON.stringify(carrito));
-                loadCart();
-
-                // Redirigir a confirmar_compratenis.html con los valores correctos
-                window.location.href = `confirmar_compratenis.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                let destino = '';
+                if (modelo === 'adidas_courtjam') {
+                    destino = 'zapatillas_CourtJam.html';
+                } else if (modelo === 'nike_air_zoom') {
+                    destino = 'nike_air_zoom.html';
+                } else if (modelo === 'puma_smash') {
+                    destino = 'zapatillas_pumasmash.html';
+                } else if (modelo === 'asics_gel') {
+                    destino = 'zapatillas_asics_Gel.html';
+                } else {
+                    destino = 'confirmar_compratenis.html';
+                }
+                window.location.href = `${destino}?modelo=${encodeURIComponent(modelo)}`;
             });
         });
 

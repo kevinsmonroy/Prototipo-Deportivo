@@ -240,7 +240,7 @@
         <div id="cartItems"></div>
         <div class="cart-footer">
             <p id="cartTotal">Total: $0.00</p>
-            <button id="checkoutBtn">Comprar todo</button>
+            <button id="checkoutBtn">Finalizar compra</button>
         </div>
     </div>
 
@@ -250,24 +250,28 @@
             <h2>Rodilleras Mizuno</h2>
             <p>Ofrecen una excelente protección y comodidad durante el juego.</p>
             <p><strong>Precio:</strong> $30.93</p>
+            <button class="button comprarBtn">Comprar</button>
         </div>
         <div class="product" data-modelo="nike" data-nombre="Rodilleras Nike" data-precio="$28.98">
             <img src="rodilleras nike.jpg" alt="Rodilleras Nike">
             <h2>Rodilleras Nike</h2>
             <p>Diseñadas para brindar soporte y flexibilidad en cada movimiento.</p>
             <p><strong>Precio:</strong> $28.98</p>
+            <button class="button comprarBtn">Comprar</button>
         </div>
         <div class="product" data-modelo="adidas" data-nombre="Rodilleras Adidas" data-precio="$28.98">
             <img src="rodilleras adidas.jpg" alt="Rodilleras Adidas">
             <h2>Rodilleras Adidas</h2>
             <p>Durabilidad y confort para los jugadores más exigentes.</p>
             <p><strong>Precio:</strong> $28.98</p>
+            <button class="button comprarBtn">Comprar</button>
         </div>
         <div class="product" data-modelo="asics" data-nombre="Rodilleras Asics" data-precio="$24.84">
             <img src="rodilleras asics.jpg" alt="Rodilleras Asics">
             <h2>Rodilleras Asics</h2>
             <p>Alta calidad y resistencia para un rendimiento óptimo.</p>
             <p><strong>Precio:</strong> $24.84</p>
+            <button class="button comprarBtn">Comprar</button>
         </div>
     </div>
 
@@ -342,17 +346,23 @@
     </div>
 
     <script>
-        const products = document.querySelectorAll(".product");
         const cartIcon = document.getElementById('cartIcon');
         const cartContainer = document.getElementById('cartContainer');
         const cartItems = document.getElementById('cartItems');
         const cartCount = document.getElementById('cartCount');
         const cartTotal = document.getElementById('cartTotal');
         const checkoutBtn = document.getElementById('checkoutBtn');
+        const modalFormulario = document.getElementById('modalFormulario');
+        const cerrarFormulario = document.getElementById('cerrarFormulario');
+        const formCompra = document.getElementById('formCompra');
+        const modalCompra = document.getElementById('modalCompra');
+        const cerrarModal = document.getElementById('cerrarModal');
 
-        // Añadir producto al carrito y redirigir a confirmación
-        products.forEach(product => {
-            product.addEventListener("click", () => {
+        // Redirección al hacer click en cualquier parte de la tarjeta
+        document.querySelectorAll('.product').forEach(product => {
+            product.addEventListener('click', (e) => {
+                // Evitar que el botón "Comprar" haga doble acción
+                if (e.target.classList.contains('comprarBtn')) return;
                 const modelo = product.dataset.modelo;
                 const nombre = product.dataset.nombre;
                 const precio = product.dataset.precio;
@@ -362,9 +372,22 @@
                 let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
                 carrito.push(producto);
                 localStorage.setItem("carrito", JSON.stringify(carrito));
+                loadCart();
 
-                // Redirigir a la página de confirmación con los datos correctos
-                window.location.href = `confirmar_compravoleibol.html?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
+                // Redirección según el modelo
+                let destino = "";
+                if (modelo === "mizuno") {
+                    destino = "rodilleras_mizuno.html";
+                } else if (modelo === "nike") {
+                    destino = "rodilleras_nike.html";
+                } else if (modelo === "adidas") {
+                    destino = "rodilleras_adidas.html";
+                } else if (modelo === "asics") {
+                    destino = "rodilleras_asics.html";
+                } else {
+                    destino = "confirmar_compravoleibol.html";
+                }
+                window.location.href = `${destino}?modelo=${encodeURIComponent(modelo)}&precio=${encodeURIComponent(precio)}&nombre=${encodeURIComponent(nombre)}`;
             });
         });
 
@@ -390,11 +413,13 @@
             checkoutBtn.style.display = 'inline-block';
 
             carrito.forEach((producto, index) => {
+                const tallaHtml = producto.talla ? `<p>Talla: ${producto.talla}</p>` : '';
                 const item = document.createElement('div');
                 item.classList.add('cart-item');
                 item.innerHTML = `
                     <div>
                         <p><strong>${producto.nombre}</strong></p>
+                        ${tallaHtml}
                         <p>Precio: ${producto.precio}</p>
                     </div>
                     <button class="remove-btn" data-index="${index}">Eliminar</button>
@@ -424,13 +449,6 @@
             localStorage.setItem('carrito', JSON.stringify(carrito));
             loadCart();
         }
-
-        // Modal formulario de compra
-        const modalFormulario = document.getElementById('modalFormulario');
-        const cerrarFormulario = document.getElementById('cerrarFormulario');
-        const formCompra = document.getElementById('formCompra');
-        const modalCompra = document.getElementById('modalCompra');
-        const cerrarModal = document.getElementById('cerrarModal');
 
         // Finalizar compra: mostrar formulario de datos
         checkoutBtn.addEventListener('click', (e) => {
